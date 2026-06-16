@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Clock, CheckCircle, FileText, ChevronRight } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from '../utils/api';
 
 export default function SovereignWorkflowLog() {
   const [liveOutputs, setLiveOutputs] = useState([]);

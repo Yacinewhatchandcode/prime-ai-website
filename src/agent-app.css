@@ -563,6 +563,12 @@ body {
     padding: 12px;
     border-radius: 16px;
   }
+  .agent-layout-content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 70px !important;
+    padding-bottom: 150px !important;
+  }
 }
 
 /* ── Accessibility, Readability & Responsive Overrides for Console Pages ── */

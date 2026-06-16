@@ -1,5 +1,7 @@
 // Browser-Safe Tauri Bridge
 // Automatically detects Tauri vs standard browser contexts to prevent runtime errors on port 5173.
+import { API_BASE } from './api.js';
+
 
 const listeners = {};
 
@@ -53,7 +55,7 @@ export async function invoke(command, args = {}) {
   
   if (command === 'get_fleet_status') {
     try {
-      const res = await fetch("http://localhost:5000/api/fleet-state");
+      const res = await fetch(`${API_BASE}/api/fleet-state`);
       if (res.ok) {
         return "ONLINE";
       }

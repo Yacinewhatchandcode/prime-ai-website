@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Send, QrCode, Shield, RefreshCw, MessageSquare, Play, Square, Activity, Database, Check } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from '../utils/api';
 
 export default function WhatsAppAgent() {
   const [phone, setPhone] = useState('');

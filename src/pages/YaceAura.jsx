@@ -1,3 +1,4 @@
+﻿import { API_BASE } from '../utils/api';
 import React, { useState, useEffect } from 'react';
 import { 
   Cpu, 
@@ -67,7 +68,7 @@ export default function YaceAura() {
     brokerStatus: "ACTIVE"
   });
 
-  const API_BASE = "http://localhost:5000";
+  // API_BASE imported from utils/api
 
   // Solana Mainnet connection (using public endpoint, fall back to default)
   const connection = new Connection("https://api.mainnet-beta.solana.com", "confirmed");

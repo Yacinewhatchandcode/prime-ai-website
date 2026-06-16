@@ -9,7 +9,7 @@ function Layout() {
   const path = location.pathname;
 
   const isSubsystemActive = ['/orb', '/orchestration', '/media', '/whatsapp', '/memory', '/factory'].includes(path);
-  const isLabActive = ['/amlazr', '/yace19', '/azirem'].includes(path);
+  const isLabActive = ['/amlazr', '/azirem'].includes(path);
 
   return (
     <div className="agent-app-container">
@@ -40,7 +40,7 @@ function Layout() {
             color: '#FAF8F4',
             textTransform: 'uppercase'
           }}>
-            PRIME <span style={{ color: '#C6A15A' }}>-</span> AI <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: '300' }}>// SOVEREIGN OS</span>
+            PRIME <span style={{ color: '#C6A15A' }}>-</span> AI <span className="desktop-only" style={{ color: 'rgba(255,255,255,0.4)', fontWeight: '300' }}> // SOVEREIGN OS</span>
           </span>
         </Link>
         
@@ -69,8 +69,7 @@ function Layout() {
             <span className={`agent-nav-dropdown-trigger ${isLabActive ? 'active' : ''}`}>🧪 LABS <span className="arrow">▼</span></span>
             <div className="agent-nav-dropdown-content">
               <Link to="/amlazr" className="dropdown-link">07_AMLAZR</Link>
-              <Link to="/yace19" className="dropdown-link">08_YACE19</Link>
-              <Link to="/azirem" className="dropdown-link">09_AZIREM</Link>
+              <Link to="/azirem" className="dropdown-link">08_AZIREM</Link>
             </div>
           </div>
         </div>
@@ -135,7 +134,6 @@ function Layout() {
             color: '#d4af37',
             cursor: 'pointer',
             padding: '4px',
-            display: 'none',
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 2000
@@ -185,10 +183,9 @@ function Layout() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}>
             <div style={{ color: '#6b6b7b', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>🧪 LABS</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               <Link to="/amlazr" className="dropdown-link" style={{ fontSize: '0.75rem', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>07_AMLAZR</Link>
-              <Link to="/yace19" className="dropdown-link" style={{ fontSize: '0.75rem', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>08_YACE19</Link>
-              <Link to="/azirem" className="dropdown-link" style={{ fontSize: '0.75rem', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>09_AZIREM</Link>
+              <Link to="/azirem" className="dropdown-link" style={{ fontSize: '0.75rem', padding: '8px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>08_AZIREM</Link>
             </div>
           </div>
         </div>

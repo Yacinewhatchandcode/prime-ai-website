@@ -11,7 +11,6 @@ import WhatsAppAgent from './pages/WhatsAppAgent';
 import MemorySystem from './pages/MemorySystem';
 import PrimeFactory from './pages/PrimeFactory';
 import AmlazrArena from './pages/AmlazrArena';
-import Yace19Lab from './pages/Yace19Lab';
 import AziremCoder from './pages/AziremCoder';
 import CountryNodeTemplate from './pages/CountryNodeTemplate';
 import YaceAura from './pages/YaceAura';
@@ -48,7 +47,6 @@ function App() {
             <Route path="/azirem" element={<AziremCoder />} />
             <Route path="/credentials" element={<Credentials />} />
             <Route path="/revenue" element={<RevenueConsole />} />
-            <Route path="/yace19" element={<Yace19Lab />} />
           </Route>
           
           {/* Country Nodes */}

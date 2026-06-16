@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from '../utils/api';
 
 export default function Credentials() {
   // Connection states
@@ -159,10 +159,10 @@ export default function Credentials() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', color: '#fcfcfc', position: 'relative' }}>
-      <div style={{ padding: '48px', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+      <div style={{ padding: 'clamp(16px, 5vw, 48px)', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
         
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <h1 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 300, fontSize: '2rem', letterSpacing: '2px', marginBottom: '8px', margin: 0 }}>
               PRIME-AI SOUVERAIN BACKOFFICE

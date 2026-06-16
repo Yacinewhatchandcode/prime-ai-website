@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Database, Search, Shield, RefreshCw, Trash2, Cpu, Check, AlertTriangle, Layers } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from '../utils/api';
 
 export default function MemorySystem() {
   const [stats, setStats] = useState({

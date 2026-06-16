@@ -235,7 +235,8 @@ export default function Vision() {
           .hero-left { text-align: center !important; }
           .hero-left .btn-container { justify-content: center !important; }
           .features-grid { grid-template-columns: 1fr !important; }
-          .feature-card { text-align: center !important; }
+          .feature-card { text-align: center !important; border-right: none !important; border-bottom: 1px solid rgba(198, 161, 90, 0.12) !important; }
+          .feature-card:last-child { border-bottom: none !important; }
           .feature-icon-wrapper { margin: 0 auto 16px !important; }
           .aug-split { flex-direction: column !important; text-align: center !important; }
           .aug-link { justify-content: center !important; }
@@ -252,7 +253,7 @@ export default function Vision() {
 
       {/* ── HERO SECTION ─────────────────────────────────── */}
       <section style={{
-        padding: '60px 60px 100px',
+        padding: 'clamp(40px, 6vw, 60px) clamp(16px, 5vw, 60px) clamp(60px, 10vw, 100px)',
         maxWidth: '1300px',
         margin: '0 auto',
         position: 'relative',
@@ -549,7 +550,7 @@ export default function Vision() {
       </section>
 
       {/* ── AUGMENTED HUMAN SECTION ──────────────────────── */}
-      <section style={{ padding: '100px 60px', maxWidth: '1200px', margin: '0 auto' }}>
+      <section style={{ padding: 'clamp(50px, 10vw, 100px) clamp(16px, 5vw, 60px)', maxWidth: '1200px', margin: '0 auto' }}>
         <div className="aug-split" style={{ display: 'flex', alignItems: 'center', gap: '80px' }}>
           <div style={{ flex: '1.2' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
@@ -612,7 +613,7 @@ export default function Vision() {
 
       {/* ── ECOSYSTEM SECTION ────────────────────────────── */}
       <section style={{
-        background: 'rgba(198, 161, 90, 0.03)', padding: '100px 60px', borderTop: '1px solid rgba(198, 161, 90, 0.1)', borderBottom: '1px solid rgba(198, 161, 90, 0.1)',
+        background: 'rgba(198, 161, 90, 0.03)', padding: 'clamp(50px, 10vw, 100px) clamp(16px, 5vw, 60px)', borderTop: '1px solid rgba(198, 161, 90, 0.1)', borderBottom: '1px solid rgba(198, 161, 90, 0.1)',
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
@@ -675,7 +676,7 @@ export default function Vision() {
       </section>
 
       {/* ── SYSTEM BRIEFING & NEWSLETTER BAR ──────────────── */}
-      <section style={{ padding: '80px 60px', maxWidth: '1200px', margin: '0 auto' }}>
+      <section style={{ padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 60px)', maxWidth: '1200px', margin: '0 auto' }}>
         <div className="newsletter-split" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '60px' }}>
           <div style={{ flex: '1', maxWidth: '420px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
@@ -721,7 +722,7 @@ export default function Vision() {
 
       {/* ── LOWER BANNER SECTION ─────────────────────────── */}
       <section style={{
-        background: 'linear-gradient(135deg, #1F1A13 0%, #3D3528 100%)', color: '#FAF8F4', padding: '80px 60px', position: 'relative', overflow: 'hidden'
+        background: 'linear-gradient(135deg, #1F1A13 0%, #3D3528 100%)', color: '#FAF8F4', padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 60px)', position: 'relative', overflow: 'hidden'
       }}>
         <div className="mesh-pulse" style={{
           position: 'absolute', width: '500px', height: '500px', border: '1px solid rgba(250, 248, 244, 0.03)', borderRadius: '50%', top: '-150px', right: '-150px', pointerEvents: 'none'

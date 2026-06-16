@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck, DollarSign, CreditCard, ArrowUpRight, Upload } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from '../utils/api';
 
 export default function RevenueConsole() {
   const [transactions, setTransactions] = useState([]);
@@ -151,10 +151,10 @@ export default function RevenueConsole() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', color: '#fcfcfc', position: 'relative' }}>
-      <div style={{ padding: '48px', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+      <div style={{ padding: 'clamp(16px, 5vw, 48px)', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
         
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <h1 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 300, fontSize: '2rem', letterSpacing: '2px', marginBottom: '8px', margin: 0 }}>
               💰 PAYMENT & REVENUE CONSOLE
@@ -243,7 +243,7 @@ export default function RevenueConsole() {
         </div>
 
         {/* Credentials and File Actions */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '24px' }}>
           
           {/* Active Credentials Panel */}
           <div style={{ background: 'rgba(15,15,18,0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '20px' }}>

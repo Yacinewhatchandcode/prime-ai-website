@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Paperclip, Mic, ArrowUp, Settings, Lock, Monitor, Box } from 'lucide-react';
+import { API_BASE } from '../utils/api';
 
 export default function SovereignCommandBar() {
   const [intent, setIntent] = useState('');
@@ -10,7 +11,7 @@ export default function SovereignCommandBar() {
     if (!intent) return;
     try {
       console.log(`Executing intent on ${model}: ${intent}`);
-      const res = await fetch("http://localhost:5000/api/dispatch", {
+      const res = await fetch(`${API_BASE}/api/dispatch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: intent, priority: "normal" })

@@ -100,7 +100,7 @@ export default function Ecosysteme() {
 
       {/* ── HEADER HERO ─────────────────────────────────── */}
       <section style={{
-        padding: '80px 60px 40px',
+        padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 60px) 40px',
         maxWidth: '1200px',
         margin: '0 auto',
         position: 'relative',
@@ -153,7 +153,7 @@ export default function Ecosysteme() {
 
       {/* ── INTERACTIVE GRID & MAP ─────────────────────── */}
       <section style={{
-        padding: '0 60px 80px',
+        padding: '0 clamp(16px, 5vw, 60px) clamp(40px, 8vw, 80px)',
         maxWidth: '1200px',
         margin: '0 auto'
       }}>
