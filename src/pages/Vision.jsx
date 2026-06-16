@@ -10,6 +10,8 @@ export default function Vision() {
   ]);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   // HUD Blink effect
   useEffect(() => {
@@ -40,17 +42,37 @@ export default function Vision() {
     return () => clearInterval(logInterval);
   }, []);
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 3000);
-      setEmail("");
+    if (!email) return;
+    setSubmitting(true);
+    setErrorMsg("");
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setSubscribed(true);
+        setTimeout(() => setSubscribed(false), 3000);
+        setEmail("");
+      } else {
+        setErrorMsg(data.error || "Une erreur est survenue.");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Erreur réseau. Veuillez réessayer.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
       <style>{`
         .prime-button-dark {
           background: #1F1A13;
@@ -710,12 +732,17 @@ export default function Vision() {
 
             <form onSubmit={handleSubscribe} className="newsletter-inputs" style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
               <input
-                type="email" placeholder="satoshi@example.com" value={email} onChange={e => setEmail(e.target.value)} className="input-newsletter" required
+                type="email" placeholder="satoshi@example.com" value={email} onChange={e => setEmail(e.target.value)} className="input-newsletter" disabled={submitting} required
               />
-              <button type="submit" className="prime-button-gold-sm">
-                {subscribed ? "Inscrit !" : "Subscribe"}
+              <button type="submit" className="prime-button-gold-sm" disabled={submitting}>
+                {submitting ? "Envoi..." : subscribed ? "Inscrit !" : "Subscribe"}
               </button>
             </form>
+            {errorMsg && (
+              <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '8px', fontFamily: 'monospace' }}>
+                ⚠️ {errorMsg}
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 export default function SovereignLightLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname;
 
   return (
@@ -174,7 +175,7 @@ export default function SovereignLightLayout() {
               padding: '8px',
               borderRadius: '8px',
               background: 'rgba(31, 26, 19, 0.03)'
-            }} onClick={() => window.location.href = "/yace-aura"}>
+            }} onClick={() => navigate("/yace-aura")}>
               <div style={{ display: 'flex', gap: '3px' }}>
                 <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
                 <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />

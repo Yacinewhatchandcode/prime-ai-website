@@ -46,7 +46,7 @@ export default function Technologie() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
       <style>{`
         .prime-button-dark {
           background: #1F1A13;

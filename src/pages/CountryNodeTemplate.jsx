@@ -5,7 +5,7 @@ import PrimeLogo from '../components/PrimeLogo';
 
 function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighlight }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100vw' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
       <div className="sub-header">
         <Link to="/" className="sub-header-btn">
           <ChevronLeft size={20} />
@@ -22,7 +22,7 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
         </button>
       </div>
 
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '40px' }}>
+      <div style={{ flex: 1, paddingBottom: '40px' }}>
         <div className="dash-top-row">
           <div className="dash-stat">
             <div className="dash-stat-label"><div className="agent-status-dot" style={{ background: nodeColor, boxShadow: `0 0 10px ${nodeColor}` }}></div> STATUS</div>

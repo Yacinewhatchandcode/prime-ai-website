@@ -19,6 +19,11 @@ import Technologie from './pages/Technologie';
 import Ecosysteme from './pages/Ecosysteme';
 import Credentials from './pages/Credentials';
 import RevenueConsole from './pages/RevenueConsole';
+import SovereignAi from './pages/SovereignAi';
+import MultiAgentSystems from './pages/MultiAgentSystems';
+import EnterpriseAiOrchestration from './pages/EnterpriseAiOrchestration';
+import Yace19Lab from './pages/Yace19Lab';
+import FleetCommand from './pages/FleetCommand';
 
 
 function App() {
@@ -32,6 +37,9 @@ function App() {
             <Route path="/vision" element={<Vision />} />
             <Route path="/technologie" element={<Technologie />} />
             <Route path="/ecosysteme" element={<Ecosysteme />} />
+            <Route path="/sovereign-ai" element={<SovereignAi />} />
+            <Route path="/multi-agent-systems" element={<MultiAgentSystems />} />
+            <Route path="/enterprise-ai-orchestration" element={<EnterpriseAiOrchestration />} />
           </Route>
 
           {/* Dark OS Console Layout */}
@@ -47,6 +55,8 @@ function App() {
             <Route path="/azirem" element={<AziremCoder />} />
             <Route path="/credentials" element={<Credentials />} />
             <Route path="/revenue" element={<RevenueConsole />} />
+            <Route path="/yace19" element={<Yace19Lab />} />
+            <Route path="/fleet-command" element={<FleetCommand />} />
           </Route>
           
           {/* Country Nodes */}
