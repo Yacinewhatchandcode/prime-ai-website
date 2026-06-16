@@ -8,7 +8,14 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 echo ✅ [Sovereign QA] Build Success!
-echo 🚀 [Sovereign Fleet] Pushing to Vercel Production...
-call vercel --prod --yes --force
+echo 🚀 [Sovereign Fleet] Deploying to GitHub Pages...
+
+cd dist
+git init
+git checkout -b main
+git add -A
+git commit -m "Deploy to GitHub Pages"
+git push -f https://github.com/Yacinewhatchandcode/prime-ai-website.git main:gh-pages
+
 echo ✅ [Sovereign Fleet] Deployment Complete!
 pause
