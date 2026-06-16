@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Ecosysteme() {
+  const { t } = useLanguage();
   const [activeNode, setActiveNode] = useState(null);
 
   const nodes = [
     {
       id: 'desktop',
-      title: "PRIME-Desktop (macOS / Windows)",
-      platform: "Application native multi-plateforme",
-      description: "L'épine dorsale de votre workflow quotidien. Capturez, organisez et raisonnez en continu avec une synchronisation locale transparente avec votre système de fichiers.",
-      specs: ["Superposition d'interface HUD", "Intégration d'outils système", "Base de données vectorielle intégrée"],
+      title: t('ecosystem.desktop.title'),
+      platform: t('ecosystem.desktop.platform'),
+      description: t('ecosystem.desktop.desc'),
+      specs: [t('ecosystem.desktop.spec1'), t('ecosystem.desktop.spec2'), t('ecosystem.desktop.spec3')],
       color: "#C6A15A"
     },
     {
       id: 'mobile',
-      title: "PRIME-Mobile (iOS / Android)",
-      platform: "Pont cognitif vocal",
-      description: "Votre compagnon d'intelligence nomade. Accès vocal ultra-rapide en temps réel, transcription automatique chiffrée et synchronisation asynchrone des sessions de réflexion.",
-      specs: ["Synthèse/Reconnaissance vocale locale", "Chiffrement AES-256", "Notifications push d'action"],
+      title: t('ecosystem.mobile.title'),
+      platform: t('ecosystem.mobile.platform'),
+      description: t('ecosystem.mobile.desc'),
+      specs: [t('ecosystem.mobile.spec1'), t('ecosystem.mobile.spec2'), t('ecosystem.mobile.spec3')],
       color: "#3D3528"
     },
     {
       id: 'cli',
-      title: "PRIME-CLI",
-      platform: "Interface développeurs",
-      description: "Pour les ingénieurs et administrateurs. Contrôlez votre flotte d'agents souverains directement depuis votre terminal ou intégrez-les à vos scripts d'automatisation.",
-      specs: ["Support du JSON-RPC", "Mode batch parallèle", "Gestionnaire de profils configurables"],
+      title: t('ecosystem.cli.title'),
+      platform: t('ecosystem.cli.platform'),
+      description: t('ecosystem.cli.desc'),
+      specs: [t('ecosystem.cli.spec1'), t('ecosystem.cli.spec2'), t('ecosystem.cli.spec3')],
       color: "#1F1A13"
     },
     {
       id: 'cloud',
-      title: "PRIME-Private Cloud",
-      platform: "Infrastructure d'entreprise",
-      description: "Votre cloud privé entièrement autonome. Hébergez vos serveurs d'inférence, de messagerie sécurisée et de traitement de données lourdes sans dépendre d'Amazon ou Google.",
-      specs: ["Cluster Kubernetes souverain", "Gestion de clés cryptographiques", "monitoring de télémétrie local"],
+      title: t('ecosystem.cloud.title'),
+      platform: t('ecosystem.cloud.platform'),
+      description: t('ecosystem.cloud.desc'),
+      specs: [t('ecosystem.cloud.spec1'), t('ecosystem.cloud.spec2'), t('ecosystem.cloud.spec3')],
       color: "#E6C587"
     }
   ];
@@ -116,7 +118,7 @@ export default function Ecosysteme() {
             letterSpacing: '3px',
             textTransform: 'uppercase'
           }}>
-            L'ÉCOSYSTEME GLOBAL PRIME-AI
+            {t('ecosystem.hero.tagline')}
           </span>
         </div>
 
@@ -129,13 +131,13 @@ export default function Ecosysteme() {
           marginBottom: '24px',
           letterSpacing: '-1px'
         }}>
-          Une Flotte d'Agents Déployée<br />
+          {t('ecosystem.hero.title1')}<br />
           <span style={{
             background: 'linear-gradient(90deg, #C6A15A 0%, #E6C587 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
-          }}>Partout où vous créez et décidez.</span>
+          }}>{t('ecosystem.hero.title2')}</span>
         </h1>
 
         <p style={{
@@ -147,7 +149,7 @@ export default function Ecosysteme() {
           maxWidth: '700px',
           margin: '0 auto'
         }}>
-          Du bureau jusqu'au cloud souverain de votre entreprise, PRIME-AI maintient une synchronisation de votre contexte et de votre mémoire à 100% de manière autonome.
+          {t('ecosystem.hero.desc')}
         </p>
       </section>
 
@@ -211,7 +213,7 @@ export default function Ecosysteme() {
                   paddingTop: '16px',
                   marginTop: '16px'
                 }}>
-                  <h4 style={{ fontSize: '12px', fontWeight: 'bold', color: '#1F1A13', marginBottom: '8px' }}>Fonctionnalités Clés :</h4>
+                  <h4 style={{ fontSize: '12px', fontWeight: 'bold', color: '#1F1A13', marginBottom: '8px' }}>{t('ecosystem.specs.title')}</h4>
                   <ul style={{ paddingLeft: '18px', margin: 0, fontSize: '13px', color: '#656059', lineHeight: '1.6' }}>
                     {node.specs.map((spec, index) => (
                       <li key={index} style={{ marginBottom: '4px' }}>{spec}</li>
@@ -225,7 +227,7 @@ export default function Ecosysteme() {
 
         <div style={{ textAlign: 'center' }}>
           <Link to="/yace-aura" className="prime-button-dark">
-            Consulter l'Infrastructure Centrale (Console OS) <span style={{ marginLeft: '6px' }}>⚡</span>
+            {t('ecosystem.btn.console')} <span style={{ marginLeft: '6px' }}>⚡</span>
           </Link>
         </div>
       </section>
@@ -239,13 +241,13 @@ export default function Ecosysteme() {
         <div className="detail-split" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '60px', alignItems: 'center' }}>
           <div style={{ flex: '1.2' }}>
             <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#1F1A13', marginBottom: '20px', letterSpacing: '-0.5px' }}>
-              Comment fonctionne la synchronisation asynchrone ?
+              {t('ecosystem.sync.title')}
             </h2>
             <p style={{ fontSize: '15px', lineHeight: '1.65', color: '#6E6860', marginBottom: '24px' }}>
-              Grâce à notre protocole P2P crypté, chaque nœud de votre écosystème conserve un cache local optimisé. Lorsque vous connectez votre mobile ou votre client desktop, les deltas de modifications sémantiques sont échangés de manière sécurisée sans jamais passer par un serveur cloud public centralisé.
+              {t('ecosystem.sync.desc1')}
             </p>
             <p style={{ fontSize: '15px', lineHeight: '1.65', color: '#6E6860' }}>
-              Cela vous assure une indépendance absolue et un temps d'accès record, même en mode hors ligne complet.
+              {t('ecosystem.sync.desc2')}
             </p>
           </div>
 
@@ -268,14 +270,14 @@ export default function Ecosysteme() {
                 borderBottom: '1px solid rgba(198, 161, 90, 0.15)',
                 paddingBottom: '8px'
               }}>
-                SYNCHRONIZATION_SCHEDULER
+                {t('ecosystem.sync.scheduler')}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {[
-                  { label: "Nœud Bureau (macOS)", status: "Synchronisé", color: "#10b981" },
-                  { label: "Nœud Mobile (iOS)", status: "Synchronisé", color: "#10b981" },
-                  { label: "Nœud CLI local", status: "Synchronisé", color: "#10b981" },
-                  { label: "Cloud Privé", status: "En attente de ping (veille)", color: "#f59e0b" }
+                  { label: t('ecosystem.sync.nodes.desktop'), status: t('ecosystem.sync.status.synced'), color: "#10b981" },
+                  { label: t('ecosystem.sync.nodes.mobile'), status: t('ecosystem.sync.status.synced'), color: "#10b981" },
+                  { label: t('ecosystem.sync.nodes.cli'), status: t('ecosystem.sync.status.synced'), color: "#10b981" },
+                  { label: t('ecosystem.sync.nodes.cloud'), status: t('ecosystem.sync.status.pending'), color: "#f59e0b" }
                 ].map((item, index) => (
                   <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '13px', fontWeight: '600', color: '#1F1A13' }}>{item.label}</span>

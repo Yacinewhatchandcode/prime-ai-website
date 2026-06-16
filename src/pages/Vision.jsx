@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Vision() {
+  const { t } = useLanguage();
   const [hudScan, setHudScan] = useState(true);
   const [hudLogs, setHudLogs] = useState([
     "Ingesting digital memory nodes... OK",
@@ -316,7 +318,7 @@ export default function Vision() {
                 letterSpacing: '3px',
                 textTransform: 'uppercase'
               }}>
-                INFRASTRUCTURE COGNITIVE SOUVERAINE
+                {`${t('home.hero.title1')} ${t('home.hero.title2')} ${t('home.hero.title3')}`}
               </span>
             </div>
 
@@ -329,14 +331,14 @@ export default function Vision() {
               marginBottom: '28px',
               letterSpacing: '-1.5px',
             }}>
-              Intelligence,<br />
+              {t('home.hero.tagline1')}<br />
               <span style={{
                 background: 'linear-gradient(90deg, #C6A15A 0%, #E6C587 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 fontWeight: '800',
-              }}>conçue pour penser avec vous.</span>
+              }}>{t('home.hero.tagline2')}</span>
             </h1>
 
             <p style={{
@@ -347,12 +349,12 @@ export default function Vision() {
               marginBottom: '40px',
               maxWidth: '520px',
             }}>
-              PRIME-AI orchestre des systèmes multi-agents souverains pour amplifier votre cognition et développer votre impact.
+              {t('home.hero.desc')}
             </p>
 
             <div className="btn-container" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <Link to="/technologie" className="prime-button-dark">
-                Découvrir PRIME-AI <span style={{ fontSize: '16px' }}>→</span>
+                {t('home.hero.exploreBtn')} <span style={{ fontSize: '16px' }}>→</span>
               </Link>
             </div>
           </div>
@@ -527,9 +529,9 @@ export default function Vision() {
                   <line x1="12" y1="22.08" x2="12" y2="12" />
                 </svg>
               </div>
-              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ MEMORY</span>
+              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ {t('vision.features.memTitle')}</span>
             </div>
-            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>Cognition persistante. Sauvegarde sémantique autonome.</p>
+            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>{t('vision.features.memDesc')}</p>
           </div>
 
           <div className="feature-card" style={{ borderRight: '1px solid rgba(198, 161, 90, 0.12)' }}>
@@ -548,9 +550,9 @@ export default function Vision() {
                   <line x1="5" y1="16" x2="19" y2="16" />
                 </svg>
               </div>
-              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ ORCHESTRATION</span>
+              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ {t('vision.features.orchTitle')}</span>
             </div>
-            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>Des systèmes qui pensent ensemble. Multi-agents collaboratifs synchrones.</p>
+            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>{t('vision.features.orchDesc')}</p>
           </div>
 
           <div className="feature-card">
@@ -564,9 +566,9 @@ export default function Vision() {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ TRUST</span>
+              <span style={{ fontWeight: '700', fontSize: '13px', letterSpacing: '2px', color: '#1F1A13', textTransform: 'uppercase' }}>✦ {t('vision.features.trustTitle')}</span>
             </div>
-            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>Votre infrastructure. Votre intelligence. Privacy by design sans compromis.</p>
+            <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#656059' }}>{t('vision.features.trustDesc')}</p>
           </div>
         </div>
       </section>
@@ -577,15 +579,15 @@ export default function Vision() {
           <div style={{ flex: '1.2' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
               <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
-              <span style={{ fontWeight: '700', fontSize: '11px', color: '#C6A15A', letterSpacing: '3px', textTransform: 'uppercase' }}>AUGMENTED HUMAN</span>
+              <span style={{ fontWeight: '700', fontSize: '11px', color: '#C6A15A', letterSpacing: '3px', textTransform: 'uppercase' }}>{t('vision.augmented.tagline')}</span>
             </div>
 
             <h2 style={{ fontSize: '44px', fontWeight: '800', lineHeight: '1.2', color: '#1F1A13', marginBottom: '24px', letterSpacing: '-1px' }}>
-              Votre cognition.<br /><span style={{ color: '#C6A15A' }}>Augmentée.</span>
+              {t('vision.augmented.title1')}<br /><span style={{ color: '#C6A15A' }}>{t('vision.augmented.title2')}</span>
             </h2>
 
             <p style={{ fontSize: '15px', lineHeight: '1.65', color: '#656059', marginBottom: '32px', maxWidth: '460px' }}>
-              Libérez votre esprit des contraintes d'exécution. PRIME-AI gère la complexité technique, l'alignement des modèles et les pipelines de traitement de données en arrière-plan.
+              {t('vision.augmented.desc')}
             </p>
 
             <Link to="/memory" className="aug-link" style={{
@@ -594,7 +596,7 @@ export default function Vision() {
               onMouseEnter={e => e.currentTarget.style.color = '#C6A15A'}
               onMouseLeave={e => e.currentTarget.style.color = '#1F1A13'}
             >
-              En savoir plus <span style={{ fontSize: '18px' }}>→</span>
+              {t('vision.augmented.learnMore')} <span style={{ fontSize: '18px' }}>→</span>
             </Link>
           </div>
 
@@ -626,7 +628,7 @@ export default function Vision() {
                 position: 'absolute', bottom: '0', left: '0', right: '0', background: 'linear-gradient(to top, rgba(31,26,19,0.7) 0%, rgba(31,26,19,0) 100%)', padding: '24px', color: '#FAF8F4'
               }}>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', letterSpacing: '1px', color: '#C6A15A', textTransform: 'uppercase', marginBottom: '4px' }}>INTERFACE COGNITIVE v1.8</div>
-                <div style={{ fontWeight: '600', fontSize: '13px', opacity: 0.9 }}>Synchronisation neuronale active</div>
+                <div style={{ fontWeight: '600', fontSize: '13px', opacity: 0.9 }}>{t('vision.augmented.hudActive')}</div>
               </div>
             </div>
           </div>
@@ -641,9 +643,9 @@ export default function Vision() {
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
               <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
-              <span style={{ fontWeight: '700', fontSize: '11px', color: '#C6A15A', letterSpacing: '3px', textTransform: 'uppercase' }}>ÉCOSYSTEME PRIME-AI</span>
+              <span style={{ fontWeight: '700', fontSize: '11px', color: '#C6A15A', letterSpacing: '3px', textTransform: 'uppercase' }}>{t('vision.ecosystem.tagline')}</span>
             </div>
-            <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#1F1A13', letterSpacing: '-0.5px' }}>Une intelligence présente partout où vous avancez.</h2>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#1F1A13', letterSpacing: '-0.5px' }}>{t('vision.ecosystem.title')}</h2>
           </div>
 
           <div className="ecosystem-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
@@ -656,7 +658,7 @@ export default function Vision() {
                 </svg>
               </div>
               <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>MAC / WINDOWS</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Desktop App.<br />Sovereign desktop integration.</p>
+              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>{t('vision.ecosystem.desktopDesc')}</p>
             </div>
 
             <div className="ecosystem-card">
@@ -667,7 +669,7 @@ export default function Vision() {
                 </svg>
               </div>
               <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>MOBILE</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>iOS / Android.<br />Real-time voice and cognitive bridge.</p>
+              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>{t('vision.ecosystem.mobileDesc')}</p>
             </div>
 
             <div className="ecosystem-card">
@@ -678,7 +680,7 @@ export default function Vision() {
                 </svg>
               </div>
               <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>PRIME-CLI</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Local & Remote Control.<br />Direct prompt-to-terminal interface.</p>
+              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>{t('vision.ecosystem.cliDesc')}</p>
             </div>
 
             <div className="ecosystem-card">
@@ -691,7 +693,7 @@ export default function Vision() {
                 </svg>
               </div>
               <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>PRIVATE CLOUD</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Sovereign Infrastructure.<br />Encrypted hosting and local pipelines.</p>
+              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>{t('vision.ecosystem.cloudDesc')}</p>
             </div>
           </div>
         </div>
@@ -711,11 +713,11 @@ export default function Vision() {
             </div>
 
             <p style={{ fontSize: '20px', fontWeight: '600', lineHeight: '1.4', color: '#1F1A13', marginBottom: '32px' }}>
-              PRIME-AI n'est pas un outil.<br /><span style={{ color: '#C6A15A' }}>C'est votre avantage cognitif.</span>
+              {t('vision.briefing.titleLeft1')}<br /><span style={{ color: '#C6A15A' }}>{t('vision.briefing.titleLeft2')}</span>
             </p>
 
             <Link to="/ecosysteme" className="prime-button-dark">
-              Rejoindre l'écosystème <span style={{ fontSize: '16px' }}>→</span>
+              {t('vision.briefing.btnLeft')} <span style={{ fontSize: '16px' }}>→</span>
             </Link>
           </div>
 
@@ -724,18 +726,18 @@ export default function Vision() {
           }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
               <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
-              <span style={{ fontWeight: '700', fontSize: '10px', color: '#C6A15A', letterSpacing: '2px', textTransform: 'uppercase' }}>SYSTEM BRIEFING</span>
+              <span style={{ fontWeight: '700', fontSize: '10px', color: '#C6A15A', letterSpacing: '2px', textTransform: 'uppercase' }}>{t('vision.briefing.taglineRight')}</span>
             </div>
 
-            <h3 style={{ fontWeight: '700', fontSize: '15px', color: '#1F1A13', marginBottom: '10px' }}>Stay ahead of the curve.</h3>
-            <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#6E6860', marginBottom: '28px' }}>Get notified about new sovereign updates, autonomous features, and exclusive architecture briefs.</p>
+            <h3 style={{ fontWeight: '700', fontSize: '15px', color: '#1F1A13', marginBottom: '10px' }}>{t('vision.briefing.titleRight')}</h3>
+            <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#6E6860', marginBottom: '28px' }}>{t('vision.briefing.descRight')}</p>
 
             <form onSubmit={handleSubscribe} className="newsletter-inputs" style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
               <input
                 type="email" placeholder="satoshi@example.com" value={email} onChange={e => setEmail(e.target.value)} className="input-newsletter" disabled={submitting} required
               />
               <button type="submit" className="prime-button-gold-sm" disabled={submitting}>
-                {submitting ? "Envoi..." : subscribed ? "Inscrit !" : "Subscribe"}
+                {submitting ? t('vision.briefing.submitting') : subscribed ? t('vision.briefing.success') : t('vision.briefing.subscribe')}
               </button>
             </form>
             {errorMsg && (
@@ -759,13 +761,13 @@ export default function Vision() {
           maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '40px', position: 'relative', zIndex: 10
         }}>
           <div style={{ maxWidth: '600px' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px', letterSpacing: '-0.5px' }}>Deploy Your Sovereign Fleet Today.</h2>
-            <p style={{ fontSize: '14px', lineHeight: '1.65', opacity: 0.7 }}>AI is not a SaaS vendor lock-in. It is a secure, decentralized infrastructure. Own your intelligence.</p>
+            <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px', letterSpacing: '-0.5px' }}>{t('vision.banner.title')}</h2>
+            <p style={{ fontSize: '14px', lineHeight: '1.65', opacity: 0.7 }}>{t('vision.banner.desc')}</p>
           </div>
 
           <div>
-            <a href="#deploy" className="prime-button-gold" onClick={(e) => { e.preventDefault(); alert("Fleet dispatching initialisé."); }}>
-              Deploy Sovereign Intelligence <span style={{ fontSize: '18px' }}>→</span>
+            <a href="#deploy" className="prime-button-gold" onClick={(e) => { e.preventDefault(); alert(t('vision.banner.alert')); }}>
+              {t('vision.banner.btn')} <span style={{ fontSize: '18px' }}>→</span>
             </a>
           </div>
         </div>

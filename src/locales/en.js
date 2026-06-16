@@ -4,7 +4,10 @@ export default {
     sovereignAi: "Sovereign AI",
     multiAgent: "Multi-Agent",
     enterprise: "Enterprise",
-    initNexus: "Initialize Strategic Nexus"
+    initNexus: "Initialize Strategic Nexus",
+    vision: "Vision",
+    technologie: "Technology",
+    ecosysteme: "Ecosystem"
   },
   footer: {
     online: "Cognitive Fleet Online",
@@ -123,5 +126,166 @@ export default {
     col1Desc: "We provide the infrastructure required to deploy specialized AI agents into factory floor systems, internal networks, and high-security compliance environments.",
     col2Title: "Seamless Tool Integration",
     col2Desc: "Leverage open-source protocols to map your custom enterprise APIs to agentic workflows. Your agents are given the authority to execute and report directly to human supervisors."
+  },
+  vision: {
+    features: {
+      memTitle: "MEMORY",
+      memDesc: "Persistent cognition. Autonomous semantic backup.",
+      orchTitle: "ORCHESTRATION",
+      orchDesc: "Systems that think together. Collaborative, synchronous multi-agent swarms.",
+      trustTitle: "TRUST",
+      trustDesc: "Your infrastructure. Your intelligence. Privacy by design without compromise."
+    },
+    augmented: {
+      tagline: "AUGMENTED HUMAN",
+      title1: "Your cognition.",
+      title2: "Augmented.",
+      desc: "Free your mind from execution constraints. PRIME-AI handles technical complexity, model alignment, and background data processing pipelines.",
+      learnMore: "Learn more",
+      hudTitle: "COGNITIVE HUD v2.0",
+      hudScan: "SCAN",
+      hudActive: "Active neural synchronization"
+    },
+    ecosystem: {
+      tagline: "PRIME-AI ECOSYSTEM",
+      title: "Intelligence present everywhere you go.",
+      desktopDesc: "Desktop App. Sovereign desktop integration.",
+      mobileDesc: "iOS / Android. Real-time voice and cognitive bridge.",
+      cliDesc: "Local & Remote Control. Direct prompt-to-terminal interface.",
+      cloudDesc: "Sovereign Infrastructure. Encrypted hosting and local pipelines."
+    },
+    briefing: {
+      titleLeft1: "PRIME-AI is not a tool.",
+      titleLeft2: "It is your cognitive advantage.",
+      btnLeft: "Join the ecosystem",
+      taglineRight: "SYSTEM BRIEFING",
+      titleRight: "Stay ahead of the curve.",
+      descRight: "Get notified about new sovereign updates, autonomous features, and exclusive architecture briefs.",
+      submitting: "Sending...",
+      success: "Subscribed!",
+      subscribe: "Subscribe"
+    },
+    banner: {
+      title: "Deploy Your Sovereign Fleet Today.",
+      desc: "AI is not a SaaS vendor lock-in. It is a secure, decentralized infrastructure. Own your intelligence.",
+      btn: "Deploy Sovereign Intelligence",
+      alert: "Sovereign fleet deployment initialized."
+    }
+  },
+  technology: {
+    hero: {
+      tagline: "PRIME-AI TECHNOLOGY",
+      title1: "The Power of Sovereign AI.",
+      title2: "Controlled, Private, and High-Performance.",
+      desc: "PRIME-AI redesigns artificial intelligence architecture. No more relying on opaque centralized APIs: deploy your own digital brains."
+    },
+    tabs: {
+      mesh: "Multi-Agent Swarms",
+      inference: "Local Inference",
+      alignment: "Sovereign Alignment"
+    },
+    mesh: {
+      title: "Decentralized Neural Network",
+      desc: "Our P2P mesh communication architecture allows cognitive agents to deliberate in a distributed manner without a single point of failure.",
+      feat1: "Decentralized synchronous consensus",
+      feat2: "Zero dependency on third-party servers",
+      feat3: "Adaptive routing with ultra-low latency",
+      metric: "99.999% convergent consensus"
+    },
+    inference: {
+      title: "Local Inference Engines",
+      desc: "Optimized local execution of open models (Llama, Gemma, Mistral) on your proprietary hardware with complete data isolation.",
+      feat1: "Advanced quantization without precision loss",
+      feat2: "Dynamic CPU / GPU / NPU orchestration",
+      feat3: "End-to-end hardware encryption",
+      metric: "< 12ms first-token latency"
+    },
+    alignment: {
+      title: "Sovereign Cognitive Alignment",
+      desc: "Advanced customized alignment and ethical guidance protocols. Your AI thinks according to your values and business rules.",
+      feat1: "Real-time constitutional guardrails",
+      feat2: "Semantic filtering of sensitive data",
+      feat3: "Encrypted persistent semantic memory",
+      metric: "100% aligned with your directives"
+    },
+    btn: {
+      test: "Test the System ⚡"
+    },
+    specs: {
+      title: "Cognitive Architecture Specifications",
+      desc: "Our technology stack is built on strict cryptographic and semantic foundations.",
+      spec1Title: "Zero Data Sharing",
+      spec1Desc: "Your prompts, reasoning logs, and local memories never pass through third-party cloud services.",
+      spec2Title: "Adaptive Model Swarm",
+      spec2Desc: "Intelligent dynamic routing between fast local models and deep reasoning LLMs.",
+      spec3Title: "Structure Graph Semantics",
+      spec3Desc: "Hierarchical vector indexing and local knowledge graphs connecting your business data."
+    }
+  },
+  ecosystem: {
+    hero: {
+      tagline: "MULTI-PLATFORM ECOSYSTEM",
+      title1: "A Cognitive Ecosystem",
+      title2: "Without Borders.",
+      desc: "Deploy intelligence across your desktops, mobile devices, local servers, and edge nodes in a secure, end-to-end encrypted mesh."
+    },
+    desktop: {
+      title: "PRIME-Desktop (macOS / Windows)",
+      platform: "Native multi-platform application",
+      desc: "The backbone of your daily workflow. Capture, organize, and reason continuously with seamless local file system synchronization.",
+      spec1: "HUD interface overlay",
+      spec2: "System tool integrations",
+      spec3: "Embedded vector database"
+    },
+    mobile: {
+      title: "PRIME-Mobile (iOS / Android)",
+      platform: "Voice cognitive bridge",
+      desc: "Your mobile intelligence companion. Ultra-fast real-time voice access, automated encrypted transcription, and async session syncing.",
+      spec1: "Local speech synthesis/recognition",
+      spec2: "AES-256 hardware encryption",
+      spec3: "Actionable push notifications"
+    },
+    cli: {
+      title: "PRIME-CLI",
+      platform: "Developer interface",
+      desc: "For engineers and sysadmins. Control your sovereign agent fleet directly from your terminal or integrate them into automation scripts.",
+      spec1: "JSON-RPC support",
+      spec2: "Parallel batch mode",
+      spec3: "Configurable profile manager"
+    },
+    cloud: {
+      title: "PRIME-Private Cloud",
+      platform: "Enterprise infrastructure",
+      desc: "Your completely autonomous private cloud. Host your inference servers, secure messaging, and heavy data pipelines without cloud lock-ins.",
+      spec1: "Sovereign Kubernetes cluster",
+      spec2: "Cryptographic key management",
+      spec3: "Local telemetry monitoring"
+    },
+    btn: {
+      test: "Test the System ⚡",
+      console: "Consult Central Infrastructure (Console OS)"
+    },
+    info: {
+      title: "Click on a platform to inspect its technical specifications."
+    },
+    specs: {
+      title: "Key Features:"
+    },
+    sync: {
+      title: "How does asynchronous synchronization work?",
+      desc1: "Thanks to our encrypted P2P protocol, each node of your ecosystem maintains an optimized local cache. When you connect your mobile or desktop client, semantic change deltas are securely exchanged without ever passing through a centralized public cloud server.",
+      desc2: "This ensures absolute independence and record access speed, even in complete offline mode.",
+      scheduler: "SYNCHRONIZATION_SCHEDULER",
+      nodes: {
+        desktop: "Desktop Node (macOS)",
+        mobile: "Mobile Node (iOS)",
+        cli: "Local CLI Node",
+        cloud: "Private Cloud"
+      },
+      status: {
+        synced: "Synchronized",
+        pending: "Pending ping (standby)"
+      }
+    }
   }
 };

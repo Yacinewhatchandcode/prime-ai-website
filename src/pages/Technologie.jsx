@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Technologie() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('mesh');
   const [hudScan, setHudScan] = useState(true);
 
@@ -14,34 +16,34 @@ export default function Technologie() {
 
   const technologies = {
     mesh: {
-      title: "Réseau de Neurones Décentralisé",
-      description: "Notre architecture de communication en maillage P2P permet aux agents cognitifs de délibérer de manière distribuée sans point de défaillance unique.",
+      title: t('technology.mesh.title'),
+      description: t('technology.mesh.desc'),
       features: [
-        "Consensus synchrone décentralisé",
-        "Zéro dépendance vis-à-vis des serveurs tiers",
-        "Routage adaptatif à ultra-faible latence"
+        t('technology.mesh.feat1'),
+        t('technology.mesh.feat2'),
+        t('technology.mesh.feat3')
       ],
-      metric: "Consensus 99.999% convergent"
+      metric: t('technology.mesh.metric')
     },
     inference: {
-      title: "Moteurs d'Inférence Locaux",
-      description: "Exécution locale optimisée de modèles ouverts (Llama, Gemma, Mistral) sur votre matériel propriétaire avec isolation complète des données.",
+      title: t('technology.inference.title'),
+      description: t('technology.inference.desc'),
       features: [
-        "Quantification avancée sans perte de précision",
-        "Orchestration dynamique CPU / GPU / NPU",
-        "Chiffrement matériel de bout en bout"
+        t('technology.inference.feat1'),
+        t('technology.inference.feat2'),
+        t('technology.inference.feat3')
       ],
-      metric: "< 12ms premier-token latence"
+      metric: t('technology.inference.metric')
     },
     alignment: {
-      title: "Alignement Cognitif Souverain",
-      description: "Protocoles avancés de guidage et d'alignement éthique personnalisés. Votre intelligence artificielle pense selon vos valeurs et règles métier.",
+      title: t('technology.alignment.title'),
+      description: t('technology.alignment.desc'),
       features: [
-        "Supervision constitutionnelle en temps réel",
-        "Filtrage sémantique des données sensibles",
-        "Mémoire sémantique persistante cryptée"
+        t('technology.alignment.feat1'),
+        t('technology.alignment.feat2'),
+        t('technology.alignment.feat3')
       ],
-      metric: "100% aligné sur vos directives"
+      metric: t('technology.alignment.metric')
     }
   };
 
@@ -131,7 +133,7 @@ export default function Technologie() {
             letterSpacing: '3px',
             textTransform: 'uppercase'
           }}>
-            TECHNOLOGIE PRIME-AI
+            {t('technology.hero.tagline')}
           </span>
         </div>
 
@@ -144,13 +146,13 @@ export default function Technologie() {
           marginBottom: '24px',
           letterSpacing: '-1px'
         }}>
-          La Puissance de l'IA Souveraine.<br />
+          {t('technology.hero.title1')}<br />
           <span style={{
             background: 'linear-gradient(90deg, #C6A15A 0%, #E6C587 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
-          }}>Contrôlée, Privée et Performante.</span>
+          }}>{t('technology.hero.title2')}</span>
         </h1>
 
         <p style={{
@@ -162,19 +164,19 @@ export default function Technologie() {
           maxWidth: '680px',
           margin: '0 auto 40px'
         }}>
-          PRIME-AI repense l'architecture d'intelligence artificielle. Plus besoin de dépendre d'API centralisées opaques : déployez vos propres cerveaux numériques.
+          {t('technology.hero.desc')}
         </p>
 
         {/* Tab Selectors */}
         <div className="tech-tabs" style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '60px', flexWrap: 'wrap' }}>
           <button className={`tech-tab ${activeTab === 'mesh' ? 'active' : ''}`} onClick={() => setActiveTab('mesh')}>
-            Réseau Multi-Agent
+            {t('technology.tabs.mesh')}
           </button>
           <button className={`tech-tab ${activeTab === 'inference' ? 'active' : ''}`} onClick={() => setActiveTab('inference')}>
-            Inférence Locale
+            {t('technology.tabs.inference')}
           </button>
           <button className={`tech-tab ${activeTab === 'alignment' ? 'active' : ''}`} onClick={() => setActiveTab('alignment')}>
-            Alignement Souverain
+            {t('technology.tabs.alignment')}
           </button>
         </div>
       </section>
@@ -268,7 +270,7 @@ export default function Technologie() {
               </div>
 
               <Link to="/yace-aura" className="prime-button-dark">
-                Tester le Système ⚡
+                {t('technology.btn.test')}
               </Link>
             </div>
           </div>
@@ -283,15 +285,15 @@ export default function Technologie() {
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#1F1A13' }}>Spécifications de l'Architecture Cognitive</h2>
-            <p style={{ fontSize: '14px', color: '#6E6860', marginTop: '8px' }}>Notre stack technologique repose sur des bases cryptographiques et sémantiques strictes.</p>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#1F1A13' }}>{t('technology.specs.title')}</h2>
+            <p style={{ fontSize: '14px', color: '#6E6860', marginTop: '8px' }}>{t('technology.specs.desc')}</p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {[
-              { title: "Zéro Partage de Données", desc: "Vos prompts, logs de raisonnement et mémoires locales ne transitent jamais par des services cloud tiers." },
-              { title: "Adaptative Model Swarm", desc: "Routage dynamique intelligent entre modèles légers ultra-rapides et modèles de raisonnement profonds." },
-              { title: "Structure Graph Semantics", desc: "Indexation vectorielle hiérarchique et graphe de connaissances locales connectant en continu toutes vos données." }
+              { title: t('technology.specs.spec1Title'), desc: t('technology.specs.spec1Desc') },
+              { title: t('technology.specs.spec2Title'), desc: t('technology.specs.spec2Desc') },
+              { title: t('technology.specs.spec3Title'), desc: t('technology.specs.spec3Desc') }
             ].map((spec, i) => (
               <div key={i} style={{ background: '#FFFFFF', border: '1px solid rgba(198, 161, 90, 0.12)', borderRadius: '16px', padding: '28px' }}>
                 <h3 style={{ fontWeight: '700', fontSize: '16px', color: '#1F1A13', marginBottom: '10px' }}>{spec.title}</h3>

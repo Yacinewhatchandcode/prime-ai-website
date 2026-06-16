@@ -41,8 +41,8 @@ function MultiAgentSystems() {
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '24px', padding: '0 24px' }}>
-          <h2 style={{ fontSize: '1.2rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{t('multiagent.title1')} <span style={{ color: '#a855f7' }}>{t('multiagent.title2')}</span></h2>
-          <div style={{ fontSize: '0.65rem', color: '#a1a1aa', letterSpacing: '1px', marginTop: '8px' }}>{t('multiagent.tagline')}</div>
+          <h2 style={{ fontSize: '1.2rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{t('multiAgent.title1')} <span style={{ color: '#a855f7' }}>{t('multiAgent.title2')}</span></h2>
+          <div style={{ fontSize: '0.65rem', color: '#a1a1aa', letterSpacing: '1px', marginTop: '8px' }}>{t('multiAgent.tagline')}</div>
         </div>
 
         <div className="agent-panel" style={{ boxShadow: 'inset 0 0 30px rgba(168, 85, 247, 0.05)', borderColor: 'rgba(168, 85, 247, 0.2)' }}>
@@ -51,15 +51,15 @@ function MultiAgentSystems() {
               <Cpu size={24} color="#a855f7" />
             </div>
             <div>
-              <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#a855f7' }}>{t('multiagent.subtitle')}</div>
+              <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#a855f7' }}>{t('multiAgent.subtitle')}</div>
               <div style={{ fontSize: '0.6rem', color: '#a1a1aa' }}>COGNITIVE ORCHESTRATION</div>
             </div>
           </div>
           <p style={{ fontSize: '0.75rem', color: '#e2e8f0', lineHeight: '1.6', marginBottom: '12px' }}>
-            {t('multiagent.desc1')}
+            {t('multiAgent.desc1')}
           </p>
           <p style={{ fontSize: '0.75rem', color: '#e2e8f0', lineHeight: '1.6' }}>
-            {t('multiagent.desc2')}
+            {t('multiAgent.desc2')}
           </p>
         </div>
 
@@ -67,15 +67,15 @@ function MultiAgentSystems() {
           <div className="agent-panel" style={{ margin: 0, padding: '16px', display: 'flex', gap: '16px' }}>
             <Activity size={24} color="#f59e0b" />
             <div>
-              <h3 style={{ fontSize: '0.8rem', color: '#f59e0b', marginBottom: '8px' }}>{t('multiagent.col1Title')}</h3>
-              <p style={{ fontSize: '0.7rem', color: '#a1a1aa', lineHeight: '1.5' }}>{t('multiagent.col1Desc')}</p>
+              <h3 style={{ fontSize: '0.8rem', color: '#f59e0b', marginBottom: '8px' }}>{t('multiAgent.col1Title')}</h3>
+              <p style={{ fontSize: '0.7rem', color: '#a1a1aa', lineHeight: '1.5' }}>{t('multiAgent.col1Desc')}</p>
             </div>
           </div>
           <div className="agent-panel" style={{ margin: 0, padding: '16px', display: 'flex', gap: '16px' }}>
             <Zap size={24} color="#3b82f6" />
             <div>
-              <h3 style={{ fontSize: '0.8rem', color: '#3b82f6', marginBottom: '8px' }}>{t('multiagent.col2Title')}</h3>
-              <p style={{ fontSize: '0.7rem', color: '#a1a1aa', lineHeight: '1.5' }}>{t('multiagent.col2Desc')}</p>
+              <h3 style={{ fontSize: '0.8rem', color: '#3b82f6', marginBottom: '8px' }}>{t('multiAgent.col2Title')}</h3>
+              <p style={{ fontSize: '0.7rem', color: '#a1a1aa', lineHeight: '1.5' }}>{t('multiAgent.col2Desc')}</p>
             </div>
           </div>
         </div>
