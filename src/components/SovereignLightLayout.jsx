@@ -1,0 +1,211 @@
+import React from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+
+export default function SovereignLightLayout() {
+  const location = useLocation();
+  const path = location.pathname;
+
+  return (
+    <div style={{
+      background: '#FAF8F4',
+      color: '#1F1A13',
+      fontFamily: "'Outfit', sans-serif",
+      minHeight: '100vh',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+    }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+        .nav-link {
+          color: #5A5550;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 11px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          transition: all 0.3s;
+          position: relative;
+          padding: 6px 0;
+        }
+        .nav-link:hover {
+          color: #C6A15A;
+        }
+        .nav-link.active {
+          color: #C6A15A;
+        }
+        .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1.5px;
+          background: #C6A15A;
+          border-radius: 10px;
+        }
+
+        .prime-button-outline {
+          background: transparent;
+          color: #1F1A13;
+          border: 1px solid rgba(31, 26, 19, 0.2);
+          padding: 10px 24px;
+          border-radius: 100px;
+          font-weight: 500;
+          font-size: 13px;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+        }
+        .prime-button-outline:hover {
+          border-color: #C6A15A;
+          color: #C6A15A;
+          background: rgba(198, 161, 90, 0.04);
+          transform: translateY(-1px);
+        }
+
+        @media (max-width: 1024px) {
+          .nav-links-desktop { display: none !important; }
+          .header-nav { padding: 16px 20px !important; }
+        }
+      `}</style>
+
+      {/* ── GLOBAL HEADER NAVIGATION ─────────────────────── */}
+      <header className="header-nav" style={{
+        padding: '24px 60px',
+        height: '80px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'relative',
+        zIndex: 50,
+        background: '#FAF8F4',
+        borderBottom: '1px solid rgba(198, 161, 90, 0.06)'
+      }}>
+        {/* Logo */}
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1F1A13 0%, #C6A15A 100%)',
+            width: '28px',
+            height: '28px',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 10px rgba(31, 26, 19, 0.08)'
+          }}>
+            <span style={{ color: '#FAF8F4', fontWeight: '800', fontSize: '15px' }}>▲</span>
+          </div>
+          <span style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: '700',
+            fontSize: '15px',
+            letterSpacing: '3px',
+            color: '#1F1A13',
+            textTransform: 'uppercase'
+          }}>
+            PRIME <span style={{ color: '#C6A15A' }}>-</span> AI
+          </span>
+        </Link>
+
+        {/* Desktop Nav Links */}
+        <nav className="nav-links-desktop" style={{
+          display: 'flex',
+          gap: '32px',
+          alignItems: 'center',
+        }}>
+          <Link to="/vision" className={`nav-link ${path === '/vision' ? 'active' : ''}`}>Vision</Link>
+          <Link to="/technologie" className={`nav-link ${path === '/technologie' ? 'active' : ''}`}>Technologie</Link>
+          <Link to="/ecosysteme" className={`nav-link ${path === '/ecosysteme' ? 'active' : ''}`}>Écosystème</Link>
+          <Link to="/yace19" className="nav-link">À propos</Link>
+        </nav>
+
+        {/* Header Right Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link to="/yace-aura" className="prime-button-outline" style={{ borderColor: '#C6A15A', color: '#C6A15A' }}>
+            Console OS <span style={{ marginLeft: '6px' }}>⚡</span>
+          </Link>
+
+          {/* Language Switcher */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontWeight: '600',
+            fontSize: '11px',
+            color: '#1F1A13',
+            letterSpacing: '1px',
+            cursor: 'pointer',
+            padding: '6px 12px',
+            background: 'rgba(198, 161, 90, 0.06)',
+            borderRadius: '100px',
+            border: '1px solid rgba(198, 161, 90, 0.1)'
+          }}>
+            <span>FR</span>
+            <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
+          </div>
+
+          {/* Menu Grid Icon */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '3px',
+            cursor: 'pointer',
+            padding: '8px',
+            borderRadius: '8px',
+            background: 'rgba(31, 26, 19, 0.03)'
+          }} onClick={() => window.location.href = "/yace-aura"}>
+            <div style={{ display: 'flex', gap: '3px' }}>
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '3px' }}>
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#C6A15A', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '3px' }}>
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+              <div style={{ width: '4px', height: '4px', background: '#1F1A13', borderRadius: '50%' }} />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* ── CORE PAGE CONTENT ────────────────────────────── */}
+      <main style={{ flex: '1', width: '100%' }}>
+        <Outlet />
+      </main>
+
+      {/* ── GLOBAL FOOTER ────────────────────────────────── */}
+      <footer style={{
+        padding: '30px 60px',
+        background: '#1F1A13',
+        color: '#FAF8F4',
+        borderTop: '1px solid rgba(250, 248, 244, 0.05)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '20px',
+        fontSize: '11px',
+        opacity: 0.8
+      }}>
+        <span>© {new Date().getFullYear()} PRIME-AI. Infrastructure Cognitive Souveraine.</span>
+        <div style={{ display: 'flex', gap: '24px' }}>
+          <Link to="/yace-aura" style={{ color: 'inherit', textDecoration: 'none' }}>Sovereign OS</Link>
+          <Link to="/vision" style={{ color: '#C6A15A', textDecoration: 'none', fontWeight: 'bold' }}>Vision Node</Link>
+          <Link to="/technologie" style={{ color: 'inherit', textDecoration: 'none' }}>Technologie</Link>
+          <Link to="/ecosysteme" style={{ color: 'inherit', textDecoration: 'none' }}>Écosystème</Link>
+        </div>
+      </footer>
+    </div>
+  );
+}
