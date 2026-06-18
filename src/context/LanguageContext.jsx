@@ -6,8 +6,8 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    // Check local storage or default to 'fr'
-    return localStorage.getItem('appLanguage') || 'fr';
+    // Check local storage or default to 'en'
+    return localStorage.getItem('appLanguage') || 'en';
   });
 
   useEffect(() => {

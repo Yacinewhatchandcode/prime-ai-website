@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import SovereignCommandBar from './SovereignCommandBar';
 import SovereignWorkflowLog from './SovereignWorkflowLog';
-import { useLanguage } from '../context/LanguageContext';
 
 function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname;
-  const { language, setLanguage, t } = useLanguage();
 
   const isSubsystemActive = ['/orb', '/orchestration', '/media', '/whatsapp', '/memory', '/factory', '/fleet-command'].includes(path);
   const isLabActive = ['/amlazr', '/azirem', '/yace19'].includes(path);
@@ -49,9 +47,9 @@ function Layout() {
         
         {/* Desktop Links */}
         <div className="agent-nav-links desktop-only">
-          <Link to="/vision" className={`agent-nav-item ${path === '/vision' || path === '/' ? 'active' : ''}`}>👁️ {t('nav.vision').toUpperCase()}</Link>
-          <Link to="/technologie" className={`agent-nav-item ${path === '/technologie' ? 'active' : ''}`}>🔬 {t('nav.technologie').toUpperCase()}</Link>
-          <Link to="/ecosysteme" className={`agent-nav-item ${path === '/ecosysteme' ? 'active' : ''}`}>🌐 {t('nav.ecosysteme').toUpperCase()}</Link>
+          <Link to="/vision" className={`agent-nav-item ${path === '/vision' || path === '/' ? 'active' : ''}`}>👁️ VISION</Link>
+          <Link to="/technologie" className={`agent-nav-item ${path === '/technologie' ? 'active' : ''}`}>🔬 TECHNOLOGIE</Link>
+          <Link to="/ecosysteme" className={`agent-nav-item ${path === '/ecosysteme' ? 'active' : ''}`}>🌐 ÉCOSYSTÈME</Link>
           <Link to="/yace-aura" className={`agent-nav-item aura ${path === '/yace-aura' ? 'active' : ''}`}>👑 YACE•AURA</Link>
           <Link to="/credentials" className={`agent-nav-item backoffice ${path === '/credentials' ? 'active' : ''}`}>🔒 BACKOFFICE</Link>
           <Link to="/revenue" className={`agent-nav-item revenue ${path === '/revenue' ? 'active' : ''}`}>💰 REVENUE</Link>
@@ -84,24 +82,21 @@ function Layout() {
         {/* Right side items: Language switcher & grid menu to align with Light Layout */}
         <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           {/* Language Switcher */}
-          <div 
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontWeight: '600',
-              fontSize: '11px',
-              color: '#FAF8F4',
-              letterSpacing: '1px',
-              cursor: 'pointer',
-              padding: '6px 12px',
-              background: 'rgba(198, 161, 90, 0.06)',
-              borderRadius: '100px',
-              border: '1px solid rgba(198, 161, 90, 0.12)'
-            }}
-          >
-            <span>{language.toUpperCase()}</span>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontWeight: '600',
+            fontSize: '11px',
+            color: '#FAF8F4',
+            letterSpacing: '1px',
+            cursor: 'pointer',
+            padding: '6px 12px',
+            background: 'rgba(198, 161, 90, 0.06)',
+            borderRadius: '100px',
+            border: '1px solid rgba(198, 161, 90, 0.12)'
+          }}>
+            <span>FR</span>
             <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
           </div>
 
@@ -173,34 +168,9 @@ function Layout() {
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ color: '#6b6b7b', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>MAIN CORE</div>
-            {/* Mobile Language Switcher */}
-            <div 
-              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                fontWeight: '600',
-                fontSize: '13px',
-                color: '#FAF8F4',
-                letterSpacing: '1px',
-                cursor: 'pointer',
-                padding: '10px',
-                background: 'rgba(198, 161, 90, 0.08)',
-                borderRadius: '8px',
-                border: '1px solid rgba(198, 161, 90, 0.15)',
-                width: '100%',
-                boxSizing: 'border-box'
-              }}
-            >
-              <span>LANGUE : {language.toUpperCase()}</span>
-              <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
-            </div>
-
-            <Link to="/vision" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>👁️ {t('nav.vision').toUpperCase()}</Link>
-            <Link to="/technologie" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#c084fc' }} onClick={() => setMobileMenuOpen(false)}>🔬 {t('nav.technologie').toUpperCase()}</Link>
-            <Link to="/ecosysteme" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#60a5fa' }} onClick={() => setMobileMenuOpen(false)}>🌐 {t('nav.ecosysteme').toUpperCase()}</Link>
+            <Link to="/vision" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>👁️ VISION</Link>
+            <Link to="/technologie" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#c084fc' }} onClick={() => setMobileMenuOpen(false)}>🔬 TECHNOLOGIE</Link>
+            <Link to="/ecosysteme" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#60a5fa' }} onClick={() => setMobileMenuOpen(false)}>🌐 ÉCOSYSTÈME</Link>
             <Link to="/yace-aura" className="agent-nav-item aura" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#d4af37' }} onClick={() => setMobileMenuOpen(false)}>👑 YACE•AURA</Link>
             <Link to="/credentials" className="agent-nav-item backoffice" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#f59e0b' }} onClick={() => setMobileMenuOpen(false)}>🔒 BACKOFFICE</Link>
             <Link to="/revenue" className="agent-nav-item revenue" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#10b981' }} onClick={() => setMobileMenuOpen(false)}>💰 REVENUE</Link>
