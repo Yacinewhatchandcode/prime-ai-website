@@ -11,6 +11,7 @@ echo ✅ [Sovereign QA] Build Success!
 echo 🚀 [Sovereign Fleet] Deploying to GitHub Pages...
 
 cd dist
+copy index.html 404.html
 git init
 git checkout -b main
 git add -A
