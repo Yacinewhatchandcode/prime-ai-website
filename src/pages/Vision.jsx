@@ -588,14 +588,14 @@ export default function Vision() {
               Libérez votre esprit des contraintes d'exécution. PRIME-AI gère la complexité technique, l'alignement des modèles et les pipelines de traitement de données en arrière-plan.
             </p>
 
-            <Link to="/memory" className="aug-link" style={{
+            <a href="https://calendly.com/info-primeai/30min" target="_blank" rel="noopener noreferrer" className="aug-link" style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#1F1A13', fontWeight: '700', fontSize: '14px', textDecoration: 'none', transition: 'color 0.3s'
             }}
               onMouseEnter={e => e.currentTarget.style.color = '#C6A15A'}
               onMouseLeave={e => e.currentTarget.style.color = '#1F1A13'}
             >
               En savoir plus <span style={{ fontSize: '18px' }}>→</span>
-            </Link>
+            </a>
           </div>
 
           <div style={{ flex: '1', display: 'flex', justifyContent: 'center', position: 'relative' }}>
