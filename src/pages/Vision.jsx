@@ -14,6 +14,23 @@ export default function Vision() {
   const [subscribed, setSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [activePortrait, setActivePortrait] = useState(0);
+  const portraits = [
+    '/portraits/portrait_1.png',
+    '/portraits/portrait_2.png',
+    '/portraits/portrait_3.png',
+    '/portraits/portrait_4.png',
+    '/portraits/portrait_5.png',
+    '/portraits/portrait_6.png',
+  ];
+
+  // Rotate portraits every 4 seconds
+  useEffect(() => {
+    const portraitInterval = setInterval(() => {
+      setActivePortrait(prev => (prev + 1) % 6);
+    }, 4000);
+    return () => clearInterval(portraitInterval);
+  }, []);
 
   // HUD Blink effect
   useEffect(() => {
@@ -630,11 +647,23 @@ export default function Vision() {
             <div style={{
               position: 'relative', width: '320px', height: '380px', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(31, 26, 19, 0.08)', border: '4px solid #FFFFFF', background: '#EAE5DB'
             }}>
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600"
-                alt="Augmented Human Cognition"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(0.3) sepia(0.15) contrast(1.05)', opacity: 0.95, transform: 'scaleX(-1)' }}
-              />
+              {portraits.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`Augmented Human Cognition ${i + 1}`}
+                  style={{
+                    position: i === 0 ? 'relative' : 'absolute',
+                    top: 0, left: 0,
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    filter: 'sepia(0.1) contrast(1.05)',
+                    opacity: activePortrait === i ? 1 : 0,
+                    transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                    zIndex: activePortrait === i ? 2 : 1,
+                  }}
+                />
+              ))}
 
               <div className="glow-temple" style={{ top: '40%', left: '62%' }}>
                 <div className="glow-temple-ring" />
