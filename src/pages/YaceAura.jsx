@@ -1298,7 +1298,7 @@ export default function YaceAura() {
               <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginTop: '8px' }}>
                 {activating 
                   ? "Tentative de communication avec le Playwright orchestrator et SQLite..." 
-                  : "Le swarm de micro-agents est synchronisé à 100% sur le port 5000 et william broker (port 4100)."}
+                  : "Le swarm de micro-agents est synchronisé à 100% sur le sovereign mesh network."}
               </p>
             </div>
 

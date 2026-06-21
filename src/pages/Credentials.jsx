@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck } from 'lucide-react';
 
 import { API_BASE } from '../utils/api';
@@ -66,7 +66,7 @@ export default function Credentials() {
         }
       }
     } catch (e) {
-      console.error("Failed to connect to backend api on port 5000", e);
+      console.error("Backend service unavailable", e);
     }
   };
 

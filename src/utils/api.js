@@ -10,7 +10,7 @@ const isDev = import.meta.env.DEV || window.location.hostname === 'localhost';
  * Override via:  VITE_API_BASE=https://api.prime-ai.fr in .env
  */
 export const API_BASE = import.meta.env.VITE_API_BASE
-  || (isDev ? 'http://localhost:5000' : '');
+  || (isDev ? (import.meta.env.VITE_API_BASE || 'http://localhost:5000') : '');
 
 /**
  * Safe fetch wrapper — never throws on network errors.

@@ -1,5 +1,5 @@
 // Browser-Safe Tauri Bridge
-// Automatically detects Tauri vs standard browser contexts to prevent runtime errors on port 5173.
+// Automatically detects Tauri vs standard browser contexts to prevent runtime errors.
 import { API_BASE } from './api.js';
 
 
@@ -47,7 +47,7 @@ export async function invoke(command, args = {}) {
     }
   }
 
-  console.log(`[tauriBridge] Mock invoke: ${command}`, args);
+  if (import.meta.env.DEV) console.log(`[tauriBridge] Mock invoke: ${command}`, args);
   
   if (command === 'check_neural_core') {
     return true;
@@ -74,7 +74,7 @@ export async function invoke(command, args = {}) {
       "Downloading neural weights [89%]",
       "Verifying SHA-256 integrity...",
       "Extracting inference sidecar...",
-      "Binding local tensor runtime to localhost:8080...",
+      "Binding local tensor runtime...",
       "Neural Core Online. Sovereign execution ready."
     ];
     let delay = 100;

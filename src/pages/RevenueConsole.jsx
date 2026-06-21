@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck, DollarSign, CreditCard, ArrowUpRight, Upload } from 'lucide-react';
 
 import { API_BASE } from '../utils/api';
@@ -59,7 +59,7 @@ export default function RevenueConsole() {
       }
       setLoading(false);
     } catch (e) {
-      console.error("Failed to fetch revenue telemetry from FastAPI port 5000", e);
+      console.error("Revenue telemetry service unavailable", e);
     }
   };
 

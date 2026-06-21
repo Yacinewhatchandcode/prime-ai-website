@@ -10,17 +10,17 @@ export default function SovereignCommandBar() {
   const handleExecute = async () => {
     if (!intent) return;
     try {
-      console.log(`Executing intent on ${model}: ${intent}`);
+      if (import.meta.env.DEV) console.log(`Executing intent on ${model}: ${intent}`);
       const res = await fetch(`${API_BASE}/api/dispatch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: intent, priority: "normal" })
       });
       if (res.ok) {
-        console.log("Successfully dispatched prompt to agent swarm");
+        if (import.meta.env.DEV) console.log("Successfully dispatched prompt to agent swarm");
       }
     } catch (e) {
-      console.error("Failed to connect to local dispatch API on port 5000", e);
+      console.error("Dispatch service unavailable", e);
     }
     setIntent('');
   };
