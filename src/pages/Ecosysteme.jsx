@@ -169,6 +169,25 @@ export default function Ecosysteme() {
         </p>
       </section>
 
+      {/* ── VIDEO ────────────────────────────────────── */}
+      <section style={{
+        padding: '0 clamp(16px, 5vw, 60px) 40px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        justifyContent: 'center'
+      }}>
+        <video
+          src={language === 'fr' ? '/prime_ecosysteme_fr.mp4' : '/prime_ecosysteme_en.mp4'}
+          autoPlay muted loop playsInline
+          style={{
+            width: '100%', maxWidth: '900px', borderRadius: '24px',
+            boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
+            border: '1px solid rgba(198, 161, 90, 0.2)',
+          }}
+        />
+      </section>
+
       {/* ── INTERACTIVE GRID & MAP ─────────────────────── */}
       <section style={{
         padding: '0 clamp(16px, 5vw, 60px) clamp(40px, 8vw, 80px)',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Layout from './components/Layout';
 import SovereignLightLayout from './components/SovereignLightLayout';
@@ -29,7 +29,7 @@ import FleetCommand from './pages/FleetCommand';
 function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           {/* Light Premium Layout */}
           <Route element={<SovereignLightLayout />}>
@@ -71,7 +71,7 @@ function App() {
           <Route path="/br" element={<CountryNodeTemplate countryName="Brazil" subtitle="Sovereign. Secure. Autonomous." flag="🇧🇷" nodeColor="#10b981" nodeHighlight="#facc15" />} />
           <Route path="/ca" element={<CountryNodeTemplate countryName="Canada" subtitle="Sovereign. Secure. Autonomous." flag="🇨🇦" nodeColor="#ef4444" nodeHighlight="#f87171" />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </LanguageProvider>
   );
 }

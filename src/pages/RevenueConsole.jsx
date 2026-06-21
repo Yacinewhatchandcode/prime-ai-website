@@ -182,7 +182,7 @@ export default function RevenueConsole() {
               }}
             >
               <RefreshCw size={14} />
-              SYNCRONISER
+              SYNCHRONISER
             </button>
           </div>
         </div>

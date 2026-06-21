@@ -1,0 +1,21 @@
+{
+  "name": "primeai-remotion",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx remotion studio",
+    "build": "npx remotion render",
+    "render:all": "node scripts/render-all.mjs",
+    "render:single": "npx remotion render src/index.jsx"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/player": "^4.0.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.0"
+  }
+}

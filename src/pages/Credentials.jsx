@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck } from 'lucide-react';
-
+import { useLanguage } from '../context/LanguageContext';
 import { API_BASE } from '../utils/api';
 
 export default function Credentials() {
+  const { language } = useLanguage();
   // Connection states
   const [lkEmail, setLkEmail] = useState('');
   const [lkPassword, setLkPassword] = useState('');
@@ -194,6 +195,19 @@ export default function Credentials() {
           </button>
         </div>
 
+        {/* Video */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <video
+            src={language === 'fr' ? '/prime_credentials_fr.mp4' : '/prime_credentials_en.mp4'}
+            autoPlay muted loop playsInline
+            style={{
+              width: '100%', borderRadius: '16px',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            }}
+          />
+        </div>
+
         {/* Credentials Form Section */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
           
@@ -335,7 +349,7 @@ export default function Credentials() {
             <h4 style={{ margin: 0, fontSize: '0.95rem', fontFamily: '"Outfit", sans-serif', color: '#f59e0b', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Server size={16} /> SOVEREIGN LOGGING & COGNITIVE SWARM TELEMETRY
             </h4>
-            <span style={{ fontSize: '0.65rem', color: '#6b6b7b', fontFamily: '"JetBrains Mono", monospace' }}>Models: hermes3 (Ollama)</span>
+            <span style={{ fontSize: '0.65rem', color: '#6b6b7b', fontFamily: '"JetBrains Mono", monospace' }}>Models: Local LLM (Private)</span>
           </div>
 
           <div style={{ height: '220px', background: '#050507', border: '1px solid rgba(255,255,255,0.03)', borderRadius: '8px', padding: '16px', overflowY: 'auto', fontFamily: '"JetBrains Mono", monospace', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '8px' }}>

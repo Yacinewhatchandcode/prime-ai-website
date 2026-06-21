@@ -1,5 +1,6 @@
 import { API_BASE } from '../utils/api';
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   Cpu, 
   Radio, 
@@ -28,6 +29,7 @@ import { VersionedTransaction, Connection, PublicKey } from '@solana/web3.js';
    ============================================================ */
 
 export default function YaceAura() {
+  const { language } = useLanguage();
   // Campaign & demo states
   const [ecosystemActive, setEcosystemActive] = useState(false);
   const [activating, setActivating] = useState(false);
@@ -692,6 +694,19 @@ export default function YaceAura() {
             Exécuter Démo
           </button>
         </div>
+      </div>
+
+      {/* ── VIDEO ── */}
+      <div style={{ display: 'flex', justifyContent: 'center', maxWidth: '1200px', width: '100%', marginBottom: '24px', zIndex: 10 }}>
+        <video
+          src={language === 'fr' ? '/prime_yace_fr.mp4' : '/prime_yace_en.mp4'}
+          autoPlay muted loop playsInline
+          style={{
+            width: '100%', borderRadius: '16px',
+            border: '1px solid rgba(212, 175, 55, 0.3)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+          }}
+        />
       </div>
 
       {/* ── METRICS GRID PANEL ── */}

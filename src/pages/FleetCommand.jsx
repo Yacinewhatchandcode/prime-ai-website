@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Zap, Radio, Globe, Terminal, Activity, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import PrimeLogo from '../components/PrimeLogo';
 import AgentFleetGrid from '../components/AgentFleetGrid';
 
 function FleetCommand() {
+  const { language } = useLanguage();
   const [isWired, setIsWired] = useState(false);
   const [logs, setLogs] = useState([]);
 
@@ -102,6 +104,19 @@ function FleetCommand() {
               <line x1="20%" y1="70%" x2="80%" y2="70%" className={`wire-line ${isWired ? 'active' : ''}`} strokeDasharray="5,5" />
             </svg>
           </div>
+        </div>
+
+        {/* Video */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+          <video
+            src={language === 'fr' ? '/prime_fleet_fr.mp4' : '/prime_fleet_en.mp4'}
+            autoPlay muted loop playsInline
+            style={{
+              width: '100%', borderRadius: '16px',
+              border: '1px solid rgba(168, 85, 247, 0.3)',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            }}
+          />
         </div>
 
         {/* 14 Agent Grid */}
