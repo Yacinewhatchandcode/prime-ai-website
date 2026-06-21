@@ -716,7 +716,7 @@ export default function Vision() {
             letterSpacing: '3px',
             textTransform: 'uppercase'
           }}>
-            {language === 'fr' ? "PRÉSENTATION MACRO" : "MACRO PRESENTATION"}
+            {language === 'fr' ? "LA THÈSE SOUVERAINE" : "THE SOVEREIGN THESIS"}
           </span>
         </div>
         
@@ -728,7 +728,7 @@ export default function Vision() {
           marginBottom: '32px',
           letterSpacing: '-0.5px'
         }}>
-          {language === 'fr' ? "Vision Macro & Souveraineté Cognitive" : "Macro Vision & Cognitive Sovereignty"}
+          {language === 'fr' ? "Infrastructure IA Souveraine" : "Sovereign AI Infrastructure"}
         </h2>
         
         <div style={{

@@ -61,6 +61,10 @@ const compositions = [
   { id: 'ArchSpecs-FR',     file: 'prime_arch_specs_fr.mp4' },
   { id: 'SyncProtocol-EN',  file: 'prime_sync_protocol_en.mp4' },
   { id: 'SyncProtocol-FR',  file: 'prime_sync_protocol_fr.mp4' },
+
+  // Macro Vision V2 — Sovereign Thesis (homepage)
+  { id: 'MacroVisionV2-EN', file: 'prime_macro_en.mp4' },
+  { id: 'MacroVisionV2-FR', file: 'prime_macro_fr.mp4' },
 ];
 
 console.log('');

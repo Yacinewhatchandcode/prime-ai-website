@@ -12,6 +12,7 @@ import FleetCommandComposition from './compositions/FleetCommandComposition';
 import YaceAuraComposition from './compositions/YaceAuraComposition';
 import ArchSpecsComposition from './compositions/ArchSpecsComposition';
 import SyncProtocolComposition from './compositions/SyncProtocolComposition';
+import MacroVisionV2Composition from './compositions/MacroVisionV2Composition';
 
 // Product card compositions (Ecosysteme page)
 import PrimeDesktopComposition from './compositions/PrimeDesktopComposition';
@@ -100,6 +101,12 @@ export const RemotionRoot = () => {
       <Composition id="SyncProtocol-EN" component={SyncProtocolComposition}
         {...shared} defaultProps={{ language: 'en' }} />
       <Composition id="SyncProtocol-FR" component={SyncProtocolComposition}
+        {...shared} defaultProps={{ language: 'fr' }} />
+
+      {/* Macro Vision V2 — Sovereign Thesis (homepage) */}
+      <Composition id="MacroVisionV2-EN" component={MacroVisionV2Composition}
+        {...shared} defaultProps={{ language: 'en' }} />
+      <Composition id="MacroVisionV2-FR" component={MacroVisionV2Composition}
         {...shared} defaultProps={{ language: 'fr' }} />
 
       {/* ═══════════════════════════════════════════════════
