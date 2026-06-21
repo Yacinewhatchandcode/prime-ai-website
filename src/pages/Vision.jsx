@@ -14,7 +14,7 @@ export default function Vision() {
   const [subscribed, setSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [activePortrait, setActivePortrait] = useState(0);
+  const [selectedPrompt, setSelectedPrompt] = useState('mac');
   const portraits = [
     '/portraits/portrait_1.png',
     '/portraits/portrait_2.png',
@@ -26,6 +26,124 @@ export default function Vision() {
     '/portraits/portrait_8.png',
     '/portraits/portrait_9.png',
     '/portraits/portrait_10.png',
+  ];
+
+  const ecoPrompts = [
+    {
+      id: 'mac',
+      title: 'Mac',
+      platform: 'macOS',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+          <path d="M4 11h16" />
+        </svg>
+      ),
+      description: {
+        en: 'Sovereign desktop integration for macOS. Capture, organize, and reason continuously with local-first file system sync.',
+        fr: 'Intégration de bureau souveraine pour macOS. Capturez, organisez et raisonnez en continu avec une synchronisation locale.'
+      },
+      video: {
+        en: '/prime_desktop_en.mp4',
+        fr: '/prime_desktop_fr.mp4'
+      }
+    },
+    {
+      id: 'windows',
+      title: 'Windows',
+      platform: 'Windows OS',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+      ),
+      description: {
+        en: 'Enterprise desktop integration for Windows. Secure, local-first background execution with low-latency LLM orchestration.',
+        fr: 'Intégration de bureau d\'entreprise pour Windows. Exécution sécurisée en arrière-plan, synchronisée en local.'
+      },
+      video: {
+        en: '/prime_desktop_en.mp4',
+        fr: '/prime_desktop_fr.mp4'
+      }
+    },
+    {
+      id: 'mobile',
+      title: 'Mobile',
+      platform: 'iOS / Android',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="5" y="2" width="14" height="20" rx="2" />
+          <line x1="12" y1="18" x2="12" y2="18.01" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      ),
+      description: {
+        en: 'Your nomadic intelligence companion. Ultra-fast real-time voice access, encrypted automatic transcription, and asynchronous thinking session sync.',
+        fr: 'Votre compagnon d\'intelligence nomade. Accès vocal temps réel ultra-rapide, transcription chiffrée automatique et synchronisation asynchrone.'
+      },
+      video: {
+        en: '/prime_mobile_en.mp4',
+        fr: '/prime_mobile_fr.mp4'
+      }
+    },
+    {
+      id: 'gram',
+      title: 'Telegram (gram)',
+      platform: 'Telegram Gateway',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="m22 2-7 20-4-9-9-4Z" />
+          <path d="M22 2 11 13" />
+        </svg>
+      ),
+      description: {
+        en: 'Control your sovereign agent fleet directly from your Telegram client. Receive real-time logs, security warnings, and execute remote delegation.',
+        fr: 'Contrôlez votre flotte d\'agents souverains directement depuis votre client Telegram. Recevez des rapports en temps réel et déléguez des tâches.'
+      },
+      video: {
+        en: '/prime_gram_en.mp4',
+        fr: '/prime_gram_fr.mp4'
+      }
+    },
+    {
+      id: 'teleprompter',
+      title: 'Teleprompter',
+      platform: 'DSPy Optimizer',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </svg>
+      ),
+      description: {
+        en: 'Autonomous prompt optimization. Leverage local DSPy validation and reinforcement loops to compile and align agent instructions without cloud leaks.',
+        fr: 'Optimisation autonome des prompts. Utilisez les validations locales DSPy pour compiler et aligner les consignes de vos agents sans fuite cloud.'
+      },
+      video: {
+        en: '/prime_teleprompter_en.mp4',
+        fr: '/prime_teleprompter_fr.mp4'
+      }
+    },
+    {
+      id: 'cloud',
+      title: 'Private Cloud',
+      platform: 'Private Server',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="2" y="3" width="20" height="18" rx="2" />
+          <path d="M2 9h20M2 15h20" />
+        </svg>
+      ),
+      description: {
+        en: 'Your fully autonomous private cloud. Host your inference, secure messaging, and heavy data processing servers without relying on Amazon or Google.',
+        fr: 'Votre cloud privé entièrement autonome. Hébergez vos serveurs d\'inférence et de traitement de données sans dépendre d\'Amazon ou de Google.'
+      },
+      video: {
+        en: '/prime_cloud_en.mp4',
+        fr: '/prime_cloud_fr.mp4'
+      }
+    }
   ];
 
   // Rotate portraits every 4 seconds
@@ -703,54 +821,123 @@ export default function Vision() {
             <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#1F1A13', letterSpacing: '-0.5px' }}>{t('vision.ecoTitle')}</h2>
           </div>
 
-          <div className="ecosystem-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
-            <div className="ecosystem-card">
-              <div style={{ color: '#C6A15A', marginBottom: '20px' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
-              </div>
-              <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>MAC / WINDOWS</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Desktop App.<br />Sovereign desktop integration.</p>
-            </div>
-
-            <div className="ecosystem-card">
-              <div style={{ color: '#C6A15A', marginBottom: '20px' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="5" y="2" width="14" height="20" rx="2" />
-                  <line x1="12" y1="18" x2="12" y2="18.01" strokeWidth="3" strokeLinecap="round" />
-                </svg>
-              </div>
-              <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>MOBILE</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>iOS / Android.<br />Real-time voice and cognitive bridge.</p>
-            </div>
-
-            <div className="ecosystem-card">
-              <div style={{ color: '#C6A15A', marginBottom: '20px' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="4 17 10 11 4 5" />
-                  <line x1="12" y1="19" x2="20" y2="19" />
-                </svg>
-              </div>
-              <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>PRIME-CLI</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Local & Remote Control.<br />Direct prompt-to-terminal interface.</p>
-            </div>
-
-            <div className="ecosystem-card">
-              <div style={{ color: '#C6A15A', marginBottom: '20px' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 10v4" />
-                  <path d="M12 18h.01" />
-                  <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
-                  <rect x="9" y="14" width="6" height="6" rx="1" />
-                </svg>
-              </div>
-              <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>PRIVATE CLOUD</h3>
-              <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>Sovereign Infrastructure.<br />Encrypted hosting and local pipelines.</p>
-            </div>
+          {/* Interactive Ecosystem Grid */}
+          <div className="ecosystem-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+            {ecoPrompts.map((prompt) => {
+              const isActive = selectedPrompt === prompt.id;
+              return (
+                <div
+                  key={prompt.id}
+                  className={`ecosystem-card ${isActive ? 'active' : ''}`}
+                  onClick={() => setSelectedPrompt(prompt.id)}
+                  style={{
+                    cursor: 'pointer',
+                    background: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.4)',
+                    borderColor: isActive ? '#C6A15A' : 'rgba(198, 161, 90, 0.08)',
+                    boxShadow: isActive ? '0 20px 45px rgba(198, 161, 90, 0.12)' : 'none',
+                    transform: isActive ? 'translateY(-4px)' : 'none'
+                  }}
+                >
+                  <div style={{ color: '#C6A15A', marginBottom: '20px' }}>
+                    {prompt.icon}
+                  </div>
+                  <h3 style={{ fontWeight: '700', fontSize: '15px', marginBottom: '10px', color: '#1F1A13' }}>
+                    {prompt.title.toUpperCase()}
+                  </h3>
+                  <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#6E6860' }}>
+                    {prompt.platform}.<br />
+                    {language === 'fr' ? 'Cliquez pour voir la démonstration vidéo.' : 'Click to inspect video demonstration.'}
+                  </p>
+                </div>
+              );
+            })}
           </div>
+
+          {/* Context Zone Display */}
+          {(() => {
+            const activePromptData = ecoPrompts.find(p => p.id === selectedPrompt) || ecoPrompts[0];
+            return (
+              <div style={{
+                marginTop: '40px',
+                background: 'rgba(31, 26, 19, 0.95)',
+                border: '1.5px solid #C6A15A',
+                borderRadius: '24px',
+                padding: '36px',
+                boxShadow: '0 25px 60px rgba(198, 161, 90, 0.15)',
+                display: 'flex',
+                gap: '40px',
+                alignItems: 'center',
+                textAlign: 'left',
+                color: '#FAF8F4',
+                position: 'relative'
+              }}>
+                <div style={{
+                  position: 'absolute', top: '16px', right: '24px',
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: '9px',
+                  color: '#C6A15A', letterSpacing: '1px', opacity: 0.6
+                }}>
+                  CONTEXT_ZONE // {activePromptData.platform.toUpperCase()}
+                </div>
+
+                <div style={{ flex: '1.2', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(198, 161, 90, 0.2)', background: '#000' }}>
+                  <video
+                    key={activePromptData.id + language}
+                    src={activePromptData.video[language]}
+                    autoPlay muted loop playsInline
+                    style={{ width: '100%', display: 'block' }}
+                  />
+                </div>
+
+                <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                      <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
+                      <span style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontWeight: '700',
+                        fontSize: '11px',
+                        color: '#C6A15A',
+                        letterSpacing: '1px'
+                      }}>
+                        {activePromptData.platform}
+                      </span>
+                    </div>
+                    <h3 style={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontSize: '28px',
+                      fontWeight: '800',
+                      color: '#FAF8F4',
+                      margin: '0 0 12px 0'
+                    }}>
+                      {activePromptData.title}
+                    </h3>
+                    <p style={{
+                      fontSize: '15px',
+                      lineHeight: '1.6',
+                      color: '#C3BCB4',
+                      margin: 0
+                    }}>
+                      {activePromptData.description[language]}
+                    </p>
+                  </div>
+
+                  <div style={{
+                    background: 'rgba(0,0,0,0.3)',
+                    borderRadius: '12px',
+                    padding: '16px',
+                    border: '1px solid rgba(198, 161, 90, 0.1)',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '11px',
+                    color: '#C6A15A'
+                  }}>
+                    <div style={{ marginBottom: '6px', color: '#FAF8F4', fontWeight: 'bold' }}>➔ SYSTEM INTERFACE ACTIVE</div>
+                    <div>Status: Connected (Sovereign Node)</div>
+                    <div>latency: 14ms // sync_protocol: active</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
