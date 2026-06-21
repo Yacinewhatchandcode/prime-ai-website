@@ -1,15 +1,17 @@
 // Vercel Serverless Function — /api/subscribe
 // Sends waitlist signup notifications via EmailJS REST API.
-// Completely self-contained, secure, and robust.
+// Credentials loaded from Vercel environment variables.
 
-const EMAILJS_SERVICE_ID = 'service_ktwq617';
-const EMAILJS_TEMPLATE_ID = 'template_pvcjv2p';
-const EMAILJS_PUBLIC_KEY = 'xflu_ts5EdSFvCVG7';
-const ADMIN_EMAIL = 'info.primeai@gmail.com';
+const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info.primeai@gmail.com';
 
 export default async function handler(req, res) {
   // CORS Headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const allowedOrigin = 'https://prime-ai.fr';
+  const origin = req.headers?.origin;
+  res.setHeader('Access-Control-Allow-Origin', origin === allowedOrigin ? allowedOrigin : '');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -27,7 +29,7 @@ export default async function handler(req, res) {
   }
 
   const timestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }) + ' CET';
-  console.log(`[PRIME.AI Waitlist] Processing signup for: ${email} (lang: ${lang})`);
+  console.log(`[PRIME.AI Waitlist] Processing signup (lang: ${lang})`);
 
   try {
     // 1. Send Notification Email to Admin
@@ -54,11 +56,11 @@ export default async function handler(req, res) {
 
     if (!adminResponse.ok) {
       const errorText = await adminResponse.text();
-      console.error(`[PRIME.AI Waitlist] Admin notification failed: ${adminResponse.status} - ${errorText}`);
+      console.error(`[PRIME.AI Waitlist] Admin notification failed: ${adminResponse.status}`);
       throw new Error(`Admin notification failed: ${errorText}`);
     }
 
-    console.log(`[PRIME.AI Waitlist] Notification email successfully routed to ${ADMIN_EMAIL}`);
+    console.log(`[PRIME.AI Waitlist] Notification email successfully routed.`);
 
     // 2. Send Localized Welcome Email to Subscriber
     const isFrench = lang.toLowerCase() === 'fr';
@@ -93,7 +95,7 @@ export default async function handler(req, res) {
       console.warn(`[PRIME.AI Waitlist] Welcome email failed: ${subscriberResponse.status} - ${errorText}`);
       // Don't throw here to avoid failing the subscription process if welcome email has delivery issues
     } else {
-      console.log(`[PRIME.AI Waitlist] Welcome email successfully sent to ${email}`);
+      console.log(`[PRIME.AI Waitlist] Welcome email successfully sent.`);
     }
 
     return res.status(200).json({ success: true });
