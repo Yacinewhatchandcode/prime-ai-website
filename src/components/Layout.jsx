@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import SovereignCommandBar from './SovereignCommandBar';
 import SovereignWorkflowLog from './SovereignWorkflowLog';
+import { useLanguage } from '../context/LanguageContext';
 
 function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { language, setLanguage } = useLanguage();
   const path = location.pathname;
 
   const isSubsystemActive = ['/orb', '/orchestration', '/media', '/whatsapp', '/memory', '/factory', '/fleet-command'].includes(path);
@@ -82,21 +84,24 @@ function Layout() {
         {/* Right side items: Language switcher & grid menu to align with Light Layout */}
         <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           {/* Language Switcher */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontWeight: '600',
-            fontSize: '11px',
-            color: '#FAF8F4',
-            letterSpacing: '1px',
-            cursor: 'pointer',
-            padding: '6px 12px',
-            background: 'rgba(198, 161, 90, 0.06)',
-            borderRadius: '100px',
-            border: '1px solid rgba(198, 161, 90, 0.12)'
-          }}>
-            <span>FR</span>
+          <div 
+            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontWeight: '600',
+              fontSize: '11px',
+              color: '#FAF8F4',
+              letterSpacing: '1px',
+              cursor: 'pointer',
+              padding: '6px 12px',
+              background: 'rgba(198, 161, 90, 0.06)',
+              borderRadius: '100px',
+              border: '1px solid rgba(198, 161, 90, 0.12)'
+            }}
+          >
+            <span>{language.toUpperCase()}</span>
             <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
           </div>
 

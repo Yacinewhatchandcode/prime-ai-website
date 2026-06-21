@@ -21,17 +21,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email } = req.body || {};
+  const { email, lang = 'fr' } = req.body || {};
   if (!email || !email.includes('@')) {
     return res.status(400).json({ error: 'Valid email required' });
   }
 
   const timestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }) + ' CET';
-  console.log(`[PRIME.AI Waitlist] Processing signup for: ${email}`);
+  console.log(`[PRIME.AI Waitlist] Processing signup for: ${email} (lang: ${lang})`);
 
   try {
-    // Call EmailJS REST API to send waitlist notification
-    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    // 1. Send Notification Email to Admin
+    const adminResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,29 +42,66 @@ export default async function handler(req, res) {
         template_id: EMAILJS_TEMPLATE_ID,
         user_id: EMAILJS_PUBLIC_KEY,
         template_params: {
-          title: `New Waitlist Request`,
+          title: `[PRIME.AI Newsletter] New Subscriber`,
           name: 'PRIME.AI Portal',
           email: email,
           to_email: ADMIN_EMAIL,
           time: timestamp,
-          message: `Excellent news! A new user has requested access to the PrimeAI Agent Mode testing phase.\n\nSubscriber Email: ${email}\nSignup Time: ${timestamp}\n\nPlease proceed with verification protocols when the testing phase begins.`
+          message: `New subscriber signup received.\n\nSubscriber Email: ${email}\nSignup Time: ${timestamp}`
         }
       })
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`[PRIME.AI Waitlist] EmailJS returned error: ${response.status} - ${errorText}`);
-      throw new Error(`EmailJS failed: ${errorText}`);
+    if (!adminResponse.ok) {
+      const errorText = await adminResponse.text();
+      console.error(`[PRIME.AI Waitlist] Admin notification failed: ${adminResponse.status} - ${errorText}`);
+      throw new Error(`Admin notification failed: ${errorText}`);
     }
 
-    console.log(`[PRIME.AI Waitlist] Email successfully routed to ${ADMIN_EMAIL} via EmailJS`);
+    console.log(`[PRIME.AI Waitlist] Notification email successfully routed to ${ADMIN_EMAIL}`);
+
+    // 2. Send Localized Welcome Email to Subscriber
+    const isFrench = lang.toLowerCase() === 'fr';
+    const welcomeTitle = isFrench ? 'Bienvenue chez PRIME-AI !' : 'Welcome to PRIME-AI!';
+    const welcomeMessage = isFrench 
+      ? `Bonjour,\n\nMerci de vous être inscrit à la newsletter de PRIME-AI (prime-ai.fr) !\n\nNous sommes ravis de vous compter parmi nous. Vous recevrez très bientôt nos dernières actualités sur le déploiement d'IA souveraines, nos fonctionnalités autonomes et nos briefs d'architecture exclusifs.\n\nCordialement,\nL'équipe PRIME-AI`
+      : `Hello,\n\nThank you for subscribing to the PRIME-AI newsletter (prime-ai.fr)!\n\nWe are thrilled to have you with us. You will soon receive our latest updates on sovereign AI deployment, autonomous features, and exclusive architecture briefs.\n\nBest regards,\nThe PRIME-AI Team`;
+
+    const subscriberResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Origin': 'https://prime-ai.fr'
+      },
+      body: JSON.stringify({
+        service_id: EMAILJS_SERVICE_ID,
+        template_id: EMAILJS_TEMPLATE_ID,
+        user_id: EMAILJS_PUBLIC_KEY,
+        template_params: {
+          title: welcomeTitle,
+          name: 'PRIME-AI Team',
+          email: email,
+          to_email: email,
+          time: timestamp,
+          message: welcomeMessage
+        }
+      })
+    });
+
+    if (!subscriberResponse.ok) {
+      const errorText = await subscriberResponse.text();
+      console.warn(`[PRIME.AI Waitlist] Welcome email failed: ${subscriberResponse.status} - ${errorText}`);
+      // Don't throw here to avoid failing the subscription process if welcome email has delivery issues
+    } else {
+      console.log(`[PRIME.AI Waitlist] Welcome email successfully sent to ${email}`);
+    }
+
     return res.status(200).json({ success: true });
 
   } catch (error) {
     console.error('[PRIME.AI Waitlist] Integration error:', error.message);
     
-    // Graceful degradation: even if email delivery fails, we log it so we never lose leads
+    // Graceful degradation: log to console to prevent lead loss
     return res.status(200).json({ 
       success: true, 
       warning: 'Signup logged, notification delivery pending' 

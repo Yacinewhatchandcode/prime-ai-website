@@ -1,4 +1,4 @@
-﻿import { API_BASE } from '../utils/api';
+import { API_BASE } from '../utils/api';
 import React, { useState, useEffect } from 'react';
 import { 
   Cpu, 
@@ -329,12 +329,20 @@ export default function YaceAura() {
   // Trigger a simulated YouTube Sentiment Scan
   const triggerSentimentScan = async () => {
     try {
+      const vids = [
+        { id: "bSDkbx5rrpM", title: "Abacus AI & Fusion Agents", sentiment: "0.88 (STRONG BULLISH: multi-agent coordination ready)" },
+        { id: "uzkTAT81FxA", title: "Subquadratic Sparse Attention (SSA)", sentiment: "0.79 (BULLISH: extreme efficiency context scaling confirmed)" },
+        { id: "1uw4UaZr3hA", title: "Gemma 4 for Agentic", sentiment: "0.72 (BULLISH: local tool-calling reliability)" },
+        { id: "oVQkh6-krb8", title: "Hermes Agent & MiniMax M3", sentiment: "0.65 (BULLISH breakout confirmed)" }
+      ];
+      const vid = vids[Math.floor(Math.random() * vids.length)];
+
       await fetch(`${API_BASE}/api/log`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           agent: "YouTube Sentiment Scout",
-          text: "Scouting YouTube video transcript oVQkh6-krb8... Overall polarity: 0.65 (BULLISH breakout confirmed).",
+          text: `Scouting YouTube video transcript ${vid.id} (${vid.title})... Overall polarity: ${vid.sentiment}.`,
           type: "success"
         })
       });

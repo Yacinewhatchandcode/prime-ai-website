@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 
 export default function Technologie() {
+  const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('mesh');
   const [hudScan, setHudScan] = useState(true);
 
@@ -14,34 +16,34 @@ export default function Technologie() {
 
   const technologies = {
     mesh: {
-      title: "Réseau de Neurones Décentralisé",
-      description: "Notre architecture de communication en maillage P2P permet aux agents cognitifs de délibérer de manière distribuée sans point de défaillance unique.",
+      title: t('tech.meshTitle'),
+      description: t('tech.meshDesc'),
       features: [
-        "Consensus synchrone décentralisé",
-        "Zéro dépendance vis-à-vis des serveurs tiers",
-        "Routage adaptatif à ultra-faible latence"
+        t('tech.meshFeatures.0'),
+        t('tech.meshFeatures.1'),
+        t('tech.meshFeatures.2')
       ],
-      metric: "Consensus 99.999% convergent"
+      metric: t('tech.meshMetric')
     },
     inference: {
-      title: "Moteurs d'Inférence Locaux",
-      description: "Exécution locale optimisée de modèles ouverts (Llama, Gemma, Mistral) sur votre matériel propriétaire avec isolation complète des données.",
+      title: t('tech.inferenceTitle'),
+      description: t('tech.inferenceDesc'),
       features: [
-        "Quantification avancée sans perte de précision",
-        "Orchestration dynamique CPU / GPU / NPU",
-        "Chiffrement matériel de bout en bout"
+        t('tech.inferenceFeatures.0'),
+        t('tech.inferenceFeatures.1'),
+        t('tech.inferenceFeatures.2')
       ],
-      metric: "< 12ms premier-token latence"
+      metric: t('tech.inferenceMetric')
     },
     alignment: {
-      title: "Alignement Cognitif Souverain",
-      description: "Protocoles avancés de guidage et d'alignement éthique personnalisés. Votre intelligence artificielle pense selon vos valeurs et règles métier.",
+      title: t('tech.alignmentTitle'),
+      description: t('tech.alignmentDesc'),
       features: [
-        "Supervision constitutionnelle en temps réel",
-        "Filtrage sémantique des données sensibles",
-        "Mémoire sémantique persistante cryptée"
+        t('tech.alignmentFeatures.0'),
+        t('tech.alignmentFeatures.1'),
+        t('tech.alignmentFeatures.2')
       ],
-      metric: "100% aligné sur vos directives"
+      metric: t('tech.alignmentMetric')
     }
   };
 
@@ -131,7 +133,7 @@ export default function Technologie() {
             letterSpacing: '3px',
             textTransform: 'uppercase'
           }}>
-            TECHNOLOGIE PRIME-AI
+            {t('tech.tagline')}
           </span>
         </div>
 
@@ -144,13 +146,13 @@ export default function Technologie() {
           marginBottom: '24px',
           letterSpacing: '-1px'
         }}>
-          La Puissance de l'IA Souveraine.<br />
+          {t('tech.title1')}<br />
           <span style={{
             background: 'linear-gradient(90deg, #C6A15A 0%, #E6C587 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
-          }}>Contrôlée, Privée et Performante.</span>
+          }}>{t('tech.title2')}</span>
         </h1>
 
         <p style={{
@@ -162,19 +164,19 @@ export default function Technologie() {
           maxWidth: '680px',
           margin: '0 auto 40px'
         }}>
-          PRIME-AI repense l'architecture d'intelligence artificielle. Plus besoin de dépendre d'API centralisées opaques : déployez vos propres cerveaux numériques.
+          {t('tech.desc')}
         </p>
 
         {/* Tab Selectors */}
         <div className="tech-tabs" style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '60px', flexWrap: 'wrap' }}>
           <button className={`tech-tab ${activeTab === 'mesh' ? 'active' : ''}`} onClick={() => setActiveTab('mesh')}>
-            Réseau Multi-Agent
+            {t('tech.tabMesh')}
           </button>
           <button className={`tech-tab ${activeTab === 'inference' ? 'active' : ''}`} onClick={() => setActiveTab('inference')}>
-            Inférence Locale
+            {t('tech.tabInference')}
           </button>
           <button className={`tech-tab ${activeTab === 'alignment' ? 'active' : ''}`} onClick={() => setActiveTab('alignment')}>
-            Alignement Souverain
+            {t('tech.tabAlignment')}
           </button>
         </div>
       </section>
@@ -273,6 +275,55 @@ export default function Technologie() {
         </div>
       </section>
 
+      {/* ── VIDEO WALKTHROUGH SECTION ────────────────── */}
+      <section style={{
+        padding: '0 clamp(16px, 5vw, 60px) clamp(60px, 10vw, 100px)',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        textAlign: 'center'
+      }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+          <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
+          <span style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: '700',
+            fontSize: '11px',
+            color: '#C6A15A',
+            letterSpacing: '3px',
+            textTransform: 'uppercase'
+          }}>
+            {language === 'fr' ? "DÉMONSTRATION VIDÉO" : "VIDEO WALKTHROUGH"}
+          </span>
+        </div>
+        
+        <h2 style={{
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: '32px',
+          fontWeight: '800',
+          color: '#1F1A13',
+          marginBottom: '32px',
+          letterSpacing: '-0.5px'
+        }}>
+          {language === 'fr' ? "Découvrez l'Architecture en Action" : "Discover the Architecture in Action"}
+        </h2>
+        
+        <div style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
+          border: '1px solid rgba(198, 161, 90, 0.2)',
+          background: '#000'
+        }}>
+          <video 
+            src={language === 'fr' ? '/prime_tech_fr.mp4' : '/prime_tech_en.mp4'} 
+            controls 
+            style={{ width: '100%', display: 'block' }}
+          />
+        </div>
+      </section>
+
       {/* ── TECHNICAL SPECIFICATION GRID ────────────────── */}
       <section style={{
         background: '#FAF8F4',
@@ -281,15 +332,15 @@ export default function Technologie() {
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#1F1A13' }}>Spécifications de l'Architecture Cognitive</h2>
-            <p style={{ fontSize: '14px', color: '#6E6860', marginTop: '8px' }}>Notre stack technologique repose sur des bases cryptographiques et sémantiques strictes.</p>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#1F1A13' }}>{t('tech.specTitle')}</h2>
+            <p style={{ fontSize: '14px', color: '#6E6860', marginTop: '8px' }}>{t('tech.specDesc')}</p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {[
-              { title: "Zéro Partage de Données", desc: "Vos prompts, logs de raisonnement et mémoires locales ne transitent jamais par des services cloud tiers." },
-              { title: "Adaptative Model Swarm", desc: "Routage dynamique intelligent entre modèles légers ultra-rapides et modèles de raisonnement profonds." },
-              { title: "Structure Graph Semantics", desc: "Indexation vectorielle hiérarchique et graphe de connaissances locales connectant en continu toutes vos données." }
+              { title: t('tech.spec1Title'), desc: t('tech.spec1Desc') },
+              { title: t('tech.spec2Title'), desc: t('tech.spec2Desc') },
+              { title: t('tech.spec3Title'), desc: t('tech.spec3Desc') }
             ].map((spec, i) => (
               <div key={i} style={{ background: '#FFFFFF', border: '1px solid rgba(198, 161, 90, 0.12)', borderRadius: '16px', padding: '28px' }}>
                 <h3 style={{ fontWeight: '700', fontSize: '16px', color: '#1F1A13', marginBottom: '10px' }}>{spec.title}</h3>

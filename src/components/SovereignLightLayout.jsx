@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function SovereignLightLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   const path = location.pathname;
 
@@ -135,30 +137,33 @@ export default function SovereignLightLayout() {
           gap: '32px',
           alignItems: 'center',
         }}>
-          <Link to="/vision" className={`nav-link ${path === '/vision' ? 'active' : ''}`}>Vision</Link>
-          <Link to="/technologie" className={`nav-link ${path === '/technologie' ? 'active' : ''}`}>Technologie</Link>
-          <Link to="/ecosysteme" className={`nav-link ${path === '/ecosysteme' ? 'active' : ''}`}>Écosystème</Link>
+          <Link to="/vision" className={`nav-link ${path === '/vision' ? 'active' : ''}`}>{t('nav.vision')}</Link>
+          <Link to="/technologie" className={`nav-link ${path === '/technologie' ? 'active' : ''}`}>{t('nav.technologie')}</Link>
+          <Link to="/ecosysteme" className={`nav-link ${path === '/ecosysteme' ? 'active' : ''}`}>{t('nav.ecosysteme')}</Link>
         </nav>
 
         {/* Header Right Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className="header-actions-desktop" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {/* Language Switcher */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontWeight: '600',
-              fontSize: '11px',
-              color: '#1F1A13',
-              letterSpacing: '1px',
-              cursor: 'pointer',
-              padding: '6px 12px',
-              background: 'rgba(198, 161, 90, 0.06)',
-              borderRadius: '100px',
-              border: '1px solid rgba(198, 161, 90, 0.1)'
-            }}>
-              <span>FR</span>
+            <div 
+              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontWeight: '600',
+                fontSize: '11px',
+                color: '#1F1A13',
+                letterSpacing: '1px',
+                cursor: 'pointer',
+                padding: '6px 12px',
+                background: 'rgba(198, 161, 90, 0.06)',
+                borderRadius: '100px',
+                border: '1px solid rgba(198, 161, 90, 0.1)'
+              }}
+            >
+              <span>{language.toUpperCase()}</span>
               <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
             </div>
           </div>
@@ -193,9 +198,9 @@ export default function SovereignLightLayout() {
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ color: '#8A8580', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>PRIME CORE</div>
-            <Link to="/vision" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>Vision</Link>
-            <Link to="/technologie" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>Technologie</Link>
-            <Link to="/ecosysteme" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>Écosystème</Link>
+            <Link to="/vision" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.vision')}</Link>
+            <Link to="/technologie" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.technologie')}</Link>
+            <Link to="/ecosysteme" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.ecosysteme')}</Link>
           </div>
 
 
@@ -221,11 +226,11 @@ export default function SovereignLightLayout() {
         fontSize: '11px',
         opacity: 0.8
       }}>
-        <span>© {new Date().getFullYear()} PRIME-AI. Infrastructure Cognitive Souveraine.</span>
+        <span>{t('footer.rights')}</span>
         <div style={{ display: 'flex', gap: '24px' }}>
-          <Link to="/vision" style={{ color: '#C6A15A', textDecoration: 'none', fontWeight: 'bold' }}>Vision Node</Link>
-          <Link to="/technologie" style={{ color: 'inherit', textDecoration: 'none' }}>Technologie</Link>
-          <Link to="/ecosysteme" style={{ color: 'inherit', textDecoration: 'none' }}>Écosystème</Link>
+          <Link to="/vision" style={{ color: '#C6A15A', textDecoration: 'none', fontWeight: 'bold' }}>{t('nav.vision')} Node</Link>
+          <Link to="/technologie" style={{ color: 'inherit', textDecoration: 'none' }}>{t('nav.technologie')}</Link>
+          <Link to="/ecosysteme" style={{ color: 'inherit', textDecoration: 'none' }}>{t('nav.ecosysteme')}</Link>
         </div>
       </footer>
     </div>
