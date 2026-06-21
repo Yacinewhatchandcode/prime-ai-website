@@ -55,6 +55,12 @@ const compositions = [
   { id: 'PrimeCLI-FR',      file: 'prime_cli_fr.mp4' },
   { id: 'PrimeCloud-EN',    file: 'prime_cloud_en.mp4' },
   { id: 'PrimeCloud-FR',    file: 'prime_cloud_fr.mp4' },
+
+  // Technologie page compositions (20s each)
+  { id: 'ArchSpecs-EN',     file: 'prime_arch_specs_en.mp4' },
+  { id: 'ArchSpecs-FR',     file: 'prime_arch_specs_fr.mp4' },
+  { id: 'SyncProtocol-EN',  file: 'prime_sync_protocol_en.mp4' },
+  { id: 'SyncProtocol-FR',  file: 'prime_sync_protocol_fr.mp4' },
 ];
 
 console.log('');

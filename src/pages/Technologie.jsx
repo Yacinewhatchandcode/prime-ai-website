@@ -324,7 +324,7 @@ export default function Technologie() {
         </div>
       </section>
 
-      {/* ── TECHNICAL SPECIFICATION GRID ────────────────── */}
+      {/* ── COGNITIVE ARCHITECTURE SPECIFICATIONS ────────── */}
       <section style={{
         background: '#FAF8F4',
         borderTop: '1px solid rgba(198, 161, 90, 0.15)',
@@ -336,17 +336,66 @@ export default function Technologie() {
             <p style={{ fontSize: '14px', color: '#6E6860', marginTop: '8px' }}>{t('tech.specDesc')}</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-            {[
-              { title: t('tech.spec1Title'), desc: t('tech.spec1Desc') },
-              { title: t('tech.spec2Title'), desc: t('tech.spec2Desc') },
-              { title: t('tech.spec3Title'), desc: t('tech.spec3Desc') }
-            ].map((spec, i) => (
-              <div key={i} style={{ background: '#FFFFFF', border: '1px solid rgba(198, 161, 90, 0.12)', borderRadius: '16px', padding: '28px' }}>
-                <h3 style={{ fontWeight: '700', fontSize: '16px', color: '#1F1A13', marginBottom: '10px' }}>{spec.title}</h3>
-                <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#6E6860' }}>{spec.desc}</p>
-              </div>
-            ))}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <video
+              src={language === 'fr' ? '/prime_arch_specs_fr.mp4' : '/prime_arch_specs_en.mp4'}
+              autoPlay muted loop playsInline
+              style={{
+                width: '100%',
+                maxWidth: '1000px',
+                borderRadius: '24px',
+                boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
+                border: '1px solid rgba(198, 161, 90, 0.2)'
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── ASYNCHRONOUS SYNCHRONIZATION ────────────────── */}
+      <section style={{
+        padding: '80px 60px',
+        background: '#FFFFFF',
+        borderTop: '1px solid rgba(198, 161, 90, 0.1)'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+              <span style={{ width: '6px', height: '6px', background: '#C6A15A', borderRadius: '50%' }} />
+              <span style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: '700',
+                fontSize: '11px',
+                color: '#C6A15A',
+                letterSpacing: '3px',
+                textTransform: 'uppercase'
+              }}>
+                {language === 'fr' ? 'SYNCHRONISATION' : 'SYNCHRONIZATION'}
+              </span>
+            </div>
+            <h2 style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '28px',
+              fontWeight: '800',
+              color: '#1F1A13',
+              letterSpacing: '-0.5px'
+            }}>
+              {language === 'fr' ? 'Comment fonctionne la synchronisation asynchrone ?' : 'How does asynchronous synchronization work?'}
+            </h2>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <video
+              src={language === 'fr' ? '/prime_sync_protocol_fr.mp4' : '/prime_sync_protocol_en.mp4'}
+              autoPlay muted loop playsInline
+              style={{
+                width: '100%',
+                maxWidth: '1000px',
+                borderRadius: '24px',
+                boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
+                border: '1px solid rgba(198, 161, 90, 0.2)'
+              }}
+            />
           </div>
         </div>
       </section>
