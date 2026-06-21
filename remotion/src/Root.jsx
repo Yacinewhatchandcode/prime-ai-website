@@ -11,6 +11,12 @@ import CredentialsComposition from './compositions/CredentialsComposition';
 import FleetCommandComposition from './compositions/FleetCommandComposition';
 import YaceAuraComposition from './compositions/YaceAuraComposition';
 
+// Product card compositions (Ecosysteme page)
+import PrimeDesktopComposition from './compositions/PrimeDesktopComposition';
+import PrimeMobileComposition from './compositions/PrimeMobileComposition';
+import PrimeCLIComposition from './compositions/PrimeCLIComposition';
+import PrimeCloudComposition from './compositions/PrimeCloudComposition';
+
 // Standalone template previews (useful in Remotion Studio)
 import HeroReveal from './templates/HeroReveal';
 import FeatureGrid from './templates/FeatureGrid';
@@ -81,6 +87,35 @@ export const RemotionRoot = () => {
         {...shared} defaultProps={{ language: 'en' }} />
       <Composition id="YaceAura-FR" component={YaceAuraComposition}
         {...shared} defaultProps={{ language: 'fr' }} />
+
+      {/* ═══════════════════════════════════════════════════
+          PRODUCT CARD COMPOSITIONS (Ecosysteme page)
+          15-second product showcase videos
+          ═══════════════════════════════════════════════════ */}
+
+      {/* PRIME-Desktop */}
+      <Composition id="PrimeDesktop-EN" component={PrimeDesktopComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeDesktop-FR" component={PrimeDesktopComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
+
+      {/* PRIME-Mobile */}
+      <Composition id="PrimeMobile-EN" component={PrimeMobileComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeMobile-FR" component={PrimeMobileComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
+
+      {/* PRIME-CLI */}
+      <Composition id="PrimeCLI-EN" component={PrimeCLIComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeCLI-FR" component={PrimeCLIComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
+
+      {/* PRIME-Private Cloud */}
+      <Composition id="PrimeCloud-EN" component={PrimeCloudComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeCloud-FR" component={PrimeCloudComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
 
       {/* ═══════════════════════════════════════════════════
           STANDALONE TEMPLATE PREVIEWS (Remotion Studio)

@@ -45,6 +45,16 @@ const compositions = [
   { id: 'FleetCommand-FR',  file: 'prime_fleet_fr.mp4' },
   { id: 'YaceAura-EN',      file: 'prime_yace_en.mp4' },
   { id: 'YaceAura-FR',      file: 'prime_yace_fr.mp4' },
+
+  // Product card compositions (Ecosysteme page — 15s each)
+  { id: 'PrimeDesktop-EN',  file: 'prime_desktop_en.mp4' },
+  { id: 'PrimeDesktop-FR',  file: 'prime_desktop_fr.mp4' },
+  { id: 'PrimeMobile-EN',   file: 'prime_mobile_en.mp4' },
+  { id: 'PrimeMobile-FR',   file: 'prime_mobile_fr.mp4' },
+  { id: 'PrimeCLI-EN',      file: 'prime_cli_en.mp4' },
+  { id: 'PrimeCLI-FR',      file: 'prime_cli_fr.mp4' },
+  { id: 'PrimeCloud-EN',    file: 'prime_cloud_en.mp4' },
+  { id: 'PrimeCloud-FR',    file: 'prime_cloud_fr.mp4' },
 ];
 
 console.log('');

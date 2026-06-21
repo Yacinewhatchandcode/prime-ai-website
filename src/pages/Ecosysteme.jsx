@@ -200,7 +200,16 @@ export default function Ecosysteme() {
           gap: '24px',
           marginBottom: '50px'
         }}>
-          {nodes.map((node) => (
+          {nodes.map((node) => {
+            const videoMap = {
+              desktop: { en: '/prime_desktop_en.mp4', fr: '/prime_desktop_fr.mp4' },
+              mobile:  { en: '/prime_mobile_en.mp4',  fr: '/prime_mobile_fr.mp4' },
+              cli:     { en: '/prime_cli_en.mp4',     fr: '/prime_cli_fr.mp4' },
+              cloud:   { en: '/prime_cloud_en.mp4',   fr: '/prime_cloud_fr.mp4' },
+            };
+            const videoSrc = videoMap[node.id]?.[language];
+
+            return (
             <div
               key={node.id}
               className={`eco-card ${activeNode === node.id ? 'active' : ''}`}
@@ -242,6 +251,20 @@ export default function Ecosysteme() {
                 {node.description}
               </p>
 
+              {videoSrc && (
+                <video
+                  src={videoSrc}
+                  autoPlay muted loop playsInline
+                  style={{
+                    width: '100%',
+                    borderRadius: '12px',
+                    marginBottom: '16px',
+                    border: '1px solid rgba(198, 161, 90, 0.15)',
+                    boxShadow: '0 4px 16px rgba(198, 161, 90, 0.06)',
+                  }}
+                />
+              )}
+
               {activeNode === node.id && (
                 <div style={{
                   borderTop: '1px solid rgba(198, 161, 90, 0.15)',
@@ -257,7 +280,8 @@ export default function Ecosysteme() {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
 
 
