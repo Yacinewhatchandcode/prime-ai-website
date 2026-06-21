@@ -46,28 +46,50 @@ export default function Vision() {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !email.includes('@')) return;
     setSubmitting(true);
     setErrorMsg("");
+    const EMAILJS_SERVICE = 'service_ktwq617';
+    const EMAILJS_TEMPLATE = 'template_pvcjv2p';
+    const EMAILJS_KEY = 'xflu_ts5EdSFvCVG7';
+    const ADMIN_EMAIL = 'info.primeai@gmail.com';
+    const timestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }) + ' CET';
     try {
-      const response = await fetch('/api/subscribe', {
+      // Admin notification
+      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, lang: language }),
+        headers: { 'Content-Type': 'application/json', 'Origin': 'https://prime-ai.fr' },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE, template_id: EMAILJS_TEMPLATE, user_id: EMAILJS_KEY,
+          template_params: {
+            title: '[PRIME.AI Newsletter] New Subscriber',
+            name: 'PRIME.AI Portal', email: email, to_email: ADMIN_EMAIL, time: timestamp,
+            message: `New subscriber signup.\n\nEmail: ${email}\nTime: ${timestamp}`
+          }
+        })
       });
-      const data = await response.json();
-      if (response.ok && data.success) {
-        setSubscribed(true);
-        setTimeout(() => setSubscribed(false), 3000);
-        setEmail("");
-      } else {
-        setErrorMsg(data.error || "Une erreur est survenue.");
-      }
+      // Welcome email to subscriber
+      const isFr = language === 'fr';
+      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Origin': 'https://prime-ai.fr' },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE, template_id: EMAILJS_TEMPLATE, user_id: EMAILJS_KEY,
+          template_params: {
+            title: isFr ? 'Bienvenue chez PRIME-AI !' : 'Welcome to PRIME-AI!',
+            name: 'PRIME-AI Team', email: email, to_email: email, time: timestamp,
+            message: isFr
+              ? `Bonjour,\n\nMerci de vous être inscrit à la newsletter PRIME-AI !\nVous recevrez nos dernières actualités sur l'IA souveraine.\n\nCordialement,\nL'équipe PRIME-AI`
+              : `Hello,\n\nThank you for subscribing to PRIME-AI!\nYou'll receive our latest sovereign AI updates.\n\nBest regards,\nThe PRIME-AI Team`
+          }
+        })
+      });
+      setSubscribed(true);
+      setTimeout(() => setSubscribed(false), 5000);
+      setEmail("");
     } catch (err) {
-      console.error(err);
-      setErrorMsg("Erreur réseau. Veuillez réessayer.");
+      if (import.meta.env.DEV) console.error(err);
+      setErrorMsg(language === 'fr' ? "Erreur réseau. Veuillez réessayer." : "Network error. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -745,6 +767,37 @@ export default function Vision() {
             controls 
             style={{ width: '100%', display: 'block' }}
           />
+        </div>
+
+        {/* Calendly CTA */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px', gap: '16px', flexWrap: 'wrap' }}>
+          <a
+            href="https://calendly.com/info-primeai/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="prime-button-gold"
+            style={{
+              background: 'linear-gradient(135deg, #C6A15A 0%, #E6C587 100%)',
+              color: '#1F1A13',
+              border: 'none',
+              padding: '16px 36px',
+              borderRadius: '100px',
+              fontWeight: '700',
+              fontSize: '15px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              cursor: 'pointer',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              textDecoration: 'none',
+              letterSpacing: '0.5px',
+              boxShadow: '0 10px 30px rgba(198, 161, 90, 0.25)',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 15px 40px rgba(198, 161, 90, 0.35)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(198, 161, 90, 0.25)'; }}
+          >
+            {language === 'fr' ? "Réserver un Appel Découverte" : "Book a Discovery Call"} <span style={{ fontSize: '18px' }}>→</span>
+          </a>
         </div>
       </section>
 
