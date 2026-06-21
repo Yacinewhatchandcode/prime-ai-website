@@ -15,6 +15,7 @@ export default function Vision() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [selectedPrompt, setSelectedPrompt] = useState('mac');
+  const [activePortrait, setActivePortrait] = useState(0);
   const portraits = [
     '/portraits/portrait_1.png',
     '/portraits/portrait_2.png',
