@@ -22,12 +22,16 @@ export default function Vision() {
     '/portraits/portrait_4.png',
     '/portraits/portrait_5.png',
     '/portraits/portrait_6.png',
+    '/portraits/portrait_7.png',
+    '/portraits/portrait_8.png',
+    '/portraits/portrait_9.png',
+    '/portraits/portrait_10.png',
   ];
 
   // Rotate portraits every 4 seconds
   useEffect(() => {
     const portraitInterval = setInterval(() => {
-      setActivePortrait(prev => (prev + 1) % 6);
+      setActivePortrait(prev => (prev + 1) % portraits.length);
     }, 4000);
     return () => clearInterval(portraitInterval);
   }, []);
