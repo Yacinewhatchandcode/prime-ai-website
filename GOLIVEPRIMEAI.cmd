@@ -12,6 +12,7 @@ echo 🚀 [Sovereign Fleet] Deploying to GitHub Pages...
 
 cd dist
 copy index.html 404.html
+type nul > .nojekyll
 git init
 git checkout -b main
 git add -A
