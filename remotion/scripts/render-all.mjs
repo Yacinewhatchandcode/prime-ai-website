@@ -55,6 +55,10 @@ const compositions = [
   { id: 'PrimeCLI-FR',      file: 'prime_cli_fr.mp4' },
   { id: 'PrimeCloud-EN',    file: 'prime_cloud_en.mp4' },
   { id: 'PrimeCloud-FR',    file: 'prime_cloud_fr.mp4' },
+  { id: 'PrimeGram-EN',     file: 'prime_gram_en.mp4' },
+  { id: 'PrimeGram-FR',     file: 'prime_gram_fr.mp4' },
+  { id: 'PrimeTeleprompter-EN', file: 'prime_teleprompter_en.mp4' },
+  { id: 'PrimeTeleprompter-FR', file: 'prime_teleprompter_fr.mp4' },
 
   // Technologie page compositions (20s each)
   { id: 'ArchSpecs-EN',     file: 'prime_arch_specs_en.mp4' },
@@ -62,9 +66,9 @@ const compositions = [
   { id: 'SyncProtocol-EN',  file: 'prime_sync_protocol_en.mp4' },
   { id: 'SyncProtocol-FR',  file: 'prime_sync_protocol_fr.mp4' },
 
-  // Macro Vision V2 — Sovereign Thesis (homepage)
-  { id: 'MacroVisionV2-EN', file: 'prime_macro_en.mp4' },
-  { id: 'MacroVisionV2-FR', file: 'prime_macro_fr.mp4' },
+  // Macro Vision V3 — Product Explainer (homepage)
+  { id: 'MacroVisionV3-EN', file: 'prime_macro_en.mp4' },
+  { id: 'MacroVisionV3-FR', file: 'prime_macro_fr.mp4' },
 ];
 
 console.log('');

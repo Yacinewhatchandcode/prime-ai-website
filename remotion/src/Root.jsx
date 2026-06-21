@@ -13,12 +13,15 @@ import YaceAuraComposition from './compositions/YaceAuraComposition';
 import ArchSpecsComposition from './compositions/ArchSpecsComposition';
 import SyncProtocolComposition from './compositions/SyncProtocolComposition';
 import MacroVisionV2Composition from './compositions/MacroVisionV2Composition';
+import MacroVisionV3Composition from './compositions/MacroVisionV3Composition';
 
 // Product card compositions (Ecosysteme page)
 import PrimeDesktopComposition from './compositions/PrimeDesktopComposition';
 import PrimeMobileComposition from './compositions/PrimeMobileComposition';
 import PrimeCLIComposition from './compositions/PrimeCLIComposition';
 import PrimeCloudComposition from './compositions/PrimeCloudComposition';
+import PrimeGramComposition from './compositions/PrimeGramComposition';
+import PrimeTeleprompterComposition from './compositions/PrimeTeleprompterComposition';
 
 // Standalone template previews (useful in Remotion Studio)
 import HeroReveal from './templates/HeroReveal';
@@ -109,6 +112,12 @@ export const RemotionRoot = () => {
       <Composition id="MacroVisionV2-FR" component={MacroVisionV2Composition}
         {...shared} defaultProps={{ language: 'fr' }} />
 
+      {/* Macro Vision V3 — Product Explainer (devices, features, comparison) */}
+      <Composition id="MacroVisionV3-EN" component={MacroVisionV3Composition}
+        {...shared} durationInFrames={660} defaultProps={{ language: 'en' }} />
+      <Composition id="MacroVisionV3-FR" component={MacroVisionV3Composition}
+        {...shared} durationInFrames={660} defaultProps={{ language: 'fr' }} />
+
       {/* ═══════════════════════════════════════════════════
           PRODUCT CARD COMPOSITIONS (Ecosysteme page)
           15-second product showcase videos
@@ -136,6 +145,18 @@ export const RemotionRoot = () => {
       <Composition id="PrimeCloud-EN" component={PrimeCloudComposition}
         {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
       <Composition id="PrimeCloud-FR" component={PrimeCloudComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
+
+      {/* PRIME-Gram (Telegram) */}
+      <Composition id="PrimeGram-EN" component={PrimeGramComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeGram-FR" component={PrimeGramComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
+
+      {/* Teleprompter */}
+      <Composition id="PrimeTeleprompter-EN" component={PrimeTeleprompterComposition}
+        {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'en' }} />
+      <Composition id="PrimeTeleprompter-FR" component={PrimeTeleprompterComposition}
         {...shared} durationInFrames={shared.fps * 15} defaultProps={{ language: 'fr' }} />
 
       {/* ═══════════════════════════════════════════════════
