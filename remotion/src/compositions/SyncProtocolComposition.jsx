@@ -7,7 +7,7 @@ const CONTENT = {
     tagline: 'SYNC PROTOCOL',
     title: 'How does asynchronous',
     titleAccent: 'synchronization work?',
-    subtitle: 'Thanks to our encrypted P2P protocol, each node in your ecosystem maintains an optimized local cache.',
+    subtitle: 'Thanks to our invisible and unbreakable network, your intelligence is perfectly synchronized instantly across your entire world.',
     nodes: [
       { label: 'Desktop', sublabel: 'macOS', icon: '🖥' },
       { label: 'Mobile', sublabel: 'iOS', icon: '📱' },
@@ -20,7 +20,7 @@ const CONTENT = {
     tagline: 'PROTOCOLE SYNC',
     title: 'Comment fonctionne la',
     titleAccent: 'synchronisation asynchrone ?',
-    subtitle: 'Grâce à notre protocole P2P chiffré, chaque nœud de votre écosystème maintient un cache local optimisé.',
+    subtitle: 'Grâce à notre réseau invisible et inviolable, votre intelligence est parfaitement synchronisée instantanément à travers tout votre monde.',
     nodes: [
       { label: 'Bureau', sublabel: 'macOS', icon: '🖥' },
       { label: 'Mobile', sublabel: 'iOS', icon: '📱' },
@@ -130,9 +130,17 @@ export default function SyncProtocolComposition({ language = 'en' }) {
         transform: `translate(-50%, -50%) rotate(${meshRotation}deg)`,
         opacity: meshOpacity,
       }}>
-        <circle cx="450" cy="450" r="400" fill="none" stroke={BRAND.gold} strokeWidth="0.5" strokeDasharray="12 18 6 20" />
-        <circle cx="450" cy="450" r="320" fill="none" stroke={BRAND.gold} strokeWidth="0.3" strokeDasharray="4 6" />
+        <circle cx="450" cy="450" r="380" fill="none" stroke={BRAND.dark} strokeWidth="0.8" strokeDasharray="30 20 10 40" />
       </svg>
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '58%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
+      }} />
 
       {/* Left: Text Content */}
       <div style={{

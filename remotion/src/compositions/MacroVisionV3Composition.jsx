@@ -43,7 +43,6 @@ const CONTENT = {
     beat5: {
       cta: 'Own your intelligence.',
       subtitle: 'Deploy in 15 minutes. No cloud dependency.',
-      url: 'prime-ai.fr',
     },
   },
   fr: {
@@ -84,7 +83,6 @@ const CONTENT = {
     beat5: {
       cta: 'Maîtrisez votre intelligence.',
       subtitle: 'Déployez en 15 minutes. Aucune dépendance cloud.',
-      url: 'prime-ai.fr',
     },
   },
 };
@@ -333,7 +331,6 @@ function Beat5({ frame, fps, c }) {
   const fadeIn = interpolate(frame, [0, 25], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const ctaScale = spring({ frame: frame - 10, fps, config: { damping: 18, stiffness: 60 } });
   const subFade = interpolate(frame, [fps * 0.8, fps * 0.8 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const urlFade = interpolate(frame, [fps * 1.3, fps * 1.3 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const logoFade = interpolate(frame, [fps * 1.8, fps * 1.8 + 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const glow = 40 + Math.sin(frame * 0.08) * 20;
 
@@ -348,10 +345,7 @@ function Beat5({ frame, fps, c }) {
         fontFamily: FONTS.heading, fontSize: 18, fontWeight: 400, color: BRAND.muted,
         opacity: subFade, marginBottom: 36,
       }}>{c.beat5.subtitle}</div>
-      <div style={{
-        fontFamily: FONTS.mono, fontSize: 20, fontWeight: 600, color: BRAND.light,
-        letterSpacing: 4, opacity: urlFade, marginBottom: 36,
-      }}>{c.beat5.url}</div>
+
       <div style={{ opacity: logoFade }}><PrimeLogo scale={0.9} /></div>
     </div>
   );

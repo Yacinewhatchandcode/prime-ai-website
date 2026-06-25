@@ -24,7 +24,7 @@ import MultiAgentSystems from './pages/MultiAgentSystems';
 import EnterpriseAiOrchestration from './pages/EnterpriseAiOrchestration';
 import Yace19Lab from './pages/Yace19Lab';
 import FleetCommand from './pages/FleetCommand';
-
+import CyberSurveyor from './pages/CyberSurveyor';
 
 function App() {
   return (
@@ -57,6 +57,7 @@ function App() {
             <Route path="/revenue" element={<RevenueConsole />} />
             <Route path="/yace19" element={<Yace19Lab />} />
             <Route path="/fleet-command" element={<FleetCommand />} />
+            <Route path="/surveyor" element={<CyberSurveyor />} />
           </Route>
           
           {/* Country Nodes */}

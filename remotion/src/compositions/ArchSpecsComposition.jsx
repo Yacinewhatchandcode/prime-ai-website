@@ -7,18 +7,18 @@ const CONTENT = {
     tagline: 'COGNITIVE ARCHITECTURE',
     specs: [
       {
-        title: 'Zero Data Sharing',
-        desc: 'Your prompts, reasoning logs, and local memories never transit through third-party cloud services.',
+        title: 'Absolute Privacy Shield',
+        desc: 'Your memories and thoughts are safely locked away, completely invisible to the outside world.',
         icon: 'shield',
       },
       {
-        title: 'Adaptive Model Swarm',
-        desc: 'Intelligent dynamic routing between ultra-fast lightweight models and deep reasoning models.',
+        title: 'Instant Intelligence',
+        desc: 'A perfectly synchronized team of minds, adapting instantly to give you the perfect answer.',
         icon: 'swarm',
       },
       {
-        title: 'Structure Graph Semantics',
-        desc: 'Hierarchical vector indexing and local knowledge graph continuously connecting all your data.',
+        title: 'Visual Knowledge Web',
+        desc: 'See all your information beautifully connected, creating a living map of your world.',
         icon: 'graph',
       },
     ],
@@ -27,18 +27,18 @@ const CONTENT = {
     tagline: 'ARCHITECTURE COGNITIVE',
     specs: [
       {
-        title: 'Zéro Partage de Données',
-        desc: 'Vos prompts, journaux de raisonnement et mémoires locales ne transitent jamais par des services cloud tiers.',
+        title: 'Bouclier de Confidentialité',
+        desc: 'Vos mémoires et pensées sont enfermées en toute sécurité, totalement invisibles au monde extérieur.',
         icon: 'shield',
       },
       {
-        title: 'Essaim de Modèles Adaptatif',
-        desc: 'Routage dynamique intelligent entre modèles légers ultra-rapides et modèles de raisonnement profond.',
+        title: 'Intelligence Instantanée',
+        desc: 'Une équipe d\'esprits parfaitement synchronisée, s\'adaptant instantanément pour vous donner la réponse parfaite.',
         icon: 'swarm',
       },
       {
-        title: 'Sémantique en Graphe Structuré',
-        desc: 'Indexation vectorielle hiérarchique et graphe de connaissances local connectant continuellement toutes vos données.',
+        title: 'Réseau de Connaissances Visuel',
+        desc: 'Voyez toutes vos informations magnifiquement connectées, créant une carte vivante de votre monde.',
         icon: 'graph',
       },
     ],

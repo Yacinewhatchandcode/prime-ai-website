@@ -192,14 +192,7 @@ export default function HeroReveal({
       }}>
         PRIME-AI // SOVEREIGN FLEET
       </div>
-      <div style={{
-        position: 'absolute', bottom: 40, right: 50,
-        fontFamily: FONTS.mono, fontSize: 11,
-        color: mutedColor, opacity: subtitleOpacity * 0.5,
-        letterSpacing: 1,
-      }}>
-        prime-ai.fr
-      </div>
+
     </div>
   );
 }

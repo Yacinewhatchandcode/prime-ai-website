@@ -29,7 +29,6 @@ const CONTENT = {
     },
     beat5: {
       cta: 'Own your intelligence.',
-      url: 'prime-ai.fr',
     },
   },
   fr: {
@@ -56,7 +55,6 @@ const CONTENT = {
     },
     beat5: {
       cta: 'Maîtrisez votre intelligence.',
-      url: 'prime-ai.fr',
     },
   },
 };
@@ -531,7 +529,6 @@ function Beat5({ frame, fps, c }) {
   const opacity = fadeIn * fadeOut;
 
   const ctaScale = spring({ frame: frame - 10, fps, config: { damping: 18, stiffness: 60 } });
-  const urlFade = interpolate(frame, [fps * 1, fps * 1 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const logoFade = interpolate(frame, [fps * 1.5, fps * 1.5 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   // Glow pulse
@@ -553,14 +550,7 @@ function Beat5({ frame, fps, c }) {
         {c.beat5.cta}
       </div>
 
-      {/* URL */}
-      <div style={{
-        fontFamily: FONTS.mono, fontSize: 20, fontWeight: 600,
-        color: BRAND.light, letterSpacing: 4, opacity: urlFade,
-        marginBottom: 40,
-      }}>
-        {c.beat5.url}
-      </div>
+
 
       {/* Logo */}
       <div style={{ opacity: logoFade }}>

@@ -8,20 +8,20 @@ const CONTENT = {
     platform: 'Cognitive Optimizer',
     title: 'Optimize',
     titleAccent: 'Instructions.',
-    subtitle: 'Autonomous prompt optimization. Compile, refine, and align your agent instructions continuously using local validation pipelines.',
+    subtitle: 'Your agents learn to be perfect. Watch them refine their own behavior, polish their thinking, and continuously adapt to become exactly what you need.',
     features: [
-      'DSPy optimization',
-      'Continuous alignment',
-      'Validation loops',
-      'Local model registry',
+      'Self-improving intelligence',
+      'Continuous refinement',
+      'Flawless adaptation',
+      'Perfect memory recall',
     ],
     logs: [
-      { text: 'Ingesting bootstrap training set (20 cases)... OK', type: 'info' },
-      { text: 'Evaluating base prompt (accuracy: 45.2%)...', type: 'warn' },
-      { text: 'Compiling candidate prompt #3 (accuracy: 72.8%)...', type: 'info' },
-      { text: 'Compiling candidate prompt #12 (accuracy: 88.5%)...', type: 'info' },
-      { text: 'Optimization complete. Final accuracy: 94.1%', type: 'success' },
-      { text: 'Saved optimized prompt to local registry.', type: 'success' }
+      { text: 'Analyzing past performance and discovering patterns...', type: 'info' },
+      { text: 'Identifying areas for brilliant improvement...', type: 'warn' },
+      { text: 'Refining thought process for maximum clarity...', type: 'info' },
+      { text: 'Polishing the perfect response structure...', type: 'info' },
+      { text: 'Mastery complete. Performance is now flawless.', type: 'success' },
+      { text: 'New intelligence permanently locked into memory.', type: 'success' }
     ]
   },
   fr: {
@@ -29,20 +29,20 @@ const CONTENT = {
     platform: 'Optimisateur Cognitif',
     title: 'Optimise',
     titleAccent: 'Les Consignes.',
-    subtitle: 'Optimisation autonome des prompts. Compilez, affinez et alignez les consignes de vos agents en continu via des pipelines locaux.',
+    subtitle: "Vos agents apprennent à être parfaits. Regardez-les affiner leur comportement, perfectionner leur pensée et s'adapter continuellement.",
     features: [
-      'Optimisation DSPy',
-      'Alignement continu',
-      'Boucles de validation',
-      'Registre local',
+      'Intelligence évolutive',
+      'Raffinement continu',
+      'Adaptation sans faille',
+      'Mémorisation parfaite',
     ],
     logs: [
-      { text: 'Lecture du jeu d\'entraînement (20 cas)... OK', type: 'info' },
-      { text: 'Évaluation du prompt de base (précision : 45.2%)...', type: 'warn' },
-      { text: 'Compilation du prompt candidat #3 (précision : 72.8%)...', type: 'info' },
-      { text: 'Compilation du prompt candidat #12 (précision : 88.5%)...', type: 'info' },
-      { text: 'Optimisation terminée. Précision finale : 94.1%', type: 'success' },
-      { text: 'Prompt optimisé sauvegardé dans le registre.', type: 'success' }
+      { text: 'Analyse des performances passées en cours...', type: 'info' },
+      { text: 'Identification des axes d\'amélioration brillants...', type: 'warn' },
+      { text: 'Raffinement du processus de pensée pour une clarté maximale...', type: 'info' },
+      { text: 'Perfectionnement de la structure de réponse idéale...', type: 'info' },
+      { text: 'Maîtrise totale. Performance sans faille.', type: 'success' },
+      { text: 'Nouvelle intelligence verrouillée en permanence.', type: 'success' }
     ]
   }
 };
@@ -88,6 +88,15 @@ export default function PrimeTeleprompterComposition({ language = 'en' }) {
         position: 'absolute', inset: 0,
         backgroundImage: `linear-gradient(rgba(198,161,90,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,161,90,0.03) 1px, transparent 1px)`,
         backgroundSize: '60px 60px',
+      }} />
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
       }} />
 
       {/* Scanline */}

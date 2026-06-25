@@ -50,6 +50,17 @@ export default function FeatureGrid({
         opacity: 0.5,
       }} />
 
+      {/* Glow Orb */}
+      <div style={{
+        position: 'absolute',
+        top: '50%', left: '50%',
+        width: 800, height: 800,
+        transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${primaryColor}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
+      }} />
+
       {/* Tagline */}
       <div style={{
         opacity: taglineOpacity,

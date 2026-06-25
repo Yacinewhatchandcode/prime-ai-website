@@ -8,40 +8,40 @@ const CONTENT = {
     platform: 'Sovereign Infrastructure',
     title: 'Your Cloud.',
     titleAccent: 'Your Rules.',
-    subtitle: 'Your fully autonomous private cloud. Host your inference, secure messaging, and heavy data processing servers without relying on Amazon or Google.',
+    subtitle: 'Your fully autonomous private cloud. Keep your thoughts, your memories, and your intelligence completely invisible to the outside world.',
     metrics: [
-      { label: 'INFERENCE', value: 'ACTIVE', status: 'LOCAL GPU', color: BRAND.green },
-      { label: 'MESSAGING', value: 'ENCRYPTED', status: 'E2E AES-256', color: BRAND.blue },
-      { label: 'STORAGE', value: '12.4 TB', status: 'SOVEREIGN', color: BRAND.gold },
-      { label: 'UPTIME', value: '99.97%', status: 'AUTONOMOUS', color: BRAND.green },
+      { label: 'INTELLIGENCE', value: 'ACTIVE', status: 'LOCAL MIND', color: BRAND.green },
+      { label: 'COMMUNICATION', value: 'SHIELDED', status: 'PRIVATE', color: BRAND.blue },
+      { label: 'MEMORY', value: 'VAULTED', status: 'SOVEREIGN', color: BRAND.gold },
+      { label: 'AWARENESS', value: 'ALWAYS ON', status: 'AUTONOMOUS', color: BRAND.green },
     ],
     servers: [
-      { name: 'inference-node-01', cpu: 94, gpu: 87, status: 'RUNNING' },
-      { name: 'msg-relay-secure', cpu: 23, gpu: 0, status: 'RUNNING' },
-      { name: 'data-processor-hq', cpu: 67, gpu: 45, status: 'RUNNING' },
-      { name: 'backup-sovereign', cpu: 12, gpu: 0, status: 'STANDBY' },
+      { name: 'brain-node-01', cpu: 94, gpu: 87, status: 'RUNNING' },
+      { name: 'vision-relay-secure', cpu: 23, gpu: 0, status: 'RUNNING' },
+      { name: 'memory-processor-hq', cpu: 67, gpu: 45, status: 'RUNNING' },
+      { name: 'backup-shield', cpu: 12, gpu: 0, status: 'STANDBY' },
     ],
-    noCloud: 'ZERO DEPENDENCY — NO AWS • NO GCP • NO AZURE',
+    noCloud: 'ABSOLUTE FREEDOM — YOUR SERVERS • YOUR RULES • YOUR MIND',
   },
   fr: {
     tagline: 'PRIME-CLOUD PRIVÉ',
     platform: 'Infrastructure Souveraine',
     title: 'Votre Cloud.',
     titleAccent: 'Vos Règles.',
-    subtitle: "Votre cloud privé entièrement autonome. Hébergez votre inférence, messagerie sécurisée et serveurs de traitement sans dépendre d'Amazon ou Google.",
+    subtitle: "Votre cloud privé entièrement autonome. Gardez vos pensées, vos mémoires et votre intelligence totalement invisibles au monde extérieur.",
     metrics: [
-      { label: 'INFÉRENCE', value: 'ACTIF', status: 'GPU LOCAL', color: BRAND.green },
-      { label: 'MESSAGERIE', value: 'CHIFFRÉ', status: 'E2E AES-256', color: BRAND.blue },
-      { label: 'STOCKAGE', value: '12.4 TO', status: 'SOUVERAIN', color: BRAND.gold },
-      { label: 'UPTIME', value: '99.97%', status: 'AUTONOME', color: BRAND.green },
+      { label: 'INTELLIGENCE', value: 'ACTIF', status: 'ESPRIT LOCAL', color: BRAND.green },
+      { label: 'COMMUNICATION', value: 'PROTÉGÉ', status: 'PRIVÉ', color: BRAND.blue },
+      { label: 'MÉMOIRE', value: 'VERROUILLÉ', status: 'SOUVERAIN', color: BRAND.gold },
+      { label: 'CONSCIENCE', value: 'TOUJOURS ACTIF', status: 'AUTONOME', color: BRAND.green },
     ],
     servers: [
-      { name: 'inférence-noeud-01', cpu: 94, gpu: 87, status: 'ACTIF' },
-      { name: 'relais-msg-sécurisé', cpu: 23, gpu: 0, status: 'ACTIF' },
-      { name: 'processeur-données', cpu: 67, gpu: 45, status: 'ACTIF' },
-      { name: 'backup-souverain', cpu: 12, gpu: 0, status: 'VEILLE' },
+      { name: 'cerveau-noeud-01', cpu: 94, gpu: 87, status: 'ACTIF' },
+      { name: 'relais-vision-sécurisé', cpu: 23, gpu: 0, status: 'ACTIF' },
+      { name: 'processeur-mémoire-hq', cpu: 67, gpu: 45, status: 'ACTIF' },
+      { name: 'bouclier-backup', cpu: 12, gpu: 0, status: 'VEILLE' },
     ],
-    noCloud: 'ZÉRO DÉPENDANCE — SANS AWS • SANS GCP • SANS AZURE',
+    noCloud: 'LIBERTÉ ABSOLUE — VOS SERVEURS • VOS RÈGLES • VOTRE ESPRIT',
   },
 };
 
@@ -95,13 +95,13 @@ export default function PrimeCloudComposition({ language = 'en' }) {
         zIndex: 5,
       }} />
 
-      {/* Ambient glow */}
+      {/* V2 Uniform Glow Orb */}
       <div style={{
-        position: 'absolute', top: '30%', left: '50%',
-        width: 600, height: 600,
-        transform: 'translate(-50%, -50%)',
-        background: `radial-gradient(circle, ${BRAND.blue}08 0%, transparent 70%)`,
-        opacity: glowPulse,
+        position: 'absolute', top: '50%', left: '50%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
       }} />
 
       {/* Header */}

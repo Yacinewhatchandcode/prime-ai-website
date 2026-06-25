@@ -10,10 +10,10 @@ const CONTENT = {
     titleAccent: 'Sovereign.',
     subtitle: 'The backbone of your daily workflow. Capture, organize, and reason continuously with seamless local sync.',
     features: [
-      'Native file system integration',
-      'Continuous reasoning engine',
-      'Encrypted local sync',
-      'Sovereign data ownership',
+      'Seamless file organization',
+      'Always-on intelligence',
+      'Absolute privacy sync',
+      'Your data stays yours',
     ],
     files: [
       { name: 'reports/', type: 'dir', status: 'SYNCED' },
@@ -30,10 +30,10 @@ const CONTENT = {
     titleAccent: 'Souverain.',
     subtitle: "L'épine dorsale de votre flux de travail quotidien. Capturez, organisez et raisonnez en continu avec une synchronisation locale transparente.",
     features: [
-      'Intégration native système de fichiers',
-      'Moteur de raisonnement continu',
-      'Synchronisation locale chiffrée',
-      'Souveraineté totale des données',
+      'Organisation fluide des fichiers',
+      'Intelligence toujours active',
+      'Synchronisation privée absolue',
+      'Vos données vous appartiennent',
     ],
     files: [
       { name: 'rapports/', type: 'dir', status: 'SYNCED' },
@@ -98,8 +98,16 @@ export default function PrimeDesktopComposition({ language = 'en' }) {
         opacity: meshOpacity,
       }}>
         <circle cx="350" cy="350" r="300" fill="none" stroke={BRAND.gold} strokeWidth="0.8" strokeDasharray="20 15 8 30" />
-        <circle cx="350" cy="350" r="250" fill="none" stroke={BRAND.gold} strokeWidth="0.5" strokeDasharray="5 10" />
       </svg>
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '25%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
+      }} />
 
       {/* Left: Text Content */}
       <div style={{

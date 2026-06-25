@@ -8,12 +8,12 @@ const CONTENT = {
     platform: 'Telegram Gateway',
     title: 'Secure',
     titleAccent: 'Chat Command.',
-    subtitle: 'Your secure chat-based assistant. Control your fleet, query memories, and receive real-time alerts directly in Telegram.',
+    subtitle: 'Your brilliant companion on the go. Talk to your agents, ask questions, and watch your intelligence work seamlessly in your favorite chat app.',
     features: [
-      'Fleet chat command',
-      'Real-time alerts',
-      'Swarm delegation',
-      'Encrypted transport',
+      'Talk naturally anywhere',
+      'Instant visual notifications',
+      'Smart task delegation',
+      'Total privacy shield',
     ],
     transcript: [
       { role: 'YOU', text: '/status' },
@@ -27,12 +27,12 @@ const CONTENT = {
     platform: 'Passerelle Telegram',
     title: 'Commande',
     titleAccent: 'Par Chat.',
-    subtitle: 'Votre assistant sécurisé par chat. Contrôlez votre flotte, interrogez la mémoire et recevez des alertes en temps réel dans Telegram.',
+    subtitle: 'Votre brillant compagnon mobile. Parlez à vos agents, posez des questions et regardez votre intelligence travailler de façon fluide dans votre application de chat.',
     features: [
-      'Contrôle par chat',
-      'Alertes temps réel',
-      'Délégation d\'essaim',
-      'Transport chiffré',
+      'Parlez naturellement partout',
+      'Notifications visuelles instantanées',
+      'Délégation intelligente',
+      'Bouclier de confidentialité total',
     ],
     transcript: [
       { role: 'VOUS', text: '/status' },
@@ -84,6 +84,15 @@ export default function PrimeGramComposition({ language = 'en' }) {
         position: 'absolute', inset: 0,
         backgroundImage: `linear-gradient(rgba(198,161,90,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,161,90,0.03) 1px, transparent 1px)`,
         backgroundSize: '60px 60px',
+      }} />
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
       }} />
 
       {/* Scanline */}

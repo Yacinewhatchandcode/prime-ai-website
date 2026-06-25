@@ -8,12 +8,12 @@ const CONTENT = {
     platform: 'iOS / Android',
     title: 'Intelligence',
     titleAccent: 'On the Go.',
-    subtitle: 'Your nomadic intelligence companion. Ultra-fast real-time voice access, encrypted automatic transcription, and asynchronous thinking session sync.',
+    subtitle: 'Intelligence on the go. Talk to your agents anywhere, instantly capture brilliant ideas, and watch your thoughts sync across all your devices seamlessly.',
     features: [
-      'Real-time voice interface',
-      'Encrypted transcription',
-      'Async session sync',
-      'Cross-device continuity',
+      'Talk naturally anywhere',
+      'Flawless private transcription',
+      'Always-on intelligence',
+      'Perfect synchronization',
     ],
     transcript: [
       { role: 'YOU', text: 'Summarize the Q2 report and flag risks.' },
@@ -26,12 +26,12 @@ const CONTENT = {
     platform: 'iOS / Android',
     title: 'Intelligence',
     titleAccent: 'Nomade.',
-    subtitle: "Votre compagnon d'intelligence nomade. Accès vocal temps réel ultra-rapide, transcription chiffrée automatique et synchronisation asynchrone.",
+    subtitle: "L'intelligence en mouvement. Parlez à vos agents partout, capturez instantanément vos idées brillantes et voyez vos pensées se synchroniser sur tous vos appareils.",
     features: [
-      'Interface vocale temps réel',
-      'Transcription chiffrée',
-      'Sync asynchrone sessions',
-      'Continuité multi-appareils',
+      'Parlez naturellement partout',
+      'Transcription privée sans faille',
+      'Intelligence toujours active',
+      'Synchronisation parfaite',
     ],
     transcript: [
       { role: 'VOUS', text: 'Résume le rapport T2 et signale les risques.' },
@@ -85,6 +85,15 @@ export default function PrimeMobileComposition({ language = 'en' }) {
         position: 'absolute', inset: 0,
         backgroundImage: `linear-gradient(rgba(198,161,90,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,161,90,0.03) 1px, transparent 1px)`,
         backgroundSize: '60px 60px',
+      }} />
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
       }} />
 
       {/* Scanline */}

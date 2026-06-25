@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npx remotion studio",
+    "start": "npx remotion studio src/index.jsx",
     "build": "npx remotion render",
     "render:all": "node scripts/render-all.mjs",
     "render:single": "npx remotion render src/index.jsx"

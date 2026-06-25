@@ -56,9 +56,9 @@ function FleetCommand() {
           </div>
           <div className="sub-header-subtitle">SOVEREIGN FLEET DASHBOARD</div>
         </div>
-        <div className="sub-header-btn" style={{ cursor: 'default' }}>
-          <Activity size={20} color={isWired ? '#22c55e' : '#64748b'} />
-        </div>
+        <Link to="/surveyor" className="sub-header-btn" style={{ textDecoration: 'none', cursor: 'pointer' }} title="Open Cyber Surveyor Dashboard">
+          <Activity size={20} color={isWired ? '#22c55e' : '#38bdf8'} />
+        </Link>
       </div>
 
       <div style={{ flex: 1, padding: '24px', display: 'flex', flexDirection: 'column', gap: '32px', zIndex: 1 }}>

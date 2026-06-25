@@ -8,7 +8,7 @@ const CONTENT = {
     platform: 'Terminal / Shell',
     title: 'Command',
     titleAccent: 'Your Fleet.',
-    subtitle: 'For engineers and administrators. Control your sovereign agent fleet directly from your terminal or integrate them into your automation scripts.',
+    subtitle: 'Absolute control from your terminal. Launch, monitor, and guide your sovereign agents with beautiful visual telemetry.',
     commands: [
       { prompt: '$ prime fleet status', output: '' },
       { prompt: '', output: '  FLEET STATUS — 14 agents online' },
@@ -20,10 +20,10 @@ const CONTENT = {
       { prompt: '', output: '  │ Reviewer        │ ● ACTIVE │ 48h 02m  │' },
       { prompt: '', output: '  │ Sentinel        │ ● IDLE   │ 72h 14m  │' },
       { prompt: '', output: '  └─────────────────┴──────────┴──────────┘' },
-      { prompt: '$ prime agent deploy --sovereign --encrypt', output: '' },
-      { prompt: '', output: '  ✓ Agent deployed to sovereign mesh' },
-      { prompt: '', output: '  ✓ E2E encryption enabled (AES-256-GCM)' },
-      { prompt: '', output: '  ✓ MCP protocol handshake complete' },
+      { prompt: '$ prime agent deploy --visual --shield', output: '' },
+      { prompt: '', output: '  ✓ Agent deployed to secure network' },
+      { prompt: '', output: '  ✓ Absolute privacy shield enabled' },
+      { prompt: '', output: '  ✓ Agent connection established' },
     ],
   },
   fr: {
@@ -31,7 +31,7 @@ const CONTENT = {
     platform: 'Terminal / Shell',
     title: 'Commandez',
     titleAccent: 'Votre Flotte.',
-    subtitle: "Pour les ingénieurs et administrateurs. Contrôlez votre flotte d'agents souverains directement depuis votre terminal.",
+    subtitle: "Contrôle absolu depuis votre terminal. Lancez, surveillez et guidez vos agents souverains avec une magnifique télémétrie visuelle.",
     commands: [
       { prompt: '$ prime fleet status', output: '' },
       { prompt: '', output: '  ÉTAT FLOTTE — 14 agents en ligne' },
@@ -43,10 +43,10 @@ const CONTENT = {
       { prompt: '', output: '  │ Réviseur        │ ● ACTIF  │ 48h 02m  │' },
       { prompt: '', output: '  │ Sentinelle      │ ● VEILLE │ 72h 14m  │' },
       { prompt: '', output: '  └─────────────────┴──────────┴──────────┘' },
-      { prompt: '$ prime agent deploy --souverain --chiffrer', output: '' },
-      { prompt: '', output: '  ✓ Agent déployé sur maillage souverain' },
-      { prompt: '', output: '  ✓ Chiffrement E2E activé (AES-256-GCM)' },
-      { prompt: '', output: '  ✓ Handshake protocole MCP terminé' },
+      { prompt: '$ prime agent deploy --visuel --bouclier', output: '' },
+      { prompt: '', output: '  ✓ Agent déployé sur réseau sécurisé' },
+      { prompt: '', output: '  ✓ Bouclier de confidentialité absolue activé' },
+      { prompt: '', output: '  ✓ Connexion agent établie' },
     ],
   },
 };
@@ -91,6 +91,15 @@ export default function PrimeCLIComposition({ language = 'en' }) {
         position: 'absolute', inset: 0,
         backgroundImage: `linear-gradient(rgba(198,161,90,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(198,161,90,0.02) 1px, transparent 1px)`,
         backgroundSize: '40px 40px',
+      }} />
+
+      {/* V2 Uniform Glow Orb */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 800, height: 800, transform: `translate(-50%, -50%)`,
+        background: `radial-gradient(circle, ${BRAND.gold}15 0%, transparent 60%)`,
+        borderRadius: '50%',
+        opacity: Math.sin(frame * 0.05) * 0.2 + 0.8,
       }} />
 
       {/* Scanline */}

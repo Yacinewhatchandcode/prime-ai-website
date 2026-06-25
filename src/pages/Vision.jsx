@@ -189,41 +189,13 @@ export default function Vision() {
     if (!email || !email.includes('@')) return;
     setSubmitting(true);
     setErrorMsg("");
-    const EMAILJS_SERVICE = 'service_ktwq617';
-    const EMAILJS_TEMPLATE = 'template_pvcjv2p';
-    const EMAILJS_KEY = 'xflu_ts5EdSFvCVG7';
-    const ADMIN_EMAIL = 'info.primeai@gmail.com';
-    const timestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }) + ' CET';
     try {
-      // Admin notification
-      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Origin': 'https://prime-ai.fr' },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE, template_id: EMAILJS_TEMPLATE, user_id: EMAILJS_KEY,
-          template_params: {
-            title: '[PRIME.AI Newsletter] New Subscriber',
-            name: 'PRIME.AI Portal', email: email, to_email: ADMIN_EMAIL, time: timestamp,
-            message: `New subscriber signup.\n\nEmail: ${email}\nTime: ${timestamp}`
-          }
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, lang: language })
       });
-      // Welcome email to subscriber
-      const isFr = language === 'fr';
-      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Origin': 'https://prime-ai.fr' },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE, template_id: EMAILJS_TEMPLATE, user_id: EMAILJS_KEY,
-          template_params: {
-            title: isFr ? 'Bienvenue chez PRIME-AI !' : 'Welcome to PRIME-AI!',
-            name: 'PRIME-AI Team', email: email, to_email: email, time: timestamp,
-            message: isFr
-              ? `Bonjour,\n\nMerci de vous être inscrit à la newsletter PRIME-AI !\nVous recevrez nos dernières actualités sur l'IA souveraine.\n\nCordialement,\nL'équipe PRIME-AI`
-              : `Hello,\n\nThank you for subscribing to PRIME-AI!\nYou'll receive our latest sovereign AI updates.\n\nBest regards,\nThe PRIME-AI Team`
-          }
-        })
-      });
+      if (!res.ok) throw new Error('Network response was not ok');
       setSubscribed(true);
       setTimeout(() => setSubscribed(false), 5000);
       setEmail("");
