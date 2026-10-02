@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
   --bg-dark: #000000;
@@ -28,8 +27,37 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-font-smoothing: antialiased;
-  -webkit-user-select: none;
-  user-select: none;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+button, input, textarea, select { font: inherit; }
+:focus-visible { outline: 2px solid #C6A15A !important; outline-offset: 4px; }
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 3000;
+  padding: 12px 20px;
+  background: #FAF8F4;
+  color: #1F1A13;
+  transform: translateY(-150%);
+}
+.skip-link:focus { transform: translateY(0); }
+.backend-notice {
+  border: 1px solid #C6A15A;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #FAF8F4;
+  background: rgba(198, 161, 90, 0.08);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 input, textarea, select, [contenteditable="true"] {

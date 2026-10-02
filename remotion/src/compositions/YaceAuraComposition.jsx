@@ -3,6 +3,7 @@ import { Sequence, useVideoConfig } from 'remotion';
 import { HeroReveal, FleetDashboard } from '../templates';
 import content from '../content';
 import { BRAND } from '../brand';
+import IllustrativeLabel from '../templates/IllustrativeLabel';
 
 /**
  * YaceAuraComposition — /yace-aura page video
@@ -28,25 +29,33 @@ export default function YaceAuraComposition({ language = 'en' }) {
       </Sequence>
       <Sequence from={halfDuration} durationInFrames={halfDuration}>
         <FleetDashboard
+          language={language}
           title="YACE"
           titleAccent="•AURA"
           metrics={[
-            { label: 'SOL NETWORK', value: '2845 TPS', status: 'ACTIVE', color: BRAND.blue },
-            { label: 'SWAP VOLUME', value: '$508.20', status: 'TRADING', color: BRAND.green },
-            { label: 'SENTIMENT', value: '83%', status: 'BULLISH', color: BRAND.amber },
-            { label: 'WALLET', value: 'PHANTOM', status: 'READY', color: BRAND.gold },
+            { label: 'SOL NETWORK', value: language === 'fr' ? 'ILLUSTRATION' : 'ILLUSTRATIVE', status: 'DEMO', color: BRAND.blue },
+            { label: language === 'fr' ? 'TRANSACTIONS' : 'TRADES', value: language === 'fr' ? 'AUCUNE' : 'NONE', status: 'DEMO', color: BRAND.green },
+            { label: 'SENTIMENT', value: language === 'fr' ? 'NON MESURÉ' : 'NOT MEASURED', status: 'DEMO', color: BRAND.amber },
+            { label: language === 'fr' ? 'PORTEFEUILLE' : 'WALLET', value: language === 'fr' ? 'NON CONNECTÉ' : 'NOT CONNECTED', status: 'DEMO', color: BRAND.gold },
           ]}
-          logLines={[
-            'Solana Network Scout: TPS 2845, Slot 298452109.',
-            'YouTube Sentiment Scout: Score 0.75 (Bullish).',
-            'Jupiter Swap Simulator: 1.0 SOL → 145.20 USDC.',
-            'Vocal Command Bridge: Bullish alert played.',
-            'Wallet Bridge: Phantom connected.',
+          logLines={language === 'fr' ? [
+            'Réseau: Schéma illustratif, aucune télémétrie.',
+            'Sentiment: Aucune analyse de marché exécutée.',
+            'Transactions: Aucun échange effectué.',
+            'Audio: Explication visuelle sans narration.',
+            'Portefeuille: Aucun compte connecté.',
+          ] : [
+            'Network: Illustrative layout, no telemetry.',
+            'Sentiment: No market analysis executed.',
+            'Trades: No swaps executed.',
+            'Audio: Visual explainer without narration.',
+            'Wallet: No account connected.',
           ]}
           theme="dark"
           primaryColor={BRAND.gold}
         />
       </Sequence>
+      <IllustrativeLabel language={language} />
     </>
   );
 }

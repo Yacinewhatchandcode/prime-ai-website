@@ -1,160 +1,95 @@
-# PrimeAI Remotion — Integration Guide
+# PrimeAI Remotion integration
 
-## Video-to-Page Mapping
+## Honest visual-only playback
 
-Each rendered video corresponds to a page on prime-ai.fr.  
-Import the `<video>` element using the language context to select the correct file.
-
-### How existing videos are integrated (reference: Vision.jsx)
+The original 34 MP4s contained digitally silent AAC tracks (mean/max -91 dB).
+They are visual explainers, not narrated videos. Do not invent transcripts,
+narration or soundtrack availability. New compositions contain no audio sources.
+Use the shared player for every site video:
 
 ```jsx
+import VisualExplainer from '../components/VisualExplainer';
 import { useLanguage } from '../context/LanguageContext';
 
-// Inside your component:
 const { language } = useLanguage();
-
-<video
+<VisualExplainer
   src={language === 'fr' ? '/prime_macro_fr.mp4' : '/prime_macro_en.mp4'}
-  controls
-  autoPlay
-  muted
-  loop
+  autoPlay loop
   style={{ width: '100%', display: 'block', borderRadius: '24px' }}
-/>
+/>;
 ```
 
----
+It enforces muted/inline playback, supplies keyboard-accessible play/pause and
+seek plus supported fullscreen, and shows EN/FR visual-only disclosure. Native
+audio/unmute controls are not exposed. On-screen text supplies the explanation;
+the disclosure is not a fabricated transcript.
 
-## Page Integration Snippets
+## Composition mapping
 
-### 1. `/ecosysteme` — Ecosysteme.jsx
+Each stem has `_en.mp4` and `_fr.mp4` outputs in `public/`.
 
-```jsx
-<video
-  src={language === 'fr' ? '/prime_ecosysteme_fr.mp4' : '/prime_ecosysteme_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', maxWidth: '900px', borderRadius: '24px',
-    boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
-    border: '1px solid rgba(198, 161, 90, 0.2)',
-  }}
-/>
+| Output stem | Composition | Page | Identity |
+|-------------|-------------|------|----------|
+| `prime_macro` | MacroVisionV3 | / and /vision | Dark/gold, 22s |
+| `prime_tech` | Technology | /technologie | Blue grid/cards, 1280x720, 47s |
+| `prime_arch_specs` | ArchSpecs | /technologie | Light/gold |
+| `prime_sync_protocol` | SyncProtocol | /technologie | Light/gold |
+| `prime_ecosysteme` | Ecosysteme | /ecosysteme | Light/gold |
+| `prime_sovereign` | SovereignAi | /sovereign-ai | Light/gold |
+| `prime_enterprise` | Enterprise | /enterprise-ai-orchestration | Light/gold |
+| `prime_multiagent` | MultiAgent | /multi-agent-systems | Dark |
+| `prime_credentials` | Credentials | /credentials | Dark/gold |
+| `prime_fleet` | FleetCommand | /fleet-command | Dark/purple |
+| `prime_yace` | YaceAura | /yace-aura | Dark/gold |
+| `prime_desktop` | PrimeDesktop | Product cards | Light/gold |
+| `prime_mobile` | PrimeMobile | Product cards | Light/gold |
+| `prime_cli` | PrimeCLI | Product cards | Light/gold |
+| `prime_cloud` | PrimeCloud | Product cards | Light/gold |
+| `prime_gram` | PrimeGram | Product cards | Light/gold |
+| `prime_teleprompter` | PrimeTeleprompter | Product cards | Light/gold |
+
+The original `prime_tech` source was absent from this checkout and from its
+render mapping. `TechnologyComposition` is its tracked replacement, preserving
+the blue-grid/card identity and duration while explaining actual local-first
+capabilities. iMac/Pi are optional nodes, not assumed online. All static
+dashboard videos are explicitly illustrative; they are not live fleet status.
+
+Macro beats must call `useCurrentFrame()` **inside each Sequence child**.
+Passing the parent's absolute frame makes later acts fade before they appear.
+Transitions retain visible content instead of fading to empty backgrounds.
+Rendering uses local font fallbacks without external font-service requests.
+
+## Bounded local rendering and evidence
+
+Restore only the existing locked renderer packages, with enough free disk:
+
+```sh
+npm ci --prefix remotion --no-audit --no-fund
+df -h .
+# From the website root; use the existing Playwright browser, not a new download:
+REMOTION_BROWSER_EXECUTABLE="$(node --input-type=module -e 'import { chromium } from "playwright"; console.log(chromium.executablePath())')" \
+  node remotion/scripts/render-all.mjs --only MacroVisionV3-EN,MacroVisionV3-FR,YaceAura-EN,YaceAura-FR,Technology-EN,Technology-FR,FleetCommand-EN,FleetCommand-FR,Credentials-EN,Credentials-FR
 ```
 
-### 2. `/sovereign-ai` — SovereignAi.jsx
+The renderer checks for at least 3 GiB before each composition, uses two
+Chromium workers and a five-minute per-file deadline, rejects unknown IDs, and
+atomically replaces the public file only after a successful render. A missing
+existing browser or disk guard reports `RENDER_BLOCKED`; no automatic browser
+downloads are allowed. Preserve successful outputs and report any pending files.
 
-```jsx
-<video
-  src={language === 'fr' ? '/prime_sovereign_fr.mp4' : '/prime_sovereign_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', borderRadius: '16px',
-    border: '1px solid rgba(245, 158, 11, 0.3)',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-  }}
-/>
+```sh
+node scripts/qa-media-files.mjs before
+# Render changed compositions, then:
+node scripts/qa-media-files.mjs after
+# Build/restart only the owned 4174 preview before actual browser playback:
+node scripts/qa-media-ui.mjs
 ```
 
-### 3. `/multi-agent-systems` — MultiAgentSystems.jsx
-
-```jsx
-<video
-  src={language === 'fr' ? '/prime_multiagent_fr.mp4' : '/prime_multiagent_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', borderRadius: '16px',
-    border: '1px solid rgba(168, 85, 247, 0.3)',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-  }}
-/>
-```
-
-### 4. `/enterprise-ai-orchestration` — EnterpriseAiOrchestration.jsx
-
-```jsx
-<video
-  src={language === 'fr' ? '/prime_enterprise_fr.mp4' : '/prime_enterprise_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', maxWidth: '900px', borderRadius: '24px',
-    boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
-    border: '1px solid rgba(198, 161, 90, 0.2)',
-  }}
-/>
-```
-
-### 5. `/credentials` — Credentials.jsx
-
-```jsx
-<video
-  src={language === 'fr' ? '/prime_credentials_fr.mp4' : '/prime_credentials_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', borderRadius: '16px',
-    border: '1px solid rgba(212, 175, 55, 0.3)',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-  }}
-/>
-```
-
-### 6. `/fleet-command` — FleetCommand.jsx
-
-```jsx
-<video
-  src={language === 'fr' ? '/prime_fleet_fr.mp4' : '/prime_fleet_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', borderRadius: '16px',
-    border: '1px solid rgba(168, 85, 247, 0.3)',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-  }}
-/>
-```
-
-### 7. `/yace-aura` — YaceAura.jsx
-
-```jsx
-<video
-  src={language === 'fr' ? '/prime_yace_fr.mp4' : '/prime_yace_en.mp4'}
-  autoPlay muted loop playsInline
-  style={{
-    width: '100%', borderRadius: '16px',
-    border: '1px solid rgba(212, 175, 55, 0.3)',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-  }}
-/>
-```
-
----
-
-## File Inventory
-
-After rendering, these files will be placed in `public/`:
-
-| File | Page | Lang | Theme |
-|------|------|------|-------|
-| `prime_ecosysteme_en.mp4` | /ecosysteme | EN | Light |
-| `prime_ecosysteme_fr.mp4` | /ecosysteme | FR | Light |
-| `prime_sovereign_en.mp4` | /sovereign-ai | EN | Light |
-| `prime_sovereign_fr.mp4` | /sovereign-ai | FR | Light |
-| `prime_enterprise_en.mp4` | /enterprise-ai-orchestration | EN | Light |
-| `prime_enterprise_fr.mp4` | /enterprise-ai-orchestration | FR | Light |
-| `prime_multiagent_en.mp4` | /multi-agent-systems | EN | Dark |
-| `prime_multiagent_fr.mp4` | /multi-agent-systems | FR | Dark |
-| `prime_credentials_en.mp4` | /credentials | EN | Dark |
-| `prime_credentials_fr.mp4` | /credentials | FR | Dark |
-| `prime_fleet_en.mp4` | /fleet-command | EN | Dark |
-| `prime_fleet_fr.mp4` | /fleet-command | FR | Dark |
-| `prime_yace_en.mp4` | /yace-aura | EN | Dark |
-| `prime_yace_fr.mp4` | /yace-aura | FR | Dark |
-
----
-
-## Quick Start
-
-```bash
-cd remotion
-npm install
-npx remotion studio          # Preview in browser
-node scripts/render-all.mjs  # Render all 14 videos
-```
+File QA records ffprobe codecs/dimensions/duration and the requested ffmpeg
+signalstats measurement: 2 fps, 320px width, blank when YMAX <120, target <=10%.
+Eight-frame contact sheets need visual inspection, not just a threshold.
+Browser QA decodes/plays all public MP4s and exercises the actual shared player
+on every video-bearing route in EN/FR at desktop/mobile sizes. It blocks external
+requests and all mutations. JSON, signalstats, contact sheets, screenshots and
+captions live under `qa-evidence/media-upgrade/`; this is bounded smoke/content
+verification, not exhaustive product acceptance.

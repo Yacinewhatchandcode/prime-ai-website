@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import VisualExplainer from '../components/VisualExplainer';
 
 export default function Vision() {
   const { language, t } = useLanguage();
@@ -853,10 +854,10 @@ export default function Vision() {
                 </div>
 
                 <div style={{ flex: '1.2', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(198, 161, 90, 0.2)', background: '#000' }}>
-                  <video
+                  <VisualExplainer
                     key={activePromptData.id + language}
                     src={activePromptData.video[language]}
-                    autoPlay muted loop playsInline
+                    autoPlay loop
                     style={{ width: '100%', display: 'block' }}
                   />
                 </div>
@@ -955,9 +956,8 @@ export default function Vision() {
           border: '1px solid rgba(198, 161, 90, 0.2)',
           background: '#000'
         }}>
-          <video 
+          <VisualExplainer
             src={language === 'fr' ? '/prime_macro_fr.mp4' : '/prime_macro_en.mp4'} 
-            controls 
             style={{ width: '100%', display: 'block' }}
           />
         </div>
@@ -1029,6 +1029,7 @@ export default function Vision() {
 
             <form onSubmit={handleSubscribe} className="newsletter-inputs" style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
               <input
+                aria-label="Newsletter email"
                 type="email" placeholder="satoshi@example.com" value={email} onChange={e => setEmail(e.target.value)} className="input-newsletter" disabled={submitting} required
               />
               <button type="submit" className="prime-button-gold-sm" disabled={submitting}>

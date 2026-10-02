@@ -8,81 +8,81 @@ const CONTENT = {
   en: {
     beat1: {
       tagline: 'WHAT IS PRIME-AI?',
-      headline: 'Your Personal AI Fleet',
-      subtitle: 'One intelligence. Every device. Your rules.',
+      headline: 'Your Local AI Workspace',
+      subtitle: 'Desktop and mobile. Your data. Your rules.',
     },
     beat2: {
       tagline: 'HOW IT WORKS',
       devices: [
-        { icon: '💻', name: 'Desktop', desc: 'Capture & organize' },
-        { icon: '📱', name: 'Mobile', desc: 'Voice & transcription' },
-        { icon: '⌨️', name: 'Terminal', desc: 'Automate & control' },
-        { icon: '☁️', name: 'Private Cloud', desc: 'Your servers only' },
+        { icon: '💻', name: 'Desktop', desc: 'Local goals & notes' },
+        { icon: '📱', name: 'Mobile', desc: 'Offline tasks & notes' },
+        { icon: '⌨️', name: 'Portable JSON', desc: 'Manual file transfer' },
+        { icon: '☁️', name: 'Local Fleet', desc: 'Optional desktop AI' },
       ],
-      subtitle: 'All connected. All synchronized. All private.',
+      subtitle: 'Manual transfer. No account. No paid API or cloud.',
     },
     beat3: {
       tagline: 'WHAT IT DOES',
       features: [
-        { icon: '🧠', label: 'Thinks', desc: 'Multi-model reasoning across your conversations' },
-        { icon: '🔗', label: 'Remembers', desc: 'Learns from every interaction, cross-session memory' },
-        { icon: '🤖', label: 'Delegates', desc: 'Spawns sub-agents for complex tasks autonomously' },
-        { icon: '🔒', label: 'Protects', desc: 'Your data never leaves your infrastructure' },
+        { icon: '🧠', label: 'Organize', desc: 'Write goals, tasks and notes in your browser' },
+        { icon: '🔗', label: 'Keep', desc: 'Browser storage persists across reloads' },
+        { icon: '🤖', label: 'Transfer', desc: 'Export a file and review import conflicts' },
+        { icon: '🔒', label: 'Advise', desc: 'Optional local roles; no tool execution' },
       ],
     },
     beat4: {
       tagline: 'THE DIFFERENCE',
       comparison: [
-        { them: 'ChatGPT / Claude', us: 'Prime-AI' },
-        { them: 'Their servers', us: 'Your servers' },
-        { them: 'Forgets every session', us: 'Remembers everything' },
-        { them: 'One chat window', us: 'Desktop + Mobile + CLI + Cloud' },
-        { them: 'You adapt to AI', us: 'AI adapts to you' },
+        { them: 'Free Browser', us: 'Optional Desktop Fleet' },
+        { them: 'Goals, tasks and notes', us: 'Local Ollama inference' },
+        { them: 'Offline app shell', us: 'Three advisory roles' },
+        { them: 'Manual JSON transfer', us: 'Real mission snapshots' },
+        { them: 'No account or cloud', us: 'No autonomous execution' },
       ],
     },
     beat5: {
       cta: 'Own your intelligence.',
-      subtitle: 'Deploy in 15 minutes. No cloud dependency.',
+      subtitle: 'Start with the free local workspace. No cloud required.',
     },
   },
   fr: {
     beat1: {
       tagline: "QU'EST-CE QUE PRIME-AI ?",
-      headline: 'Votre Flotte IA Personnelle',
-      subtitle: 'Une intelligence. Chaque appareil. Vos règles.',
+      headline: 'Votre Espace IA Local',
+      subtitle: 'Bureau et mobile. Vos données. Vos règles.',
     },
     beat2: {
       tagline: 'COMMENT ÇA MARCHE',
       devices: [
-        { icon: '💻', name: 'Bureau', desc: 'Capture & organisation' },
-        { icon: '📱', name: 'Mobile', desc: 'Voix & transcription' },
-        { icon: '⌨️', name: 'Terminal', desc: 'Automatisation' },
-        { icon: '☁️', name: 'Cloud Privé', desc: 'Vos serveurs uniquement' },
+        { icon: '💻', name: 'Bureau', desc: 'Objectifs & notes locaux' },
+        { icon: '📱', name: 'Mobile', desc: 'Tâches & notes hors ligne' },
+        { icon: '⌨️', name: 'JSON Portable', desc: 'Transfert manuel' },
+        { icon: '☁️', name: 'Flotte Locale', desc: 'IA de bureau facultative' },
       ],
-      subtitle: 'Tout connecté. Tout synchronisé. Tout privé.',
+      subtitle: 'Transfert manuel. Sans compte, API payante ni cloud.',
     },
     beat3: {
       tagline: 'CE QUE ÇA FAIT',
       features: [
-        { icon: '🧠', label: 'Pense', desc: 'Raisonnement multi-modèle à travers vos conversations' },
-        { icon: '🔗', label: 'Mémorise', desc: "Apprend de chaque interaction, mémoire inter-session" },
-        { icon: '🤖', label: 'Délègue', desc: 'Lance des sous-agents pour les tâches complexes' },
-        { icon: '🔒', label: 'Protège', desc: "Vos données ne quittent jamais votre infrastructure" },
+        { icon: '🧠', label: 'Organiser', desc: 'Objectifs, tâches et notes dans le navigateur' },
+        { icon: '🔗', label: 'Conserver', desc: 'Stockage local conservé après rechargement' },
+        { icon: '🤖', label: 'Transférer', desc: "Export de fichier et revue des conflits" },
+        { icon: '🔒', label: 'Conseiller', desc: "Rôles locaux facultatifs, sans exécution d'outils" },
       ],
     },
     beat4: {
       tagline: 'LA DIFFÉRENCE',
       comparison: [
-        { them: 'ChatGPT / Claude', us: 'Prime-AI' },
-        { them: 'Leurs serveurs', us: 'Vos serveurs' },
-        { them: 'Oublie chaque session', us: 'Se souvient de tout' },
-        { them: 'Une seule fenêtre', us: 'Bureau + Mobile + CLI + Cloud' },
-        { them: "Vous vous adaptez à l'IA", us: "L'IA s'adapte à vous" },
+        { them: 'Navigateur Gratuit', us: 'Flotte de Bureau Facultative' },
+        { them: 'Objectifs, tâches et notes', us: 'Inférence Ollama locale' },
+        { them: 'Application hors ligne', us: 'Trois rôles consultatifs' },
+        { them: 'Transfert JSON manuel', us: 'Instantanés de missions réelles' },
+        { them: "Sans compte ni cloud", us: "Sans exécution autonome" },
       ],
     },
     beat5: {
       cta: 'Maîtrisez votre intelligence.',
-      subtitle: 'Déployez en 15 minutes. Aucune dépendance cloud.',
+      subtitle: "Commencez avec l'espace local gratuit. Sans cloud.",
     },
   },
 };
@@ -125,11 +125,12 @@ function PrimeLogo({ scale = 1, opacity = 1 }) {
 
 // ── Beat 1: WHAT IS PRIME-AI? (0-4s) ────────────────────────
 
-function Beat1({ frame, fps, c }) {
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const fadeOut = interpolate(frame, [fps * 4 - 12, fps * 4], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+function Beat1({ fps, c }) {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 20], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const fadeOut = interpolate(frame, [fps * 4 - 12, fps * 4], [1, 0.85], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-  const logoScale = spring({ frame, fps, config: { damping: 15, stiffness: 80 } });
+  const logoScale = 0.92 + 0.08 * spring({ frame, fps, config: { damping: 15, stiffness: 80 } });
   const tagFade = interpolate(frame, [15, 35], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const headFade = interpolate(frame, [25, 50], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const headSlide = interpolate(frame, [25, 50], [30, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
@@ -159,9 +160,10 @@ function Beat1({ frame, fps, c }) {
 
 // ── Beat 2: HOW IT WORKS — 4 Devices (4-9s) ─────────────────
 
-function Beat2({ frame, fps, c }) {
-  const fadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const fadeOut = interpolate(frame, [fps * 5 - 12, fps * 5], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+function Beat2({ fps, c }) {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 15], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const fadeOut = interpolate(frame, [fps * 5 - 12, fps * 5], [1, 0.85], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   const tagFade = interpolate(frame, [5, 25], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const subFade = interpolate(frame, [fps * 3, fps * 3 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
@@ -233,16 +235,17 @@ function Beat2({ frame, fps, c }) {
 
 // ── Beat 3: WHAT IT DOES — 4 Features (9-14s) ───────────────
 
-function Beat3({ frame, fps, c }) {
-  const fadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const fadeOut = interpolate(frame, [fps * 5 - 12, fps * 5], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+function Beat3({ fps, c }) {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 15], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const fadeOut = interpolate(frame, [fps * 5 - 12, fps * 5], [1, 0.85], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-  const tagFade = interpolate(frame, [5, 25], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const tagFade = interpolate(frame, [0, 25], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   return (
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: fadeIn * fadeOut }}>
       <div style={{
-        fontFamily: FONTS.mono, fontSize: 13, fontWeight: 700, color: BRAND.gold,
+        fontFamily: FONTS.mono, fontSize: 28, fontWeight: 700, color: BRAND.gold,
         letterSpacing: 4, opacity: tagFade, marginBottom: 50,
       }}>{c.beat3.tagline}</div>
 
@@ -273,16 +276,17 @@ function Beat3({ frame, fps, c }) {
 
 // ── Beat 4: THE DIFFERENCE — Comparison Table (14-18s) ───────
 
-function Beat4({ frame, fps, c }) {
-  const fadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const fadeOut = interpolate(frame, [fps * 4 - 12, fps * 4], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+function Beat4({ fps, c }) {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 15], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const fadeOut = interpolate(frame, [fps * 4 - 12, fps * 4], [1, 0.85], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-  const tagFade = interpolate(frame, [5, 25], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const tagFade = interpolate(frame, [0, 25], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   return (
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: fadeIn * fadeOut }}>
       <div style={{
-        fontFamily: FONTS.mono, fontSize: 13, fontWeight: 700, color: BRAND.gold,
+        fontFamily: FONTS.mono, fontSize: 28, fontWeight: 700, color: BRAND.gold,
         letterSpacing: 4, opacity: tagFade, marginBottom: 44,
       }}>{c.beat4.tagline}</div>
 
@@ -327,9 +331,10 @@ function Beat4({ frame, fps, c }) {
 
 // ── Beat 5: CTA (18-22s) ─────────────────────────────────────
 
-function Beat5({ frame, fps, c }) {
-  const fadeIn = interpolate(frame, [0, 25], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const ctaScale = spring({ frame: frame - 10, fps, config: { damping: 18, stiffness: 60 } });
+function Beat5({ fps, c }) {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 25], [0.85, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const ctaScale = 0.95 + 0.05 * spring({ frame, fps, config: { damping: 18, stiffness: 60 } });
   const subFade = interpolate(frame, [fps * 0.8, fps * 0.8 + 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const logoFade = interpolate(frame, [fps * 1.8, fps * 1.8 + 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const glow = 40 + Math.sin(frame * 0.08) * 20;
@@ -370,11 +375,11 @@ export default function MacroVisionV3Composition({ language = 'en' }) {
       <GoldMesh frame={frame} />
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)', zIndex: 1 }} />
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
-        <Sequence from={b1} durationInFrames={b1d}><Beat1 frame={useCurrentFrame()} fps={fps} c={c} /></Sequence>
-        <Sequence from={b2} durationInFrames={b2d}><Beat2 frame={useCurrentFrame()} fps={fps} c={c} /></Sequence>
-        <Sequence from={b3} durationInFrames={b3d}><Beat3 frame={useCurrentFrame()} fps={fps} c={c} /></Sequence>
-        <Sequence from={b4} durationInFrames={b4d}><Beat4 frame={useCurrentFrame()} fps={fps} c={c} /></Sequence>
-        <Sequence from={b5} durationInFrames={b5d}><Beat5 frame={useCurrentFrame()} fps={fps} c={c} /></Sequence>
+        <Sequence from={b1} durationInFrames={b1d}><Beat1 fps={fps} c={c} /></Sequence>
+        <Sequence from={b2} durationInFrames={b2d}><Beat2 fps={fps} c={c} /></Sequence>
+        <Sequence from={b3} durationInFrames={b3d}><Beat3 fps={fps} c={c} /></Sequence>
+        <Sequence from={b4} durationInFrames={b4d}><Beat4 fps={fps} c={c} /></Sequence>
+        <Sequence from={b5} durationInFrames={b5d}><Beat5 fps={fps} c={c} /></Sequence>
       </div>
       <div style={{ position: 'absolute', top: 36, left: 48, fontFamily: FONTS.mono, fontSize: 11, fontWeight: 600, color: BRAND.gold, opacity: 0.4, letterSpacing: 1.5, zIndex: 20 }}>PRIME-AI // SOVEREIGN FLEET</div>
       <div style={{ position: 'absolute', bottom: 36, right: 48, fontFamily: FONTS.mono, fontSize: 11, fontWeight: 500, color: BRAND.muted, opacity: 0.35, letterSpacing: 1, zIndex: 20 }}>prime-ai.fr</div>

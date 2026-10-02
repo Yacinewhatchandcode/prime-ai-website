@@ -1,0 +1,1750 @@
+{
+  "definition": "Visible main.innerText words using Intl.Segmenter; body-copy count is visible main paragraph text. Required disclosures included, live backend data may vary.",
+  "totals": {
+    "beforeWords": 28542,
+    "afterWords": 5566,
+    "beforeBodyCopyWords": 8936,
+    "afterBodyCopyWords": 2088
+  },
+  "bodyCopyReduction": 0.7663384064458371,
+  "wordReduction": 0.8049891388129774,
+  "nonReducedRoutes": [],
+  "comparisons": [
+    {
+      "route": "/",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 40,
+      "beforeWords": 258,
+      "beforeBodyCopyWords": 150,
+      "wordReduction": 0.6744186046511628,
+      "bodyCopyReduction": 0.7333333333333334
+    },
+    {
+      "route": "/ae",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6781609195402298,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/amlazr",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 35,
+      "bodyCopyWords": 16,
+      "beforeWords": 399,
+      "beforeBodyCopyWords": 140,
+      "wordReduction": 0.9122807017543859,
+      "bodyCopyReduction": 0.8857142857142857
+    },
+    {
+      "route": "/azirem",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 179,
+      "beforeBodyCopyWords": 25,
+      "wordReduction": 0.8268156424581006,
+      "bodyCopyReduction": 0.56
+    },
+    {
+      "route": "/br",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ca",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ch",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/cn",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/credentials",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 144,
+      "beforeBodyCopyWords": 74,
+      "wordReduction": 0.7916666666666666,
+      "bodyCopyReduction": 0.8648648648648649
+    },
+    {
+      "route": "/de",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 210,
+      "bodyCopyWords": 85,
+      "beforeWords": 334,
+      "beforeBodyCopyWords": 211,
+      "wordReduction": 0.37125748502994016,
+      "bodyCopyReduction": 0.5971563981042654
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 10,
+      "beforeWords": 106,
+      "beforeBodyCopyWords": 74,
+      "wordReduction": 0.7264150943396226,
+      "bodyCopyReduction": 0.8648648648648649
+    },
+    {
+      "route": "/factory",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 62,
+      "beforeBodyCopyWords": 22,
+      "wordReduction": 0.5161290322580645,
+      "bodyCopyReduction": 0.5454545454545454
+    },
+    {
+      "route": "/fleet-command",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 169,
+      "bodyCopyWords": 57,
+      "beforeWords": 2938,
+      "beforeBodyCopyWords": 301,
+      "wordReduction": 0.9424778761061947,
+      "bodyCopyReduction": 0.8106312292358804
+    },
+    {
+      "route": "/jp",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/media",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 39,
+      "bodyCopyWords": 15,
+      "beforeWords": 111,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.6486486486486487,
+      "bodyCopyReduction": 0.42307692307692313
+    },
+    {
+      "route": "/memory",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 52,
+      "bodyCopyWords": 12,
+      "beforeWords": 116,
+      "beforeBodyCopyWords": 61,
+      "wordReduction": 0.5517241379310345,
+      "bodyCopyReduction": 0.8032786885245902
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 115,
+      "beforeBodyCopyWords": 79,
+      "wordReduction": 0.7304347826086957,
+      "bodyCopyReduction": 0.8607594936708861
+    },
+    {
+      "route": "/orb",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 26,
+      "bodyCopyWords": 9,
+      "beforeWords": 27,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.03703703703703709,
+      "bodyCopyReduction": 0.6086956521739131
+    },
+    {
+      "route": "/orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.5652173913043479
+    },
+    {
+      "route": "/revenue",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 173,
+      "beforeBodyCopyWords": 68,
+      "wordReduction": 0.815028901734104,
+      "bodyCopyReduction": 0.8382352941176471
+    },
+    {
+      "route": "/sg",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 146,
+      "beforeBodyCopyWords": 105,
+      "wordReduction": 0.7945205479452055,
+      "bodyCopyReduction": 0.9047619047619048
+    },
+    {
+      "route": "/surveyor",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 193,
+      "beforeBodyCopyWords": 33,
+      "wordReduction": 0.8341968911917098,
+      "bodyCopyReduction": 0.6666666666666667
+    },
+    {
+      "route": "/technologie",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 48,
+      "bodyCopyWords": 20,
+      "beforeWords": 105,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.5428571428571429,
+      "bodyCopyReduction": 0.5833333333333333
+    },
+    {
+      "route": "/uk",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/vision",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 40,
+      "beforeWords": 258,
+      "beforeBodyCopyWords": 150,
+      "wordReduction": 0.6744186046511628,
+      "bodyCopyReduction": 0.7333333333333334
+    },
+    {
+      "route": "/whatsapp",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 71,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.5633802816901409,
+      "bodyCopyReduction": 0.5217391304347826
+    },
+    {
+      "route": "/yace-aura",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 34,
+      "wordReduction": 0.8152866242038217,
+      "bodyCopyReduction": 0.6764705882352942
+    },
+    {
+      "route": "/yace19",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 9,
+      "beforeWords": 171,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.8362573099415205,
+      "bodyCopyReduction": 0.6538461538461539
+    },
+    {
+      "route": "/za",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 40,
+      "beforeWords": 258,
+      "beforeBodyCopyWords": 150,
+      "wordReduction": 0.6744186046511628,
+      "bodyCopyReduction": 0.7333333333333334
+    },
+    {
+      "route": "/ae",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6781609195402298,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/amlazr",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 35,
+      "bodyCopyWords": 16,
+      "beforeWords": 399,
+      "beforeBodyCopyWords": 140,
+      "wordReduction": 0.9122807017543859,
+      "bodyCopyReduction": 0.8857142857142857
+    },
+    {
+      "route": "/azirem",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 179,
+      "beforeBodyCopyWords": 25,
+      "wordReduction": 0.8268156424581006,
+      "bodyCopyReduction": 0.56
+    },
+    {
+      "route": "/br",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ca",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ch",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/cn",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/credentials",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 144,
+      "beforeBodyCopyWords": 74,
+      "wordReduction": 0.7916666666666666,
+      "bodyCopyReduction": 0.8648648648648649
+    },
+    {
+      "route": "/de",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 210,
+      "bodyCopyWords": 85,
+      "beforeWords": 334,
+      "beforeBodyCopyWords": 211,
+      "wordReduction": 0.37125748502994016,
+      "bodyCopyReduction": 0.5971563981042654
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 10,
+      "beforeWords": 106,
+      "beforeBodyCopyWords": 74,
+      "wordReduction": 0.7264150943396226,
+      "bodyCopyReduction": 0.8648648648648649
+    },
+    {
+      "route": "/factory",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 62,
+      "beforeBodyCopyWords": 22,
+      "wordReduction": 0.5161290322580645,
+      "bodyCopyReduction": 0.5454545454545454
+    },
+    {
+      "route": "/fleet-command",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 169,
+      "bodyCopyWords": 57,
+      "beforeWords": 2938,
+      "beforeBodyCopyWords": 301,
+      "wordReduction": 0.9424778761061947,
+      "bodyCopyReduction": 0.8106312292358804
+    },
+    {
+      "route": "/jp",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/media",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 39,
+      "bodyCopyWords": 15,
+      "beforeWords": 111,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.6486486486486487,
+      "bodyCopyReduction": 0.42307692307692313
+    },
+    {
+      "route": "/memory",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 52,
+      "bodyCopyWords": 12,
+      "beforeWords": 116,
+      "beforeBodyCopyWords": 61,
+      "wordReduction": 0.5517241379310345,
+      "bodyCopyReduction": 0.8032786885245902
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 115,
+      "beforeBodyCopyWords": 79,
+      "wordReduction": 0.7304347826086957,
+      "bodyCopyReduction": 0.8607594936708861
+    },
+    {
+      "route": "/orb",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 26,
+      "bodyCopyWords": 9,
+      "beforeWords": 27,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.03703703703703709,
+      "bodyCopyReduction": 0.6086956521739131
+    },
+    {
+      "route": "/orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.5652173913043479
+    },
+    {
+      "route": "/revenue",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 173,
+      "beforeBodyCopyWords": 68,
+      "wordReduction": 0.815028901734104,
+      "bodyCopyReduction": 0.8382352941176471
+    },
+    {
+      "route": "/sg",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 146,
+      "beforeBodyCopyWords": 105,
+      "wordReduction": 0.7945205479452055,
+      "bodyCopyReduction": 0.9047619047619048
+    },
+    {
+      "route": "/surveyor",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 193,
+      "beforeBodyCopyWords": 33,
+      "wordReduction": 0.8341968911917098,
+      "bodyCopyReduction": 0.6666666666666667
+    },
+    {
+      "route": "/technologie",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 48,
+      "bodyCopyWords": 20,
+      "beforeWords": 105,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.5428571428571429,
+      "bodyCopyReduction": 0.5833333333333333
+    },
+    {
+      "route": "/uk",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/vision",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 40,
+      "beforeWords": 258,
+      "beforeBodyCopyWords": 150,
+      "wordReduction": 0.6744186046511628,
+      "bodyCopyReduction": 0.7333333333333334
+    },
+    {
+      "route": "/whatsapp",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 71,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.5633802816901409,
+      "bodyCopyReduction": 0.5217391304347826
+    },
+    {
+      "route": "/yace-aura",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 34,
+      "wordReduction": 0.8152866242038217,
+      "bodyCopyReduction": 0.6764705882352942
+    },
+    {
+      "route": "/yace19",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 9,
+      "beforeWords": 171,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.8362573099415205,
+      "bodyCopyReduction": 0.6538461538461539
+    },
+    {
+      "route": "/za",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 79,
+      "bodyCopyWords": 35,
+      "beforeWords": 274,
+      "beforeBodyCopyWords": 166,
+      "wordReduction": 0.7116788321167884,
+      "bodyCopyReduction": 0.7891566265060241
+    },
+    {
+      "route": "/ae",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6781609195402298,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/amlazr",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 35,
+      "bodyCopyWords": 16,
+      "beforeWords": 399,
+      "beforeBodyCopyWords": 140,
+      "wordReduction": 0.9122807017543859,
+      "bodyCopyReduction": 0.8857142857142857
+    },
+    {
+      "route": "/azirem",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 179,
+      "beforeBodyCopyWords": 25,
+      "wordReduction": 0.8212290502793296,
+      "bodyCopyReduction": 0.56
+    },
+    {
+      "route": "/br",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ca",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ch",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/cn",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/credentials",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 146,
+      "beforeBodyCopyWords": 76,
+      "wordReduction": 0.7945205479452055,
+      "bodyCopyReduction": 0.868421052631579
+    },
+    {
+      "route": "/de",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 216,
+      "bodyCopyWords": 85,
+      "beforeWords": 361,
+      "beforeBodyCopyWords": 228,
+      "wordReduction": 0.4016620498614959,
+      "bodyCopyReduction": 0.6271929824561404
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 10,
+      "beforeWords": 124,
+      "beforeBodyCopyWords": 88,
+      "wordReduction": 0.7661290322580645,
+      "bodyCopyReduction": 0.8863636363636364
+    },
+    {
+      "route": "/factory",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 62,
+      "beforeBodyCopyWords": 22,
+      "wordReduction": 0.5161290322580645,
+      "bodyCopyReduction": 0.5454545454545454
+    },
+    {
+      "route": "/fleet-command",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 172,
+      "bodyCopyWords": 56,
+      "beforeWords": 2938,
+      "beforeBodyCopyWords": 301,
+      "wordReduction": 0.9414567733151804,
+      "bodyCopyReduction": 0.813953488372093
+    },
+    {
+      "route": "/jp",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/media",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 38,
+      "bodyCopyWords": 14,
+      "beforeWords": 111,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.6576576576576576,
+      "bodyCopyReduction": 0.46153846153846156
+    },
+    {
+      "route": "/memory",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 51,
+      "bodyCopyWords": 11,
+      "beforeWords": 116,
+      "beforeBodyCopyWords": 61,
+      "wordReduction": 0.5603448275862069,
+      "bodyCopyReduction": 0.819672131147541
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 127,
+      "beforeBodyCopyWords": 91,
+      "wordReduction": 0.7559055118110236,
+      "bodyCopyReduction": 0.8791208791208791
+    },
+    {
+      "route": "/orb",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 26,
+      "bodyCopyWords": 9,
+      "beforeWords": 27,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.03703703703703709,
+      "bodyCopyReduction": 0.6086956521739131
+    },
+    {
+      "route": "/orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.5652173913043479
+    },
+    {
+      "route": "/revenue",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 173,
+      "beforeBodyCopyWords": 68,
+      "wordReduction": 0.815028901734104,
+      "bodyCopyReduction": 0.8382352941176471
+    },
+    {
+      "route": "/sg",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 184,
+      "beforeBodyCopyWords": 137,
+      "wordReduction": 0.8369565217391304,
+      "bodyCopyReduction": 0.927007299270073
+    },
+    {
+      "route": "/surveyor",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 33,
+      "bodyCopyWords": 11,
+      "beforeWords": 193,
+      "beforeBodyCopyWords": 33,
+      "wordReduction": 0.8290155440414508,
+      "bodyCopyReduction": 0.6666666666666667
+    },
+    {
+      "route": "/technologie",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 46,
+      "bodyCopyWords": 18,
+      "beforeWords": 110,
+      "beforeBodyCopyWords": 50,
+      "wordReduction": 0.5818181818181818,
+      "bodyCopyReduction": 0.64
+    },
+    {
+      "route": "/uk",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/vision",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 79,
+      "bodyCopyWords": 35,
+      "beforeWords": 274,
+      "beforeBodyCopyWords": 166,
+      "wordReduction": 0.7116788321167884,
+      "bodyCopyReduction": 0.7891566265060241
+    },
+    {
+      "route": "/whatsapp",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 71,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.5633802816901409,
+      "bodyCopyReduction": 0.5217391304347826
+    },
+    {
+      "route": "/yace-aura",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 12,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 34,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.6470588235294117
+    },
+    {
+      "route": "/yace19",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 28,
+      "bodyCopyWords": 9,
+      "beforeWords": 171,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.8362573099415205,
+      "bodyCopyReduction": 0.6538461538461539
+    },
+    {
+      "route": "/za",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 30,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6551724137931034,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 79,
+      "bodyCopyWords": 35,
+      "beforeWords": 274,
+      "beforeBodyCopyWords": 166,
+      "wordReduction": 0.7116788321167884,
+      "bodyCopyReduction": 0.7891566265060241
+    },
+    {
+      "route": "/ae",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6781609195402298,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/amlazr",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 35,
+      "bodyCopyWords": 16,
+      "beforeWords": 399,
+      "beforeBodyCopyWords": 140,
+      "wordReduction": 0.9122807017543859,
+      "bodyCopyReduction": 0.8857142857142857
+    },
+    {
+      "route": "/azirem",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 179,
+      "beforeBodyCopyWords": 25,
+      "wordReduction": 0.8212290502793296,
+      "bodyCopyReduction": 0.56
+    },
+    {
+      "route": "/br",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ca",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ch",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/cn",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/credentials",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 144,
+      "beforeBodyCopyWords": 74,
+      "wordReduction": 0.7916666666666666,
+      "bodyCopyReduction": 0.8648648648648649
+    },
+    {
+      "route": "/de",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 216,
+      "bodyCopyWords": 85,
+      "beforeWords": 361,
+      "beforeBodyCopyWords": 228,
+      "wordReduction": 0.4016620498614959,
+      "bodyCopyReduction": 0.6271929824561404
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 10,
+      "beforeWords": 124,
+      "beforeBodyCopyWords": 88,
+      "wordReduction": 0.7661290322580645,
+      "bodyCopyReduction": 0.8863636363636364
+    },
+    {
+      "route": "/factory",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 62,
+      "beforeBodyCopyWords": 22,
+      "wordReduction": 0.5161290322580645,
+      "bodyCopyReduction": 0.5454545454545454
+    },
+    {
+      "route": "/fleet-command",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 172,
+      "bodyCopyWords": 56,
+      "beforeWords": 2938,
+      "beforeBodyCopyWords": 301,
+      "wordReduction": 0.9414567733151804,
+      "bodyCopyReduction": 0.813953488372093
+    },
+    {
+      "route": "/jp",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/media",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 38,
+      "bodyCopyWords": 14,
+      "beforeWords": 111,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.6576576576576576,
+      "bodyCopyReduction": 0.46153846153846156
+    },
+    {
+      "route": "/memory",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 51,
+      "bodyCopyWords": 11,
+      "beforeWords": 116,
+      "beforeBodyCopyWords": 61,
+      "wordReduction": 0.5603448275862069,
+      "bodyCopyReduction": 0.819672131147541
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 127,
+      "beforeBodyCopyWords": 91,
+      "wordReduction": 0.7559055118110236,
+      "bodyCopyReduction": 0.8791208791208791
+    },
+    {
+      "route": "/orb",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 26,
+      "bodyCopyWords": 9,
+      "beforeWords": 27,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.03703703703703709,
+      "bodyCopyReduction": 0.6086956521739131
+    },
+    {
+      "route": "/orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.5652173913043479
+    },
+    {
+      "route": "/revenue",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 32,
+      "bodyCopyWords": 11,
+      "beforeWords": 173,
+      "beforeBodyCopyWords": 68,
+      "wordReduction": 0.815028901734104,
+      "bodyCopyReduction": 0.8382352941176471
+    },
+    {
+      "route": "/sg",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 11,
+      "beforeWords": 84,
+      "beforeBodyCopyWords": 48,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7708333333333334
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 10,
+      "beforeWords": 184,
+      "beforeBodyCopyWords": 137,
+      "wordReduction": 0.8369565217391304,
+      "bodyCopyReduction": 0.927007299270073
+    },
+    {
+      "route": "/surveyor",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 33,
+      "bodyCopyWords": 11,
+      "beforeWords": 193,
+      "beforeBodyCopyWords": 33,
+      "wordReduction": 0.8290155440414508,
+      "bodyCopyReduction": 0.6666666666666667
+    },
+    {
+      "route": "/technologie",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 46,
+      "bodyCopyWords": 18,
+      "beforeWords": 110,
+      "beforeBodyCopyWords": 50,
+      "wordReduction": 0.5818181818181818,
+      "bodyCopyReduction": 0.64
+    },
+    {
+      "route": "/uk",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 29,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6666666666666667,
+      "bodyCopyReduction": 0.7755102040816326
+    },
+    {
+      "route": "/vision",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 79,
+      "bodyCopyWords": 35,
+      "beforeWords": 274,
+      "beforeBodyCopyWords": 166,
+      "wordReduction": 0.7116788321167884,
+      "bodyCopyReduction": 0.7891566265060241
+    },
+    {
+      "route": "/whatsapp",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 31,
+      "bodyCopyWords": 11,
+      "beforeWords": 71,
+      "beforeBodyCopyWords": 23,
+      "wordReduction": 0.5633802816901409,
+      "bodyCopyReduction": 0.5217391304347826
+    },
+    {
+      "route": "/yace-aura",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 12,
+      "beforeWords": 157,
+      "beforeBodyCopyWords": 34,
+      "wordReduction": 0.8089171974522293,
+      "bodyCopyReduction": 0.6470588235294117
+    },
+    {
+      "route": "/yace19",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 28,
+      "bodyCopyWords": 9,
+      "beforeWords": 171,
+      "beforeBodyCopyWords": 26,
+      "wordReduction": 0.8362573099415205,
+      "bodyCopyReduction": 0.6538461538461539
+    },
+    {
+      "route": "/za",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 30,
+      "bodyCopyWords": 11,
+      "beforeWords": 87,
+      "beforeBodyCopyWords": 49,
+      "wordReduction": 0.6551724137931034,
+      "bodyCopyReduction": 0.7755102040816326
+    }
+  ]
+}

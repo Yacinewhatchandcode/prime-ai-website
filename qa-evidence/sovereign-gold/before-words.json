@@ -1,0 +1,1246 @@
+{
+  "phase": "before",
+  "definition": "Visible main.innerText words using Intl.Segmenter; body-copy count is visible main paragraph text. Required disclosures included, live backend data may vary.",
+  "results": [
+    {
+      "route": "/",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 258,
+      "bodyCopyWords": 150
+    },
+    {
+      "route": "/ae",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/amlazr",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 399,
+      "bodyCopyWords": 140
+    },
+    {
+      "route": "/azirem",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 179,
+      "bodyCopyWords": 25
+    },
+    {
+      "route": "/br",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ca",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ch",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/cn",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/credentials",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 144,
+      "bodyCopyWords": 74
+    },
+    {
+      "route": "/de",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 334,
+      "bodyCopyWords": 211
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 106,
+      "bodyCopyWords": 74
+    },
+    {
+      "route": "/factory",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 62,
+      "bodyCopyWords": 22
+    },
+    {
+      "route": "/fleet-command",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 2938,
+      "bodyCopyWords": 301
+    },
+    {
+      "route": "/jp",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/media",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 111,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/memory",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 116,
+      "bodyCopyWords": 61
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 115,
+      "bodyCopyWords": 79
+    },
+    {
+      "route": "/orb",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 27,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 157,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/revenue",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 173,
+      "bodyCopyWords": 68
+    },
+    {
+      "route": "/sg",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 146,
+      "bodyCopyWords": 105
+    },
+    {
+      "route": "/surveyor",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 193,
+      "bodyCopyWords": 33
+    },
+    {
+      "route": "/technologie",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 105,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/uk",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/vision",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 258,
+      "bodyCopyWords": 150
+    },
+    {
+      "route": "/whatsapp",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 71,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/yace-aura",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 157,
+      "bodyCopyWords": 34
+    },
+    {
+      "route": "/yace19",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 171,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/za",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 258,
+      "bodyCopyWords": 150
+    },
+    {
+      "route": "/ae",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/amlazr",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 399,
+      "bodyCopyWords": 140
+    },
+    {
+      "route": "/azirem",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 179,
+      "bodyCopyWords": 25
+    },
+    {
+      "route": "/br",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ca",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ch",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/cn",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/credentials",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 144,
+      "bodyCopyWords": 74
+    },
+    {
+      "route": "/de",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 334,
+      "bodyCopyWords": 211
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 106,
+      "bodyCopyWords": 74
+    },
+    {
+      "route": "/factory",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 62,
+      "bodyCopyWords": 22
+    },
+    {
+      "route": "/fleet-command",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 2938,
+      "bodyCopyWords": 301
+    },
+    {
+      "route": "/jp",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/media",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 111,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/memory",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 116,
+      "bodyCopyWords": 61
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 115,
+      "bodyCopyWords": 79
+    },
+    {
+      "route": "/orb",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 27,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/orchestration",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 157,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/revenue",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 173,
+      "bodyCopyWords": 68
+    },
+    {
+      "route": "/sg",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 146,
+      "bodyCopyWords": 105
+    },
+    {
+      "route": "/surveyor",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 193,
+      "bodyCopyWords": 33
+    },
+    {
+      "route": "/technologie",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 105,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/uk",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/vision",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 258,
+      "bodyCopyWords": 150
+    },
+    {
+      "route": "/whatsapp",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 71,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/yace-aura",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 157,
+      "bodyCopyWords": 34
+    },
+    {
+      "route": "/yace19",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 171,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/za",
+      "language": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 274,
+      "bodyCopyWords": 166
+    },
+    {
+      "route": "/ae",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/amlazr",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 399,
+      "bodyCopyWords": 140
+    },
+    {
+      "route": "/azirem",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 179,
+      "bodyCopyWords": 25
+    },
+    {
+      "route": "/br",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ca",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ch",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/cn",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/credentials",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 146,
+      "bodyCopyWords": 76
+    },
+    {
+      "route": "/de",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 361,
+      "bodyCopyWords": 228
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 124,
+      "bodyCopyWords": 88
+    },
+    {
+      "route": "/factory",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 62,
+      "bodyCopyWords": 22
+    },
+    {
+      "route": "/fleet-command",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 2938,
+      "bodyCopyWords": 301
+    },
+    {
+      "route": "/jp",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/media",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 111,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/memory",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 116,
+      "bodyCopyWords": 61
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 127,
+      "bodyCopyWords": 91
+    },
+    {
+      "route": "/orb",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 27,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 157,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/revenue",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 173,
+      "bodyCopyWords": 68
+    },
+    {
+      "route": "/sg",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 184,
+      "bodyCopyWords": 137
+    },
+    {
+      "route": "/surveyor",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 193,
+      "bodyCopyWords": 33
+    },
+    {
+      "route": "/technologie",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 110,
+      "bodyCopyWords": 50
+    },
+    {
+      "route": "/uk",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/vision",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 274,
+      "bodyCopyWords": 166
+    },
+    {
+      "route": "/whatsapp",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 71,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/yace-aura",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 157,
+      "bodyCopyWords": 34
+    },
+    {
+      "route": "/yace19",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 171,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/za",
+      "language": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 274,
+      "bodyCopyWords": 166
+    },
+    {
+      "route": "/ae",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/amlazr",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 399,
+      "bodyCopyWords": 140
+    },
+    {
+      "route": "/azirem",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 179,
+      "bodyCopyWords": 25
+    },
+    {
+      "route": "/br",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ca",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ch",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/cn",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/credentials",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 144,
+      "bodyCopyWords": 74
+    },
+    {
+      "route": "/de",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/ecosysteme",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 361,
+      "bodyCopyWords": 228
+    },
+    {
+      "route": "/enterprise-ai-orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 124,
+      "bodyCopyWords": 88
+    },
+    {
+      "route": "/factory",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 62,
+      "bodyCopyWords": 22
+    },
+    {
+      "route": "/fleet-command",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 2938,
+      "bodyCopyWords": 301
+    },
+    {
+      "route": "/jp",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/media",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 111,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/memory",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 116,
+      "bodyCopyWords": 61
+    },
+    {
+      "route": "/multi-agent-systems",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 127,
+      "bodyCopyWords": 91
+    },
+    {
+      "route": "/orb",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 27,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/orchestration",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 157,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/revenue",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 173,
+      "bodyCopyWords": 68
+    },
+    {
+      "route": "/sg",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 84,
+      "bodyCopyWords": 48
+    },
+    {
+      "route": "/sovereign-ai",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 184,
+      "bodyCopyWords": 137
+    },
+    {
+      "route": "/surveyor",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 193,
+      "bodyCopyWords": 33
+    },
+    {
+      "route": "/technologie",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 110,
+      "bodyCopyWords": 50
+    },
+    {
+      "route": "/uk",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    },
+    {
+      "route": "/vision",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 274,
+      "bodyCopyWords": 166
+    },
+    {
+      "route": "/whatsapp",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 71,
+      "bodyCopyWords": 23
+    },
+    {
+      "route": "/yace-aura",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 157,
+      "bodyCopyWords": 34
+    },
+    {
+      "route": "/yace19",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 171,
+      "bodyCopyWords": 26
+    },
+    {
+      "route": "/za",
+      "language": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "words": 87,
+      "bodyCopyWords": 49
+    }
+  ]
+}

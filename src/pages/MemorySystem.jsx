@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Database, Search, Shield, RefreshCw, Trash2, Cpu, Check, AlertTriangle, Layers } from 'lucide-react';
 
-import { API_BASE } from '../utils/api';
+import { requestJSON } from '../utils/api';
 
 export default function MemorySystem() {
   const [stats, setStats] = useState({
@@ -17,39 +17,29 @@ export default function MemorySystem() {
   const [logs, setLogs] = useState([]);
   const [optimizing, setOptimizing] = useState(false);
   const [optDone, setOptDone] = useState(false);
+  const [backendError, setBackendError] = useState('');
+  const [hasTelemetry, setHasTelemetry] = useState(false);
 
   const fetchDatabaseStats = async () => {
     try {
-      // 1. Fetch Prospects
-      const resP = await fetch(`${API_BASE}/api/prospects`);
-      const prospects = resP.ok ? await resP.ok && resP.json() : [];
-      
-      // 2. Fetch Deals
-      const resD = await fetch(`${API_BASE}/api/deals`);
-      const deals = resD.ok ? await resD.json() : [];
-
-      // 3. Fetch Keywords
-      const resK = await fetch(`${API_BASE}/api/keywords`);
-      const keywords = resK.ok ? await resK.json() : [];
-
-      // 4. Fetch Objections
-      const resO = await fetch(`${API_BASE}/api/objections`);
-      const objections = resO.ok ? await resO.json() : [];
-
-      // 5. Fetch Logs
-      const resL = await fetch(`${API_BASE}/api/logs`);
-      const systemLogs = resL.ok ? await resL.json() : [];
-
+      const [prospects, deals, keywords, objections, systemLogs] = await Promise.all(
+        ['/api/prospects', '/api/deals', '/api/keywords', '/api/objections', '/api/logs'].map(endpoint => requestJSON(endpoint))
+      );
+      if (![prospects, deals, keywords, objections, systemLogs].every(Array.isArray)) {
+        throw new Error('Memory telemetry has an invalid response shape.');
+      }
       setStats({
-        prospects: Array.isArray(prospects) ? prospects.length : 2,
-        deals: Array.isArray(deals) ? deals.length : 3,
-        keywords: Array.isArray(keywords) ? keywords.length : 4,
-        objections: Array.isArray(objections) ? objections.length : 2,
-        logs: Array.isArray(systemLogs) ? systemLogs.length : 15
+        prospects: prospects.length,
+        deals: deals.length,
+        keywords: keywords.length,
+        objections: objections.length,
+        logs: systemLogs.length
       });
       setLogs(systemLogs);
+      setHasTelemetry(true);
+      setBackendError('');
     } catch (e) {
-      console.warn("Could not query database endpoints, utilizing default metrics");
+      setBackendError(`Memory backend unavailable; metrics are not live. ${e.message}`);
     }
   };
 
@@ -71,8 +61,8 @@ export default function MemorySystem() {
     // Filter through logs and search results
     setTimeout(() => {
       const results = logs.filter(l => 
-        l.text.toLowerCase().includes(query.toLowerCase()) || 
-        l.agent.toLowerCase().includes(query.toLowerCase())
+        String(l.text || '').toLowerCase().includes(query.toLowerCase()) ||
+        String(l.agent || '').toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results.slice(0, 10));
       setIsSearching(false);
@@ -84,18 +74,19 @@ export default function MemorySystem() {
     setOptDone(false);
 
     try {
-      // Log index action in the Swarm logs
-      await fetch(`${API_BASE}/api/log`, {
+      await requestJSON('/api/log', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           agent: "Memory Reconciler",
-          text: "Executed SQLite VACUUM and rebuilt FTS5 search indexing structures.",
-          type: "success"
+          text: "Requested database maintenance. Execution has not been verified.",
+          type: "info"
         })
       });
     } catch (e) {
-      console.warn(e);
+      setBackendError(`Maintenance request failed. ${e.message}`);
+      setOptimizing(false);
+      return;
     }
 
     setTimeout(() => {
@@ -109,6 +100,7 @@ export default function MemorySystem() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', color: '#fcfcfc', position: 'relative' }}>
       <div style={{ padding: '48px', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+        {backendError && <p role="status" className="backend-notice">{backendError}</p>}
         
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px' }}>
@@ -122,7 +114,7 @@ export default function MemorySystem() {
           </div>
           <button 
             onClick={handleOptimize}
-            disabled={optimizing}
+            disabled={optimizing || !hasTelemetry || !!backendError}
             style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid #d4af37', color: '#d4af37', padding: '10px 20px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"JetBrains Mono", monospace' }}
           >
             {optimizing ? <RefreshCw size={16} className="spin" style={{ animation: 'spin 1s linear infinite' }} /> : <Cpu size={16} />}
@@ -141,7 +133,7 @@ export default function MemorySystem() {
           ].map((item, idx) => (
             <div key={idx} style={{ background: 'rgba(15,15,18,0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <span style={{ color: '#6b6b7b', fontSize: '0.65rem', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>{item.label}</span>
-              <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: item.color }}>{item.val}</span>
+              <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: item.color }}>{hasTelemetry ? item.val : '—'}</span>
             </div>
           ))}
         </div>
@@ -161,6 +153,7 @@ export default function MemorySystem() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '10px 16px', border: '1px solid rgba(255,255,255,0.08)' }}>
               <Search size={18} color="#6b6b7b" />
               <input 
+                aria-label="Search memory logs"
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
@@ -212,7 +205,7 @@ export default function MemorySystem() {
                   <div style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>SQLite Auto-Vacuum</div>
                   <div style={{ fontSize: '0.65rem', color: '#6b6b7b', marginTop: '2px' }}>Libère les pages inutilisées du disque</div>
                 </div>
-                <button onClick={handleOptimize} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0', padding: '6px 12px', borderRadius: '6px', fontSize: '0.7rem', cursor: 'pointer' }}>
+                <button disabled={optimizing || !hasTelemetry || !!backendError} onClick={handleOptimize} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0', padding: '6px 12px', borderRadius: '6px', fontSize: '0.7rem', cursor: 'pointer' }}>
                   Lancer
                 </button>
               </div>
@@ -222,14 +215,14 @@ export default function MemorySystem() {
                   <div style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>Reconstruire FTS5 Index</div>
                   <div style={{ fontSize: '0.65rem', color: '#6b6b7b', marginTop: '2px' }}>Corrige l'indexation de texte intégral</div>
                 </div>
-                <button onClick={handleOptimize} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0', padding: '6px 12px', borderRadius: '6px', fontSize: '0.7rem', cursor: 'pointer' }}>
+                <button disabled={optimizing || !hasTelemetry || !!backendError} onClick={handleOptimize} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0', padding: '6px 12px', borderRadius: '6px', fontSize: '0.7rem', cursor: 'pointer' }}>
                   Reconstruire
                 </button>
               </div>
 
               {optDone && (
                 <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid #10b981', color: '#34d399', padding: '12px', borderRadius: '8px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Check size={16} /> Base de données SQLite optimisée avec succès !
+                  <Check size={16} /> Demande enregistrée. Exécution de maintenance non vérifiée.
                 </div>
               )}
             </div>

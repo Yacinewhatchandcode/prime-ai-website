@@ -3,33 +3,32 @@ import { useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { BRAND, FONTS, FONT_CSS } from '../brand';
 
 /**
- * FleetDashboard — Simulated dashboard with live metrics + telemetry
+ * FleetDashboard — Illustrative dashboard, never live telemetry
  * 
  * Props:
  *   title       — Dashboard title
  *   titleAccent — Accent portion
  *   metrics     — array of { label, value, status, color }
  *   logLines    — array of telemetry log strings
- *   theme       — 'light' | 'dark'
  *   primaryColor — accent color
  */
 export default function FleetDashboard({
   title = 'Fleet',
   titleAccent = 'Command',
+  language = 'en',
   metrics = [
-    { label: 'AGENTS ONLINE', value: '14', status: 'ACTIVE', color: BRAND.green },
-    { label: 'MESH STATUS', value: 'SYNCED', status: 'OK', color: BRAND.green },
-    { label: 'MCP LAYER', value: 'ACTIVE', status: 'OPERATIONAL', color: BRAND.blue },
-    { label: 'LATENCY', value: '23ms', status: 'OPTIMAL', color: BRAND.amber },
+    { label: 'PLANNER', value: 'ADVISORY', status: 'EXAMPLE', color: BRAND.green },
+    { label: 'ANALYST', value: 'ADVISORY', status: 'EXAMPLE', color: BRAND.green },
+    { label: 'REVIEWER', value: 'ADVISORY', status: 'EXAMPLE', color: BRAND.blue },
+    { label: 'MEMORY', value: 'LOCAL', status: 'EXAMPLE', color: BRAND.amber },
   ],
   logLines = [
-    'A2A Protocol: Initializing Agent bridge...',
-    'MCP Server: Verified 14/14 agents online.',
-    'Edge Node: Sovereign Mesh connected.',
-    'Fleet Commander: Heartbeat established.',
-    'Sovereign Auditor: 0 discrepancies found.',
+    'Goal: User submits an advisory request.',
+    'Planner: Draft a local advisory plan.',
+    'Analyst: Analyze the supplied context.',
+    'Reviewer: Review limitations and risks.',
+    'Memory: Persist results; no tools executed.',
   ],
-  theme = 'dark',
   primaryColor = BRAND.purple,
 }) {
   const frame = useCurrentFrame();
@@ -105,7 +104,7 @@ export default function FleetDashboard({
                 fontFamily: FONTS.mono, fontSize: 11,
                 color: BRAND.consoleSubtext, letterSpacing: 2,
               }}>
-                SOVEREIGN FLEET DASHBOARD
+                {language === 'fr' ? 'TABLEAU ILLUSTRATIF' : 'ILLUSTRATIVE DASHBOARD'}
               </span>
             </div>
           </div>
@@ -119,7 +118,7 @@ export default function FleetDashboard({
           }}>
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: BRAND.green, boxShadow: `0 0 8px ${BRAND.green}` }} />
             <span style={{ fontFamily: FONTS.mono, fontSize: 12, fontWeight: 700, color: BRAND.green, letterSpacing: 1 }}>
-              ALL SYSTEMS ONLINE
+              {language === 'fr' ? 'DÉMO — PAS EN DIRECT' : 'DEMO — NOT LIVE'}
             </span>
           </div>
         </div>
@@ -176,7 +175,7 @@ export default function FleetDashboard({
             <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e' }} />
           </div>
           <span style={{ fontFamily: FONTS.mono, fontSize: 12, color: primaryColor, fontWeight: 700, letterSpacing: 1 }}>
-            MCP TELEMETRY STREAM
+            {language === 'fr' ? 'ÉTAPES ILLUSTRATIVES' : 'ILLUSTRATIVE STEPS'}
           </span>
         </div>
 
@@ -193,7 +192,7 @@ export default function FleetDashboard({
               color: BRAND.consoleText, lineHeight: 2,
               display: 'flex', gap: 12,
             }}>
-              <span style={{ color: BRAND.gold, minWidth: 80 }}>[{String(14 + i).padStart(2, '0')}:{String(45 + i * 3).padStart(2, '0')}:{String(10 + i * 7).padStart(2, '0')}]</span>
+              <span style={{ color: BRAND.gold, minWidth: 80 }}>#{i + 1}</span>
               <span style={{ color: primaryColor, fontWeight: 700, minWidth: 180 }}>
                 {line.split(':')[0]}:
               </span>

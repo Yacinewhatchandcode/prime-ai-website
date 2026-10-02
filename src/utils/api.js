@@ -12,6 +12,18 @@ const isDev = import.meta.env.DEV || window.location.hostname === 'localhost';
 export const API_BASE = import.meta.env.VITE_API_BASE
   || (isDev ? (import.meta.env.VITE_API_BASE || 'http://localhost:5000') : '');
 
+export async function requestJSON(path, options = {}) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    ...options,
+    signal: options.signal || AbortSignal.timeout(8000),
+  });
+  if (!response.ok) throw new Error(`Backend ${path}: HTTP ${response.status}`);
+  if (!response.headers.get('content-type')?.includes('application/json')) {
+    throw new Error(`Backend ${path} did not return JSON. Configure VITE_API_BASE for the local backend.`);
+  }
+  return response.json();
+}
+
 /**
  * Safe fetch wrapper — never throws on network errors.
  */

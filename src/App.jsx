@@ -1,4 +1,3 @@
-import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Layout from './components/Layout';
@@ -25,11 +24,13 @@ import EnterpriseAiOrchestration from './pages/EnterpriseAiOrchestration';
 import Yace19Lab from './pages/Yace19Lab';
 import FleetCommand from './pages/FleetCommand';
 import CyberSurveyor from './pages/CyberSurveyor';
+import SovereignExperience from './components/SovereignExperience';
 
 function App() {
   return (
     <LanguageProvider>
       <HashRouter>
+        <SovereignExperience>
         <Routes>
           {/* Light Premium Layout */}
           <Route element={<SovereignLightLayout />}>
@@ -66,12 +67,13 @@ function App() {
           <Route path="/ch" element={<CountryNodeTemplate countryName="Switzerland" subtitle="Souverän. Sicher. Autonom." flag="🇨🇭" nodeColor="#ef4444" nodeHighlight="#f87171" />} />
           <Route path="/ae" element={<CountryNodeTemplate countryName="Dubai (UAE)" subtitle="Sovereign. Secure. Autonomous." flag="🇦🇪" nodeColor="#10b981" nodeHighlight="#f59e0b" />} />
           <Route path="/jp" element={<CountryNodeTemplate countryName="Japan" subtitle="Sovereign. Secure. Autonomous." flag="🇯🇵" nodeColor="#ef4444" nodeHighlight="#9ca3af" />} />
-          <Route path="/cn" element={<CountryNodeTemplate countryName="China" strokeColor="#ef4444" flag="🇨🇳" nodeColor="#ef4444" nodeHighlight="#facc15" />} />
+          <Route path="/cn" element={<CountryNodeTemplate countryName="China" subtitle="Sovereign. Secure. Autonomous." flag="🇨🇳" nodeColor="#ef4444" nodeHighlight="#facc15" />} />
           <Route path="/sg" element={<CountryNodeTemplate countryName="Singapore" subtitle="Sovereign. Secure. Autonomous." flag="🇸🇬" nodeColor="#ef4444" nodeHighlight="#f87171" />} />
           <Route path="/za" element={<CountryNodeTemplate countryName="South Africa" subtitle="Sovereign. Secure. Autonomous." flag="🇿🇦" nodeColor="#10b981" nodeHighlight="#facc15" />} />
           <Route path="/br" element={<CountryNodeTemplate countryName="Brazil" subtitle="Sovereign. Secure. Autonomous." flag="🇧🇷" nodeColor="#10b981" nodeHighlight="#facc15" />} />
           <Route path="/ca" element={<CountryNodeTemplate countryName="Canada" subtitle="Sovereign. Secure. Autonomous." flag="🇨🇦" nodeColor="#ef4444" nodeHighlight="#f87171" />} />
         </Routes>
+        </SovereignExperience>
       </HashRouter>
     </LanguageProvider>
   );

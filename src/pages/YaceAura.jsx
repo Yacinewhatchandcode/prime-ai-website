@@ -1,6 +1,7 @@
 import { API_BASE } from '../utils/api';
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import VisualExplainer from '../components/VisualExplainer';
 import { 
   Cpu, 
   Radio, 
@@ -698,9 +699,9 @@ export default function YaceAura() {
 
       {/* ── VIDEO ── */}
       <div style={{ display: 'flex', justifyContent: 'center', maxWidth: '1200px', width: '100%', marginBottom: '24px', zIndex: 10 }}>
-        <video
+        <VisualExplainer
           src={language === 'fr' ? '/prime_yace_fr.mp4' : '/prime_yace_en.mp4'}
-          autoPlay muted loop playsInline
+          autoPlay loop
           style={{
             width: '100%', borderRadius: '16px',
             border: '1px solid rgba(212, 175, 55, 0.3)',
@@ -1098,6 +1099,7 @@ export default function YaceAura() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={{ fontSize: '0.7rem', color: '#cbd5e1', fontWeight: 700, textTransform: 'uppercase' }}>Sélectionner la Paire :</label>
                   <select
+                    aria-label="Swap currency pair"
                     value={swapPair}
                     onChange={e => { setSwapPair(e.target.value); setQuoteResponse(null); }}
                     style={{
@@ -1122,6 +1124,7 @@ export default function YaceAura() {
                     Montant ({swapPair === "SOL_TO_USDC" ? "SOL" : "USDC"}) :
                   </label>
                   <input
+                    aria-label="Swap amount"
                     type="number"
                     step="0.01"
                     min="0.001"
@@ -1391,6 +1394,7 @@ export default function YaceAura() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <label style={{ fontSize: '0.85rem', color: '#cbd5e1', fontWeight: 600 }}>Entrez l'objectif que vous souhaitez faire résoudre par YACE•AURA :</label>
                 <input 
+                  aria-label="Demo objective"
                   type="text" 
                   value={demoPrompt}
                   onChange={e => setDemoPrompt(e.target.value)}

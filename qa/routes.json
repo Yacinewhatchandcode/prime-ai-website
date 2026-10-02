@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "router": "hash",
+  "source": "src/App.jsx",
+  "routes": [
+    {
+      "path": "/",
+      "component": "Vision",
+      "hash": "#/"
+    },
+    {
+      "path": "/ae",
+      "component": "CountryNodeTemplate",
+      "hash": "#/ae"
+    },
+    {
+      "path": "/amlazr",
+      "component": "AmlazrArena",
+      "hash": "#/amlazr"
+    },
+    {
+      "path": "/azirem",
+      "component": "AziremCoder",
+      "hash": "#/azirem"
+    },
+    {
+      "path": "/br",
+      "component": "CountryNodeTemplate",
+      "hash": "#/br"
+    },
+    {
+      "path": "/ca",
+      "component": "CountryNodeTemplate",
+      "hash": "#/ca"
+    },
+    {
+      "path": "/ch",
+      "component": "CountryNodeTemplate",
+      "hash": "#/ch"
+    },
+    {
+      "path": "/cn",
+      "component": "CountryNodeTemplate",
+      "hash": "#/cn"
+    },
+    {
+      "path": "/credentials",
+      "component": "Credentials",
+      "hash": "#/credentials"
+    },
+    {
+      "path": "/de",
+      "component": "CountryNodeTemplate",
+      "hash": "#/de"
+    },
+    {
+      "path": "/ecosysteme",
+      "component": "Ecosysteme",
+      "hash": "#/ecosysteme"
+    },
+    {
+      "path": "/enterprise-ai-orchestration",
+      "component": "EnterpriseAiOrchestration",
+      "hash": "#/enterprise-ai-orchestration"
+    },
+    {
+      "path": "/factory",
+      "component": "PrimeFactory",
+      "hash": "#/factory"
+    },
+    {
+      "path": "/fleet-command",
+      "component": "FleetCommand",
+      "hash": "#/fleet-command"
+    },
+    {
+      "path": "/jp",
+      "component": "CountryNodeTemplate",
+      "hash": "#/jp"
+    },
+    {
+      "path": "/media",
+      "component": "MediaCommandCenter",
+      "hash": "#/media"
+    },
+    {
+      "path": "/memory",
+      "component": "MemorySystem",
+      "hash": "#/memory"
+    },
+    {
+      "path": "/multi-agent-systems",
+      "component": "MultiAgentSystems",
+      "hash": "#/multi-agent-systems"
+    },
+    {
+      "path": "/orb",
+      "component": "OrbHome",
+      "hash": "#/orb"
+    },
+    {
+      "path": "/orchestration",
+      "component": "AgentOrchestration",
+      "hash": "#/orchestration"
+    },
+    {
+      "path": "/revenue",
+      "component": "RevenueConsole",
+      "hash": "#/revenue"
+    },
+    {
+      "path": "/sg",
+      "component": "CountryNodeTemplate",
+      "hash": "#/sg"
+    },
+    {
+      "path": "/sovereign-ai",
+      "component": "SovereignAi",
+      "hash": "#/sovereign-ai"
+    },
+    {
+      "path": "/surveyor",
+      "component": "CyberSurveyor",
+      "hash": "#/surveyor"
+    },
+    {
+      "path": "/technologie",
+      "component": "Technologie",
+      "hash": "#/technologie"
+    },
+    {
+      "path": "/uk",
+      "component": "CountryNodeTemplate",
+      "hash": "#/uk"
+    },
+    {
+      "path": "/vision",
+      "component": "Vision",
+      "hash": "#/vision"
+    },
+    {
+      "path": "/whatsapp",
+      "component": "WhatsAppAgent",
+      "hash": "#/whatsapp"
+    },
+    {
+      "path": "/yace-aura",
+      "component": "YaceAura",
+      "hash": "#/yace-aura"
+    },
+    {
+      "path": "/yace19",
+      "component": "Yace19Lab",
+      "hash": "#/yace19"
+    },
+    {
+      "path": "/za",
+      "component": "CountryNodeTemplate",
+      "hash": "#/za"
+    }
+  ]
+}

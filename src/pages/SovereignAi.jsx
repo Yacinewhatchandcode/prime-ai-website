@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import VisualExplainer from '../components/VisualExplainer';
 import { ChevronLeft, Sliders, ShieldCheck, Database, Network } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PrimeLogo from '../components/PrimeLogo';
@@ -9,7 +10,7 @@ function SovereignAi() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
       <div className="sub-header">
-        <Link to="/" className="sub-header-btn">
+        <Link to="/" className="sub-header-btn" aria-label="Back to home">
           <ChevronLeft size={20} />
         </Link>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -19,7 +20,7 @@ function SovereignAi() {
           </div>
           <div className="sub-header-subtitle">PRIME MCP SOVEREIGN FLEET</div>
         </div>
-        <button className="sub-header-btn">
+        <button className="sub-header-btn" disabled aria-label="Architecture settings unavailable">
           <Sliders size={20} />
         </button>
       </div>
@@ -41,14 +42,14 @@ function SovereignAi() {
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '24px', padding: '0 24px' }}>
-          <h2 style={{ fontSize: '1.2rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{t('sovereign.title1')} <span style={{ color: '#f59e0b' }}>{t('sovereign.title2')}</span></h2>
+          <h1 style={{ fontSize: '1.2rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{t('sovereign.title1')} <span style={{ color: '#f59e0b' }}>{t('sovereign.title2')}</span></h1>
           <div style={{ fontSize: '0.65rem', color: '#a1a1aa', letterSpacing: '1px', marginTop: '8px' }}>{t('sovereign.tagline')}</div>
         </div>
 
         <div style={{ padding: '0 24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
-          <video
+          <VisualExplainer
             src={language === 'fr' ? '/prime_sovereign_fr.mp4' : '/prime_sovereign_en.mp4'}
-            autoPlay muted loop playsInline
+            autoPlay loop
             style={{
               width: '100%', borderRadius: '16px',
               border: '1px solid rgba(245, 158, 11, 0.3)',

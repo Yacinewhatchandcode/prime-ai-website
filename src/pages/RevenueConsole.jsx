@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck, DollarSign, CreditCard, ArrowUpRight, Upload } from 'lucide-react';
 
-import { API_BASE } from '../utils/api';
+import { API_BASE, requestJSON } from '../utils/api';
 
 export default function RevenueConsole() {
   const [transactions, setTransactions] = useState([]);
@@ -15,11 +15,11 @@ export default function RevenueConsole() {
     reconciliation_ratio: 0.0
   });
   const [credentials, setCredentials] = useState({
-    stripe_configured: true,
+    stripe_configured: false,
     revolut_configured: false,
     revolut_api_token: "Not Set",
-    stripe_api_token: "Not Set (Mock active)",
-    rpc_endpoint: "Helius Mainnet Default"
+    stripe_api_token: "Unverified",
+    rpc_endpoint: "Unverified"
   });
 
   // Manual Trigger Form
@@ -34,32 +34,24 @@ export default function RevenueConsole() {
   
   // Loading status
   const [loading, setLoading] = useState(true);
+  const [backendError, setBackendError] = useState('');
 
   const loadData = async () => {
     try {
-      // 1. Fetch Stats
-      const resStats = await fetch(`${API_BASE}/api/revenue/stats`);
-      if (resStats.ok) {
-        const dataStats = await resStats.json();
-        setStats(dataStats);
+      const [dataStats, dataLedger, dataCreds] = await Promise.all(
+        ['/api/revenue/stats', '/api/revenue', '/api/revenue/credentials'].map(endpoint => requestJSON(endpoint))
+      );
+      if (!dataStats || typeof dataStats.total_volume !== 'number' || !Array.isArray(dataLedger) || !dataCreds || typeof dataCreds.stripe_configured !== 'boolean') {
+        throw new Error('Invalid revenue telemetry response.');
       }
-
-      // 2. Fetch Ledger
-      const resLedger = await fetch(`${API_BASE}/api/revenue`);
-      if (resLedger.ok) {
-        const dataLedger = await resLedger.json();
-        setTransactions(dataLedger);
-      }
-
-      // 3. Fetch Credentials
-      const resCreds = await fetch(`${API_BASE}/api/revenue/credentials`);
-      if (resCreds.ok) {
-        const dataCreds = await resCreds.json();
-        setCredentials(dataCreds);
-      }
-      setLoading(false);
+      setStats(dataStats);
+      setTransactions(dataLedger);
+      setCredentials(dataCreds);
+      setBackendError('');
     } catch (e) {
-      console.error("Revenue telemetry service unavailable", e);
+      setBackendError(`Revenue backend unavailable; balances and provider configuration are unverified. ${e.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -152,6 +144,7 @@ export default function RevenueConsole() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', color: '#fcfcfc', position: 'relative' }}>
       <div style={{ padding: 'clamp(16px, 5vw, 48px)', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+        {backendError && <p role="status" className="backend-notice">{backendError}</p>}
         
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
@@ -289,6 +282,7 @@ export default function RevenueConsole() {
             
             <form onSubmit={handleCsvUpload} style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '4px' }}>
               <input 
+                aria-label="Revolut CSV statement"
                 id="csv-file-input"
                 type="file" 
                 accept=".csv"
@@ -355,6 +349,7 @@ export default function RevenueConsole() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Montant (€)</label>
               <input 
+                aria-label="Transaction amount in euros"
                 type="number" 
                 step="0.01"
                 value={simAmount} 
@@ -366,6 +361,7 @@ export default function RevenueConsole() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Source</label>
               <select 
+                aria-label="Transaction source"
                 value={simType} 
                 onChange={(e) => setSimType(e.target.value)}
                 style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '10px 14px', color: '#fff', fontSize: '0.85rem', outline: 'none' }}
@@ -379,6 +375,7 @@ export default function RevenueConsole() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Description / Attribution</label>
               <input 
+                aria-label="Transaction description"
                 type="text" 
                 value={simDesc} 
                 onChange={(e) => setSimDesc(e.target.value)} 

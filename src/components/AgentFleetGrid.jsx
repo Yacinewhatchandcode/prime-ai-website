@@ -22,7 +22,7 @@ function AgentFleetGrid() {
   return (
     <div className="agent-fleet-container">
       <div className="agent-fleet-header">
-        <h3><TerminalSquare size={16} /> Sovereign Fleet Roster (14/14 Online)</h3>
+        <h3><TerminalSquare size={16} /> Sovereign Fleet Roster (14 illustrative agents)</h3>
       </div>
       <div className="agent-grid">
         {AGENT_FLEET.map(agent => (

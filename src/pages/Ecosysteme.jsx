@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-
+import VisualExplainer from '../components/VisualExplainer';
+import PortableWorkspace from '../components/PortableWorkspace';
 
 export default function Ecosysteme() {
   const { language, t } = useLanguage();
@@ -177,9 +178,9 @@ export default function Ecosysteme() {
         display: 'flex',
         justifyContent: 'center'
       }}>
-        <video
+        <VisualExplainer
           src={language === 'fr' ? '/prime_ecosysteme_fr.mp4' : '/prime_ecosysteme_en.mp4'}
-          autoPlay muted loop playsInline
+          autoPlay loop
           style={{
             width: '100%', maxWidth: '900px', borderRadius: '24px',
             boxShadow: '0 20px 50px rgba(198, 161, 90, 0.12)',
@@ -252,9 +253,9 @@ export default function Ecosysteme() {
               </p>
 
               {videoSrc && (
-                <video
+                <VisualExplainer
                   src={videoSrc}
-                  autoPlay muted loop playsInline
+                  autoPlay loop
                   style={{
                     width: '100%',
                     borderRadius: '12px',
@@ -291,7 +292,7 @@ export default function Ecosysteme() {
       <section style={{
         background: '#FAF8F4',
         borderTop: '1px solid rgba(198, 161, 90, 0.15)',
-        padding: '80px 60px'
+        padding: 'clamp(24px, 5vw, 60px) clamp(16px, 5vw, 60px)'
       }}>
         <div className="detail-split" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '60px', alignItems: 'center' }}>
           <div style={{ flex: '1.2' }}>
@@ -306,46 +307,8 @@ export default function Ecosysteme() {
             </p>
           </div>
 
-          <div style={{ flex: '1', display: 'flex', justifyContent: 'center' }}>
-            <div style={{
-              background: '#FFFFFF',
-              border: '1.5px solid rgba(198, 161, 90, 0.25)',
-              borderRadius: '24px',
-              padding: '30px',
-              width: '100%',
-              maxWidth: '380px',
-              boxShadow: '0 15px 45px rgba(198, 161, 90, 0.04)'
-            }}>
-              <div style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '10px',
-                color: '#C6A15A',
-                fontWeight: 'bold',
-                marginBottom: '16px',
-                borderBottom: '1px solid rgba(198, 161, 90, 0.15)',
-                paddingBottom: '8px'
-              }}>
-                SYNCHRONIZATION_SCHEDULER
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {[
-                  { label: t('eco.nodes.desktop'), status: t('eco.nodes.synced'), color: "#10b981" },
-                  { label: t('eco.nodes.mobile'), status: t('eco.nodes.synced'), color: "#10b981" },
-                  { label: t('eco.nodes.cli'), status: t('eco.nodes.synced'), color: "#10b981" },
-                  { label: t('eco.nodes.cloud'), status: t('eco.nodes.pending'), color: "#f59e0b" }
-                ].map((item, index) => (
-                  <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '13px', fontWeight: '600', color: '#1F1A13' }}>{item.label}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: item.color }} />
-                      <span style={{ fontSize: '11px', color: '#6E6860', fontFamily: "'JetBrains Mono', monospace" }}>{item.status}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
+        <div style={{ marginTop: '32px' }}><PortableWorkspace /></div>
       </section>
     </div>
   );

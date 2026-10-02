@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import useNavigationMenu from './useNavigationMenu';
+import SkipLink from './SkipLink';
 
 export default function SovereignLightLayout() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { mobileMenuOpen, setMobileMenuOpen, toggleRef, menuRef } = useNavigationMenu();
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
 
@@ -20,8 +22,8 @@ export default function SovereignLightLayout() {
       flexDirection: 'column',
       position: 'relative',
     }}>
+      <SkipLink />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
         .nav-link {
           color: #5A5550;
@@ -101,7 +103,7 @@ export default function SovereignLightLayout() {
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'relative',
-        zIndex: 50,
+        zIndex: mobileMenuOpen ? 1600 : 50,
         background: '#FAF8F4',
         borderBottom: '1px solid rgba(198, 161, 90, 0.06)'
       }}>
@@ -137,7 +139,7 @@ export default function SovereignLightLayout() {
           gap: '32px',
           alignItems: 'center',
         }}>
-          <Link to="/vision" className={`nav-link ${path === '/vision' ? 'active' : ''}`}>{t('nav.vision')}</Link>
+          <Link to="/vision" className={`nav-link ${path === '/vision' || path === '/' ? 'active' : ''}`}>{t('nav.vision')}</Link>
           <Link to="/technologie" className={`nav-link ${path === '/technologie' ? 'active' : ''}`}>{t('nav.technologie')}</Link>
           <Link to="/ecosysteme" className={`nav-link ${path === '/ecosysteme' ? 'active' : ''}`}>{t('nav.ecosysteme')}</Link>
         </nav>
@@ -146,7 +148,7 @@ export default function SovereignLightLayout() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className="header-actions-desktop" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {/* Language Switcher */}
-            <div 
+            <button type="button" aria-label="Change language"
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
               style={{
                 display: 'flex',
@@ -165,12 +167,17 @@ export default function SovereignLightLayout() {
             >
               <span>{language.toUpperCase()}</span>
               <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
-            </div>
+            </button>
           </div>
 
           {/* Mobile Toggle Hamburger */}
           <button 
             className="mobile-hamburger-btn"
+            type="button"
+            ref={toggleRef}
+            aria-label="Navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="light-mobile-navigation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -184,7 +191,7 @@ export default function SovereignLightLayout() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div style={{
+        <div ref={menuRef} id="light-mobile-navigation" role="dialog" aria-modal="true" aria-label="Navigation menu" style={{
           position: 'fixed',
           top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(250, 248, 244, 0.98)',
@@ -202,13 +209,12 @@ export default function SovereignLightLayout() {
             <Link to="/technologie" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.technologie')}</Link>
             <Link to="/ecosysteme" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.ecosysteme')}</Link>
           </div>
-
-
+          <button type="button" className="prime-button-outline" onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}>Change language: {language.toUpperCase()}</button>
         </div>
       )}
 
       {/* ── CORE PAGE CONTENT ────────────────────────────── */}
-      <main style={{ flex: '1', width: '100%' }}>
+      <main id="main-content" tabIndex={-1} style={{ flex: '1', width: '100%' }}>
         <Outlet />
       </main>
 

@@ -3,6 +3,7 @@ import { Sequence, useVideoConfig } from 'remotion';
 import { FleetDashboard, SovereignNarrative } from '../templates';
 import content from '../content';
 import { BRAND } from '../brand';
+import IllustrativeLabel from '../templates/IllustrativeLabel';
 
 /**
  * CredentialsComposition — /credentials page video
@@ -30,19 +31,21 @@ export default function CredentialsComposition({ language = 'en' }) {
       </Sequence>
       <Sequence from={halfDuration} durationInFrames={halfDuration}>
         <FleetDashboard
+          language={language}
           title="Credential"
           titleAccent="Vault"
           metrics={[
-            { label: 'BROWSER SESSIONS', value: 'ACTIVE', status: 'HEADED', color: BRAND.green },
-            { label: 'VAULT STATUS', value: 'SEALED', status: 'ENCRYPTED', color: BRAND.amber },
-            { label: 'PIPELINE', value: 'B2B', status: 'RUNNING', color: BRAND.blue },
-            { label: 'AUDIT TRAIL', value: '100%', status: 'SOVEREIGN', color: BRAND.gold },
+            { label: 'BROWSER', value: 'LOCAL', status: 'DEMO', color: BRAND.green },
+            { label: 'VAULT', value: language === 'fr' ? 'ILLUSTRATION' : 'ILLUSTRATIVE', status: 'DEMO', color: BRAND.amber },
+            { label: 'PIPELINE', value: language === 'fr' ? 'NON CONFIGURÉ' : 'NOT CONFIGURED', status: 'DEMO', color: BRAND.blue },
+            { label: 'AUDIT', value: language === 'fr' ? 'REVUE HUMAINE' : 'HUMAN REVIEW', status: 'DEMO', color: BRAND.gold },
           ]}
           logLines={c.bullets.map(b => b.replace('—', ':'))}
           theme="dark"
           primaryColor={BRAND.amber}
         />
       </Sequence>
+      <IllustrativeLabel language={language} />
     </>
   );
 }

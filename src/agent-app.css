@@ -17,8 +17,8 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
+  overflow-y: visible;
   color: #ffffff;
 }
 
@@ -302,9 +302,8 @@ body {
   padding-top: 80px;
   padding-left: 370px;
   padding-bottom: 120px;
-  height: 100vh;
-  width: 100vw;
-  overflow-y: auto;
+  min-height: 100vh;
+  width: 100%;
   transition: all 0.3s ease;
   background: radial-gradient(ellipse at 50% 0%, #151109 0%, #0a0805 60%, #020202 100%);
 }
@@ -464,7 +463,7 @@ body {
 }
 
 /* Show dropdown with pure CSS on hover */
-.agent-nav-dropdown:hover .agent-nav-dropdown-content {
+.agent-nav-dropdown[open] .agent-nav-dropdown-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -612,7 +611,52 @@ body {
 }
 
 .agent-layout-content input::placeholder {
-  color: #4b5563 !important;
+  color: #a1a1aa !important;
+}
+
+.agent-layout-content, .agent-layout-content * { min-width: 0; }
+.agent-layout-content > [style*="100vw"] { width: 100% !important; }
+.agent-nav-dropdown-trigger { border: 0; background: transparent; cursor: pointer; list-style: none; }
+.agent-nav-dropdown-trigger::-webkit-details-marker { display: none; }
+.sovereign-command-bar-wrapper input { min-width: 0; }
+.mobile-hamburger-btn { display: none; }
+.console-preview-notice {
+  margin: 16px 24px 0;
+  padding: 12px 16px;
+  border: 1px solid rgba(198, 161, 90, 0.2);
+  border-radius: 12px;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.local-fleet-panel { padding: 20px; background: rgba(15,15,25,0.6); border: 1px solid rgba(198,161,90,0.2); border-radius: 16px; }
+.agent-layout-content.live-fleet-content { padding-left: 0; padding-bottom: 32px; }
+.local-fleet-panel p { font-size: 0.85rem; line-height: 1.6; margin: 12px 0; }
+.local-fleet-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.local-fleet-readiness { padding: 12px; border-radius: 8px; background: rgba(198,161,90,0.08); font-size: 0.8rem; overflow-wrap: anywhere; }
+.local-fleet-form { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; }
+.local-fleet-form textarea { width: 100%; resize: vertical; }
+.local-fleet-form button { align-self: flex-start; }
+.local-fleet-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.local-mission-list { list-style: none; padding: 0; max-height: 320px; overflow-y: auto; }
+.local-mission-list button { display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.03); color: #FAF8F4; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; width: 100%; text-align: left; padding: 12px; margin-top: 8px; overflow-wrap: anywhere; cursor: pointer; }
+.local-mission-list button[aria-pressed="true"] { border-color: #C6A15A; }
+.local-memory-counts > div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.local-role-output { padding: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin: 12px 0; }
+.local-role-output pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.8rem; line-height: 1.6; margin-top: 12px; color: #e2e8f0; }
+@media (max-width: 1320px) {
+  .agent-global-nav .desktop-only { display: none !important; }
+  .agent-global-nav .mobile-hamburger-btn { display: flex; }
+}
+@media (max-width: 768px) {
+  .agent-layout-content > div > div[style*="padding: 48px"] { padding: 24px 8px !important; }
+  .agent-layout-content [style*="justify-content: space-between"] { flex-wrap: wrap; gap: 12px; }
+  .agent-layout-content h1 { font-size: clamp(1.4rem, 6vw, 2rem) !important; overflow-wrap: anywhere; }
+  .agent-layout-content p { overflow-wrap: anywhere; }
+  .agent-layout-content button { max-width: 100%; white-space: normal; }
+  .sovereign-command-bar-wrapper > div:first-child { flex-wrap: wrap; gap: 8px; }
+  .sovereign-command-bar-wrapper > div:first-child > div { flex-wrap: wrap; gap: 8px; }
+  .sovereign-command-bar-wrapper { font-size: 0.75rem; }
 }
 
 /* Make grids fully responsive and stack on tablet/mobile views */
@@ -622,5 +666,3 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
-
-

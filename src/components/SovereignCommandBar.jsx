@@ -6,6 +6,7 @@ export default function SovereignCommandBar() {
   const [intent, setIntent] = useState('');
   const [model, setModel] = useState('GPT-5.5 Sovereign');
   const [workLocally, setWorkLocally] = useState(true);
+  const [dispatchStatus, setDispatchStatus] = useState('');
 
   const handleExecute = async () => {
     if (!intent) return;
@@ -16,13 +17,12 @@ export default function SovereignCommandBar() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: intent, priority: "normal" })
       });
-      if (res.ok) {
-        if (import.meta.env.DEV) console.log("Successfully dispatched prompt to agent swarm");
-      }
+      if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) throw new Error('Dispatch endpoint unavailable');
+      setDispatchStatus('Request accepted by the dispatch endpoint; execution not verified.');
+      setIntent('');
     } catch (e) {
-      console.error("Dispatch service unavailable", e);
+      setDispatchStatus(`Dispatch service unavailable. Your request was preserved. ${e.message}`);
     }
-    setIntent('');
   };
 
   return (
@@ -31,7 +31,7 @@ export default function SovereignCommandBar() {
       {/* Top Bar: Model Selection & Settings */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 8px' }}>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <div style={{
+          <button type="button" aria-label="Select model preference" style={{
             background: 'rgba(255, 255, 255, 0.05)',
             padding: '4px 12px',
             borderRadius: '12px',
@@ -46,7 +46,7 @@ export default function SovereignCommandBar() {
             <Box size={14} color="#d4af37" />
             {model}
             <span style={{ color: 'var(--text-muted)', marginLeft: '4px' }}>▼</span>
-          </div>
+          </button>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <span style={{ display: 'inline-block', width: '6px', height: '6px', background: '#10b981', borderRadius: '50%' }}></span>
             Reasoning: High
@@ -59,6 +59,7 @@ export default function SovereignCommandBar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(0,0,0,0.4)', borderRadius: '16px', padding: '8px 16px', border: '1px solid rgba(255,255,255,0.03)' }}>
         <Paperclip size={20} color="var(--text-muted)" style={{ cursor: 'pointer' }} />
         <input 
+          aria-label="Agent task request"
           type="text" 
           value={intent}
           onChange={(e) => setIntent(e.target.value)}
@@ -76,7 +77,7 @@ export default function SovereignCommandBar() {
           }}
         />
         <Mic size={20} color="var(--text-muted)" style={{ cursor: 'pointer' }} />
-        <button onClick={handleExecute} style={{
+        <button aria-label="Send agent task request" disabled={!intent.trim()} onClick={handleExecute} style={{
           background: intent ? '#d4af37' : 'rgba(255,255,255,0.1)',
           border: 'none',
           borderRadius: '50%',
@@ -94,17 +95,18 @@ export default function SovereignCommandBar() {
 
       {/* Bottom Status Row */}
       <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '16px', padding: '0 8px' }}>
-        <div 
+        <button type="button" aria-pressed={workLocally}
           onClick={() => setWorkLocally(!workLocally)}
-          style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', opacity: workLocally ? 1 : 0.5 }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', opacity: workLocally ? 1 : 0.5, background: 'transparent', border: 0, padding: 0 }}
         >
           <Lock size={14} color={workLocally ? '#10b981' : '#6b6b7b'} />
           <span style={{ fontSize: '0.8rem', color: workLocally ? '#e2e8f0' : '#6b6b7b' }}>Work locally</span>
-        </div>
+        </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', opacity: 0.5 }}>
           <Monitor size={14} color="#6b6b7b" />
           <span style={{ fontSize: '0.8rem', color: '#6b6b7b' }}>screencast</span>
         </div>
+        {dispatchStatus && <p role="status">{dispatchStatus}</p>}
       </div>
 
     </div>

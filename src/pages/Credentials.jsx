@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Play, Square, RefreshCw, Send, CheckCircle, Database, Server, UserCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { API_BASE } from '../utils/api';
+import VisualExplainer from '../components/VisualExplainer';
+import { API_BASE, requestJSON } from '../utils/api';
 
 export default function Credentials() {
   const { language } = useLanguage();
@@ -19,31 +20,28 @@ export default function Credentials() {
   const [campaignRunning, setCampaignRunning] = useState(false);
   const [activeCampaign, setActiveCampaign] = useState('None');
   const [currentMaster, setCurrentMaster] = useState(0);
+  const [backendError, setBackendError] = useState('');
 
   // Stats
   const [stats, setStats] = useState({
-    scanned: 218,
-    analyzed: 56,
-    invitations: 1,
-    calls: 45,
+    scanned: 0,
+    analyzed: 0,
+    invitations: 0,
+    calls: 0,
     meetings: 0,
-    deals: 1
+    deals: 0
   });
 
   // Load state and prospects
   const loadData = async () => {
     try {
-      // 1. Load Prospects
-      const resP = await fetch(`${API_BASE}/api/prospects`);
-      if (resP.ok) {
-        const dataP = await resP.json();
-        setProspects(dataP);
+      const [dataP, dataS, dataL] = await Promise.all(
+        ['/api/prospects', '/api/state', '/api/login/linkedin/status'].map(endpoint => requestJSON(endpoint))
+      );
+      if (!Array.isArray(dataP) || !dataS || typeof dataS.is_running !== 'boolean' || !dataL || typeof dataL.status !== 'string') {
+        throw new Error('Invalid backoffice telemetry response.');
       }
-
-      // 2. Load Global State
-      const resS = await fetch(`${API_BASE}/api/state`);
-      if (resS.ok) {
-        const dataS = await resS.json();
+      setProspects(dataP);
         setCampaignRunning(dataS.is_running);
         setActiveCampaign(dataS.active_campaign || 'None');
         setCurrentMaster(dataS.current_master);
@@ -51,12 +49,6 @@ export default function Credentials() {
         if (dataS.stats) {
           setStats(dataS.stats);
         }
-      }
-
-      // 3. Load LinkedIn status
-      const resL = await fetch(`${API_BASE}/api/login/linkedin/status`);
-      if (resL.ok) {
-        const dataL = await resL.json();
         setLkStatus(dataL.status);
         setLkError(dataL.error);
         if (dataL.email) {
@@ -65,9 +57,9 @@ export default function Credentials() {
         if (dataL.phone) {
           setLkPhone(dataL.phone);
         }
-      }
+      setBackendError('');
     } catch (e) {
-      console.error("Backend service unavailable", e);
+      setBackendError(`Backoffice backend unavailable; campaign and account state are unverified. ${e.message}`);
     }
   };
 
@@ -161,6 +153,7 @@ export default function Credentials() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', color: '#fcfcfc', position: 'relative' }}>
       <div style={{ padding: 'clamp(16px, 5vw, 48px)', flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+        {backendError && <p role="status" className="backend-notice">{backendError}</p>}
         
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
@@ -197,9 +190,9 @@ export default function Credentials() {
 
         {/* Video */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-          <video
+          <VisualExplainer
             src={language === 'fr' ? '/prime_credentials_fr.mp4' : '/prime_credentials_en.mp4'}
-            autoPlay muted loop playsInline
+            autoPlay loop
             style={{
               width: '100%', borderRadius: '16px',
               border: '1px solid rgba(212, 175, 55, 0.3)',
@@ -233,6 +226,7 @@ export default function Credentials() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Nom d'utilisateur / E-mail</label>
                 <input 
+                  aria-label="LinkedIn email"
                   type="email" 
                   value={lkEmail} 
                   onChange={(e) => setLkEmail(e.target.value)} 
@@ -243,6 +237,7 @@ export default function Credentials() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Mot de passe</label>
                 <input 
+                  aria-label="LinkedIn password"
                   type="password" 
                   value={lkPassword} 
                   onChange={(e) => setLkPassword(e.target.value)} 
@@ -253,6 +248,7 @@ export default function Credentials() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Numéro de téléphone (Vérification)</label>
                 <input 
+                  aria-label="Verification phone number"
                   type="text" 
                   value={lkPhone} 
                   onChange={(e) => setLkPhone(e.target.value)} 
@@ -269,6 +265,7 @@ export default function Credentials() {
                 <p style={{ color: '#8b8b9b', fontSize: '0.7rem', margin: 0, lineHeight: 1.4 }}>Un code temporaire a été envoyé par LinkedIn. Saisissez-le ici pour débloquer le robot :</p>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <input 
+                    aria-label="Two-factor authentication code"
                     type="text" 
                     value={lkCode} 
                     onChange={(e) => setLkCode(e.target.value)} 

@@ -777,6 +777,7 @@ function AmlazrArena() {
               gap: '12px'
             }}>
               <input
+                aria-label="Arena message"
                 type="text"
                 value={customQuestion}
                 onChange={(e) => setCustomQuestion(e.target.value)}

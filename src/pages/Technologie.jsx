@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import VisualExplainer from '../components/VisualExplainer';
 
 
 export default function Technologie() {
@@ -316,9 +317,8 @@ export default function Technologie() {
           border: '1px solid rgba(198, 161, 90, 0.2)',
           background: '#000'
         }}>
-          <video 
+          <VisualExplainer
             src={language === 'fr' ? '/prime_tech_fr.mp4' : '/prime_tech_en.mp4'} 
-            controls 
             style={{ width: '100%', display: 'block' }}
           />
         </div>
@@ -337,9 +337,9 @@ export default function Technologie() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <video
+            <VisualExplainer
               src={language === 'fr' ? '/prime_arch_specs_fr.mp4' : '/prime_arch_specs_en.mp4'}
-              autoPlay muted loop playsInline
+              autoPlay loop
               style={{
                 width: '100%',
                 maxWidth: '1000px',
@@ -385,9 +385,9 @@ export default function Technologie() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <video
+            <VisualExplainer
               src={language === 'fr' ? '/prime_sync_protocol_fr.mp4' : '/prime_sync_protocol_en.mp4'}
-              autoPlay muted loop playsInline
+              autoPlay loop
               style={{
                 width: '100%',
                 maxWidth: '1000px',

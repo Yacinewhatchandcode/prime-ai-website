@@ -225,6 +225,7 @@ export default function WhatsAppAgent() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Destinataire (Numéro ou Identifiant)</label>
                 <input 
+                  aria-label="Message recipient phone or identifier"
                   type="text" 
                   value={phone} 
                   onChange={(e) => setPhone(e.target.value)} 
@@ -237,6 +238,7 @@ export default function WhatsAppAgent() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
                 <label style={{ fontSize: '0.75rem', color: '#6b6b7b', fontWeight: 'bold' }}>Message Outbound</label>
                 <textarea 
+                  aria-label="Outbound message"
                   value={message} 
                   onChange={(e) => setMessage(e.target.value)} 
                   placeholder="Bonjour, je vous contacte concernant votre projet..."

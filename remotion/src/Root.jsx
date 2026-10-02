@@ -14,6 +14,7 @@ import ArchSpecsComposition from './compositions/ArchSpecsComposition';
 import SyncProtocolComposition from './compositions/SyncProtocolComposition';
 import MacroVisionV2Composition from './compositions/MacroVisionV2Composition';
 import MacroVisionV3Composition from './compositions/MacroVisionV3Composition';
+import TechnologyComposition from './compositions/TechnologyComposition';
 
 // Product card compositions (Ecosysteme page)
 import PrimeDesktopComposition from './compositions/PrimeDesktopComposition';
@@ -95,6 +96,11 @@ export const RemotionRoot = () => {
         {...shared} defaultProps={{ language: 'fr' }} />
 
       {/* /technologie — Cognitive Architecture Specifications */}
+      <Composition id="Technology-EN" component={TechnologyComposition}
+        {...shared} width={1280} height={720} durationInFrames={shared.fps * 47} defaultProps={{ language: 'en' }} />
+      <Composition id="Technology-FR" component={TechnologyComposition}
+        {...shared} width={1280} height={720} durationInFrames={shared.fps * 47} defaultProps={{ language: 'fr' }} />
+
       <Composition id="ArchSpecs-EN" component={ArchSpecsComposition}
         {...shared} defaultProps={{ language: 'en' }} />
       <Composition id="ArchSpecs-FR" component={ArchSpecsComposition}

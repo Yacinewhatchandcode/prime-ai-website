@@ -8,6 +8,16 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "qa:routes": "node scripts/qa-routes.mjs",
+    "qa:pages": "node scripts/qa-pages.mjs",
+    "preview:local": "node scripts/local-preview.mjs",
+    "test:proxy": "node --test scripts/local-preview.test.mjs",
+    "test:fleet-ui": "node --test scripts/local-fleet-ui.test.mjs",
+    "qa:fleet": "node scripts/qa-local-fleet.mjs",
+    "test:data": "node --test scripts/prime-data.test.mjs",
+    "qa:data": "node scripts/qa-prime-data.mjs",
+    "qa:media": "node scripts/qa-media-files.mjs after && node scripts/qa-media-ui.mjs",
+    "qa:gold": "node scripts/qa-gold.mjs && node scripts/qa-word-counts.mjs after",
     "tauri": "tauri"
   },
   "dependencies": {
@@ -33,6 +43,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "playwright": "^1.63.0",
     "vite": "^8.0.12"
   }
 }

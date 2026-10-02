@@ -39,7 +39,5 @@ export const VIDEO = {
   durationInFrames: 30 * 20, // 20 seconds default
 };
 
-// Google Fonts CSS import URL
-export const FONT_CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
-`;
+// Rendering uses local font fallbacks, never an external font service.
+export const FONT_CSS = '';

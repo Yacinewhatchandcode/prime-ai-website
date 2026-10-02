@@ -5,9 +5,9 @@ import PrimeLogo from '../components/PrimeLogo';
 
 function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighlight }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
+    <main id="main-content" tabIndex={-1} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
       <div className="sub-header">
-        <Link to="/" className="sub-header-btn">
+        <Link to="/" className="sub-header-btn" aria-label="Back to home">
           <ChevronLeft size={20} />
         </Link>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -17,7 +17,7 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
           </div>
           <div className="sub-header-subtitle">PRIME MCP SOVEREIGN FLEET</div>
         </div>
-        <button className="sub-header-btn">
+        <button className="sub-header-btn" disabled aria-label="Node settings unavailable">
           <Sliders size={20} />
         </button>
       </div>
@@ -26,7 +26,7 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
         <div className="dash-top-row">
           <div className="dash-stat">
             <div className="dash-stat-label"><div className="agent-status-dot" style={{ background: nodeColor, boxShadow: `0 0 10px ${nodeColor}` }}></div> STATUS</div>
-            <div className="dash-stat-val" style={{ color: nodeColor }}>ONLINE</div>
+            <div className="dash-stat-val" style={{ color: nodeColor }}>UNVERIFIED</div>
           </div>
           <div className="dash-stat">
             <div className="dash-stat-label">REGION</div>
@@ -34,13 +34,13 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
           </div>
           <div className="dash-stat">
             <div className="dash-stat-label">LATENCY</div>
-            <div className="dash-stat-val" style={{ color: '#22c55e' }}>2ms</div>
+            <div className="dash-stat-val" style={{ color: '#22c55e' }}>NOT MEASURED</div>
           </div>
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '24px', padding: '0 24px' }}>
           <div style={{ fontSize: '3rem', marginBottom: '8px' }}>{flag}</div>
-          <h2 style={{ fontSize: '1.5rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{countryName} <span style={{ color: nodeHighlight }}>FLEET</span></h2>
+          <h1 style={{ fontSize: '1.5rem', color: '#fff', margin: 0, letterSpacing: '1px' }}>{countryName} <span style={{ color: nodeHighlight }}>FLEET</span></h1>
           <div style={{ fontSize: '0.65rem', color: '#a1a1aa', letterSpacing: '1px', marginTop: '8px' }}>{subtitle}</div>
         </div>
 
@@ -55,11 +55,11 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
             </div>
           </div>
           <p style={{ fontSize: '0.75rem', color: '#e2e8f0', lineHeight: '1.6', marginBottom: '12px' }}>
-            This node is fully integrated into the PRIME MCP SOVEREIGN FLEET. It provides highly secure, localized AI orchestration tailored specifically to {countryName}'s regulatory and operational standards.
+            This is an architectural preview of localized AI orchestration for {countryName}. Deployment, connectivity and regulatory compliance have not been verified by this interface.
           </p>
           <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ width: '8px', height: '8px', background: nodeHighlight, borderRadius: '50%', boxShadow: `0 0 10px ${nodeHighlight}` }}></div>
-            <div style={{ flex: 1, fontSize: '0.65rem', color: '#fff' }}>Node synchronization active and stable.</div>
+            <div style={{ flex: 1, fontSize: '0.65rem', color: '#fff' }}>Preview only. Live node synchronization is not connected.</div>
           </div>
         </div>
 
@@ -80,7 +80,7 @@ function CountryNodeTemplate({ countryName, subtitle, flag, nodeColor, nodeHighl
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

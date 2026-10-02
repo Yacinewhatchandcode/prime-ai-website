@@ -1,20 +1,20 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Clock, CheckCircle, FileText, ChevronRight } from 'lucide-react';
 
-import { API_BASE } from '../utils/api';
+import { API_BASE, requestJSON } from '../utils/api';
 
 export default function SovereignWorkflowLog() {
   const [liveOutputs, setLiveOutputs] = useState([]);
+  const [backendError, setBackendError] = useState('');
 
   const fetchOutputs = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/outputs`);
-      if (res.ok) {
-        const data = await res.json();
-        setLiveOutputs(data.files || []);
-      }
+      const data = await requestJSON('/api/outputs');
+      if (!data || !Array.isArray(data.files)) throw new Error('Invalid artifact response.');
+      setLiveOutputs(data.files);
+      setBackendError('');
     } catch (e) {
-      console.warn("Could not fetch live outputs", e);
+      setBackendError(`Live artifacts unavailable. ${e.message}`);
     }
   };
 
@@ -52,8 +52,9 @@ export default function SovereignWorkflowLog() {
     <div className="sovereign-workflow-log-sidebar">
       <div style={{ color: '#d4af37', fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
         <Clock size={14} />
-        Active Workflow Iterations
+        Example Workflow Iterations
       </div>
+      {backendError && <p role="status" style={{ color: '#cbd5e1', fontSize: '0.75rem' }}>{backendError}</p>}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {logs.map((log, index) => (

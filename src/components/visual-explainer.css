@@ -1,0 +1,20 @@
+.visual-explainer { min-width: 0; }
+.visual-explainer video { height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
+.visual-explainer-controls {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  padding: 10px 12px; background: #1f1a13; color: #faf8f4;
+  font: 12px system-ui, sans-serif;
+}
+.visual-explainer-controls button {
+  border: 1px solid #c6a15a; border-radius: 20px; padding: 7px 12px;
+  background: transparent; color: #faf8f4; cursor: pointer;
+}
+.visual-explainer-seek { flex: 1 1 120px; min-width: 0; display: flex; align-items: center; gap: 8px; }
+.visual-explainer-seek input { width: 100%; min-width: 0; accent-color: #c6a15a; }
+.visual-explainer-caption, .visual-explainer-error {
+  margin: 0; padding: 9px 12px; background: #1f1a13; color: #e6c587;
+  font: 12px/1.5 system-ui, sans-serif;
+}
+.visual-explainer-error { color: #ffb4b4; }
+.visual-explainer:fullscreen { background: #000; max-width: none !important; display: flex; flex-direction: column; justify-content: center; }
+.visual-explainer:fullscreen video { width: 100%; max-width: none !important; max-height: calc(100vh - 110px); object-fit: contain; }

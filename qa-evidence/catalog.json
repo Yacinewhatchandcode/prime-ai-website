@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "productionStatus": "live (old version); new build prepared, not deployed",
+  "productionTarget": "GitHub Pages gh-pages, prime-ai.fr; GoDaddy DNS owner",
+  "preview": "http://127.0.0.1:4174",
+  "routeManifest": "qa/routes.json",
+  "routeCount": 31,
+  "buildScript": "assets/index-huoMUaL0.js",
+  "validation": {
+    "routeLanguageViewportCases": 124,
+    "designMotionContrastCases": 18,
+    "mp4Decoded": 34,
+    "manualMediaControlCases": 40,
+    "transferOfflineWorkflows": 2,
+    "dataUnitTests": 15,
+    "nativeProxyTests": 8,
+    "syntheticFleetUiTests": 5,
+    "actualFleetEvidence": "Existing completed three-role mission readback, memory reference, desktop/mobile reload; no new inference submitted in final QA",
+    "bodyCopyWordsBefore": 8936,
+    "bodyCopyWordsAfter": 2088,
+    "aggregateBodyCopyReductionPercent": 76.63,
+    "mainWordsBefore": 28542,
+    "mainWordsAfter": 5566,
+    "everyRouteMainWordsReduced": true,
+    "regeneratedMediaFiles": 10,
+    "regeneratedBlankFrameRatioMaximumPercent": 6.8
+  },
+  "evidence": [
+    "sovereign-gold/before-words.json",
+    "sovereign-gold/after-words.json",
+    "sovereign-gold/word-comparison.json",
+    "sovereign-gold/design-report.json",
+    "gold-en/report.json",
+    "gold-fr/report.json",
+    "media-upgrade/before/report.json",
+    "media-upgrade/after/report.json",
+    "media-upgrade/browser/report.json",
+    "gold-data/report.json",
+    "gold-fleet-real/report.json"
+  ],
+  "limits": [
+    "Chromium smoke coverage is not exhaustive acceptance or physical-device testing.",
+    "Manual transfer only; no configured cloud or connected public game/biotech backend.",
+    "Optional local advisory inference never executes tools or verifies acceptance.",
+    "Existing videos remain illustrative and silent; videos and APIs are not cached offline.",
+    "No push, deployment or production requests performed."
+  ]
+}
