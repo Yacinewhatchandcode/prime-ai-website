@@ -46,6 +46,8 @@ on:
       reviewed_run_id: { type: string, default: "", description: "Successful PRIME manual dry-run run ID required for publish" }
       reviewed_artifact_id: { type: string, default: "", description: "Immutable artifact ID required for publish" }
       reviewed_artifact_sha256: { type: string, default: "", description: "Reviewed artifact tree digest required for publish" }
+      approval_policy: { type: string, default: "required-reviewers/v1", description: "required-reviewers/v1 | single-owner/v1 (explicit opt-in)" }
+      policy_approval: { type: string, default: "", description: "Exact owner approval binding required for single-owner/v1" }
     outputs:
       artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 || jobs.deploy.outputs.artifact_sha256 }}" }
       result: { value: "${{ jobs.deploy.outputs.status }}" }
@@ -96,23 +98,35 @@ jobs:
           if [[ "$MODE" != dry-run ]]; then
             [[ "$EVENT" != pull_request* ]] || fail "production modes are never allowed from $EVENT"
             [[ -n "$ENVIRONMENT" ]] || fail "environment is required for $MODE"
-            reviewers=$(gh api "repos/$REPO/environments/$ENVIRONMENT" \
-              --jq '[.protection_rules[]? | select(.type == "required_reviewers")] | length') \
-              || fail "environment '$ENVIRONMENT' not found or unreadable; refusing to deploy without manual approval"
-            [[ "$reviewers" -ge 1 ]] || fail "environment '$ENVIRONMENT' has no required reviewers; configure manual approval first"
+            # The default policy fails if the environment has no required reviewers.
+            # Owner policy is verified separately, never inferred from missing reviewers.
           fi
           echo "preflight ok: mode=$MODE event=$EVENT"
       - name: Checkout pinned review verification tooling
-        if: inputs.mode == 'publish'
+        if: inputs.mode != 'dry-run'
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.tooling_repository }}
           ref: ${{ inputs.tooling_sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
-        if: inputs.mode == 'publish'
+        if: inputs.mode != 'dry-run'
         with:
           node-version: ${{ inputs.node_version }}
+      - name: Verify explicit approval policy
+        if: inputs.mode != 'dry-run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_MODE: ${{ inputs.mode }}
+          RELEASE_ENVIRONMENT: ${{ inputs.environment }}
+          APPROVAL_POLICY: ${{ inputs.approval_policy }}
+          CONFIGURED_APPROVAL_POLICY: ${{ vars.STATIC_RELEASE_APPROVAL_POLICY }}
+          POLICY_APPROVAL: ${{ inputs.policy_approval }}
+          RELEASE_SOURCE_SHA: ${{ inputs.source_sha }}
+          REVIEW_DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
+          REVIEW_RUN_ID: ${{ inputs.reviewed_run_id }}
+          REVIEW_ARTIFACT_ID: ${{ inputs.reviewed_artifact_id }}
+        run: node scripts/release/approval-policy.mjs
       - name: Verify successful validation run and immutable artifact metadata
         if: inputs.mode == 'publish'
         env:
@@ -281,6 +295,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node_version }}
+      - name: Recheck approval policy before deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_MODE: ${{ inputs.mode }}
+          RELEASE_ENVIRONMENT: ${{ inputs.environment }}
+          APPROVAL_POLICY: ${{ inputs.approval_policy }}
+          CONFIGURED_APPROVAL_POLICY: ${{ vars.STATIC_RELEASE_APPROVAL_POLICY }}
+          POLICY_APPROVAL: ${{ inputs.policy_approval }}
+          RELEASE_SOURCE_SHA: ${{ inputs.source_sha }}
+          REVIEW_DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
+          REVIEW_RUN_ID: ${{ inputs.reviewed_run_id }}
+          REVIEW_ARTIFACT_ID: ${{ inputs.reviewed_artifact_id }}
+          APPROVAL_OUT: ${{ runner.temp }}/approval.json
+        run: node "${TOOL%/*}/approval-policy.mjs"
       - name: Checkout Pages branch
         uses: actions/checkout@v4
         with:
@@ -424,6 +452,7 @@ jobs:
               toolingSha: e.TOOLING_SHA, artifactSha256: e.DIGEST || null, branch: e.BRANCH,
               rollbackTag: publish?.pushed ? e.ROLLBACK_TAG : null, publish, postdeploy: read(`${t}/postdeploy.json`),
               review: read(`${t}/review.json`),
+              approval: read(`${t}/approval.json`),
               stages: { publish: e.PUBLISH_OUTCOME || "skipped", postdeploy: e.POSTDEPLOY_OUTCOME || "skipped" },
               finishedAt: new Date().toISOString(),
             };

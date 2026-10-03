@@ -66,7 +66,8 @@ Only after a separate explicit deployment approval, publish **the contents of
 immutable `main` SHA to build, validate and hash an immutable artifact. Publish
 requires that successful dry-run's run ID, artifact ID and reviewed tree digest;
 it downloads those exact bytes without rebuilding, waits for the
-`prime-ai-production` Environment reviewers, saves a rollback tag and
+`prime-ai-production` Environment approval (reviewers by default, or the separately enabled
+and explicitly artifact-bound `single-owner/v1` policy documented in the release contract), saves a rollback tag and
 fast-forwards `gh-pages` without force-pushing. Do not use the legacy
 force-push `GOLIVEPRIMEAI.cmd`. Do not publish the source checkout, local preview
 server, tokens, mission storage, or QA exports. No Vercel/Netlify configuration

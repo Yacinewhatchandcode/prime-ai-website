@@ -172,13 +172,42 @@ The result manifest adds `review` (or `null` for restore/failed verification), c
 `validationRunId`, `validationRunAttempt`, `artifactId`, `artifactSha256`,
 `validationToolingSha` and `artifactArchiveDigest`. Preserve this raw evidence separately from
 the ORB normalized all-sites receipt. Reviewer approval, rollback and deployment locks remain
-mandatory. No single-owner approval policy is implemented or activated by this change.
+mandatory unless the explicitly selected single-owner policy below applies.
 
 The live `release-manifest.json` retains the original dry-run identity: `toolingSha` must match
 `review.validationToolingSha`, and its `runId` is exactly
 `<review.validationRunId>-<review.validationRunAttempt>`. The result's top-level `toolingSha`,
 `runId` and `runAttempt` identify the later production dispatch, not the original validation.
 Do not compare the live marker's run/tooling identity to the production dispatch fields.
+
+### Explicit single-owner policy
+
+The default is still `approval_policy=required-reviewers/v1`; missing reviewers never trigger
+an automatic fallback. An owner can explicitly enable `single-owner/v1` for reviewed publish:
+
+- The repository must belong to a **User**, and both the original dispatch actor and rerun
+  initiator must be that repository owner.
+- Repository variable `STATIC_RELEASE_APPROVAL_POLICY` must be exactly `single-owner/v1`.
+- The production Environment must use custom branch policies with **exactly one branch `main`**,
+  no wildcard, tag or extra branch. Existing required reviewers, if present, are not removed.
+- Dispatch must explicitly select `approval_policy=single-owner/v1` and provide
+  `policy_approval=single-owner/v1:<repository>:<source_sha>:<tree_sha256>:<validation_run_id>:<artifact_id>`.
+- All immutable artifact verification, source-main ancestry, routes, disk guard, concurrency,
+  rollback-before-push, non-force update and live checks remain unchanged. Publish never rebuilds.
+
+```sh
+gh workflow run prime-ai-release.yml --ref main -f mode=publish \
+  -f source_sha=<SHA> -f confirm_sha=<SHA> -f reviewed_run_id=<RUN> \
+  -f reviewed_artifact_id=<ID> -f reviewed_artifact_sha256=<TREE_DIGEST> \
+  -f approval_policy=single-owner/v1 \
+  -f policy_approval=single-owner/v1:<REPOSITORY>:<SHA>:<TREE_DIGEST>:<RUN>:<ID>
+```
+
+The policy is checked in preflight and again before deployment. The result adds optional
+`approval: {policy, actor, production, policyApproval}`. This is explicit owner authorization,
+**not independent review**. Single-owner restore is not supported by this release consent
+contract; restore continues to require reviewer approval. This option does not create branch
+protection or grant permissions to nonowners, bots, organizations, PR events or other repositories.
 
 This reviewed-publish contract currently trusts the PRIME manual validation workflow in the
 same repository. Other repositories must supply an equivalent approved validation workflow;
