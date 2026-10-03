@@ -52,8 +52,13 @@ execution verification, or a production availability check.
 ## Human-gated publication
 
 Only after a separate explicit deployment approval, publish **the contents of
-`dist/`** to the repository's `gh-pages` branch using the owner's existing
-GitHub Pages procedure. Do not publish the source checkout, local preview
+`dist/`** to the repository's `gh-pages` branch with the guarded
+`prime-ai.fr release` workflow (`.github/workflows/prime-ai-release.yml`; see
+[docs/STATIC_RELEASE.md](docs/STATIC_RELEASE.md)). It builds an approved
+immutable `main` SHA, validates and hashes the artifact, waits for the
+`prime-ai-production` Environment reviewers, saves a rollback tag and
+fast-forwards `gh-pages` without force-pushing. Do not use the legacy
+force-push `GOLIVEPRIMEAI.cmd`. Do not publish the source checkout, local preview
 server, tokens, mission storage, or QA exports. No Vercel/Netlify configuration
 is needed. Preserve `CNAME` and `.nojekyll` on that branch.
 

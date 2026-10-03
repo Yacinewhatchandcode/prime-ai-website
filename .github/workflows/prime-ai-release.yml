@@ -1,0 +1,83 @@
+# Manual, approval-gated release of prime-ai.fr (legacy GitHub Pages, branch gh-pages).
+# No schedule, push or pull_request trigger: every run names an explicit approved source SHA.
+# Production modes additionally wait for the `prime-ai-production` Environment reviewers.
+name: prime-ai.fr release
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: dry-run builds + validates + plans only; publish/restore update gh-pages after Environment approval
+        type: choice
+        options: [dry-run, publish, restore]
+        default: dry-run
+      source_sha:
+        description: Approved immutable 40-char source commit on main (dry-run/publish)
+        type: string
+        default: ""
+      confirm_sha:
+        description: Re-type source_sha (publish) or restore_from_sha (restore) to confirm
+        type: string
+        default: ""
+      restore_from_sha:
+        description: Known-good gh-pages commit to republish forward (restore), e.g. 369fc4d21c113e7ebd3dac99513975a9a17ac7e8
+        type: string
+        default: ""
+      restore_allowed_ref:
+        description: Branch whose history must contain restore_from_sha
+        type: choice
+        options: [gh-pages, gh-pages-gold-backup]
+        default: gh-pages
+
+concurrency:
+  group: prime-ai-release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  actions: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Confirm operator intent
+        env:
+          MODE: ${{ inputs.mode }}
+          REF: ${{ github.ref }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          RESTORE_SHA: ${{ inputs.restore_from_sha }}
+          CONFIRM: ${{ inputs.confirm_sha }}
+        run: |
+          set -euo pipefail
+          [[ "$MODE" == dry-run ]] && { echo "dry-run: no confirmation required"; exit 0; }
+          [[ "$REF" == refs/heads/main ]] || { echo "::error::production modes must be dispatched from main (got $REF)"; exit 1; }
+          expected=$SOURCE_SHA; [[ "$MODE" == restore ]] && expected=$RESTORE_SHA
+          [[ -n "$expected" && "$CONFIRM" == "$expected" ]] || { echo "::error::confirm_sha does not match the SHA being released"; exit 1; }
+
+  release:
+    needs: gate
+    uses: ./.github/workflows/static-release.yml
+    with:
+      site_id: prime-ai
+      site_url: https://prime-ai.fr
+      cname: prime-ai.fr
+      mode: ${{ inputs.mode }}
+      source_sha: ${{ inputs.source_sha }}
+      approved_ref: main
+      restore_from_sha: ${{ inputs.restore_from_sha }}
+      restore_allowed_ref: ${{ inputs.restore_allowed_ref }}
+      tooling_repository: ${{ github.repository }}
+      tooling_sha: ${{ github.sha }}
+      test_command: npm run qa:routes && npm run test:data && npm run test:proxy
+      build_command: npm run build
+      post_build_test_command: npx playwright install --with-deps chromium && npm run test:fleet-ui
+      output_dir: dist
+      spa_404: false
+      # Static route pages required from the replica source (Pages directory redirects need <route>/index.html).
+      required_routes: replica,responsive-preview,semantic-library,replica-image,convergence,legacy
+      pages_branch: gh-pages
+      environment: prime-ai-production
