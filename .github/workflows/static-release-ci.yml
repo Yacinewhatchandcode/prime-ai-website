@@ -1,14 +1,12 @@
-# PR validation for the release tooling. Read-only token; can never publish
-# (the reusable workflow's deploy job is excluded for pull_request events and dry-run mode).
+# PR validation on GitHub runners (no local disk needed). Read-only token; can never publish:
+# the reusable workflow's deploy job is excluded for pull_request events and dry-run mode.
+# Dry-runs the PR head (tests, build, artifact validation, gh-pages publish plan) using the
+# release tooling from the PR merge commit.
 name: static-release CI
 
 on:
   pull_request:
-    paths:
-      - .github/workflows/static-release.yml
-      - .github/workflows/prime-ai-release.yml
-      - .github/workflows/static-release-ci.yml
-      - scripts/release/**
+    branches: [main]
 
 permissions:
   contents: read
@@ -43,10 +41,11 @@ jobs:
       site_url: https://prime-ai.fr
       cname: prime-ai.fr
       mode: dry-run
-      source_sha: ${{ github.event.pull_request.base.sha }}
-      approved_ref: ${{ github.event.pull_request.base.ref }}
-      tooling_repository: ${{ github.event.pull_request.head.repo.full_name }}
-      tooling_sha: ${{ github.event.pull_request.head.sha }}
+      source_repository: ${{ github.event.pull_request.head.repo.full_name }}
+      source_sha: ${{ github.event.pull_request.head.sha }}
+      approved_ref: ${{ github.event.pull_request.head.ref }}
+      tooling_repository: ${{ github.repository }}
+      tooling_sha: ${{ github.sha }}
       test_command: npm run qa:routes && npm run test:data && npm run test:proxy
       build_command: npm run build
       output_dir: dist
