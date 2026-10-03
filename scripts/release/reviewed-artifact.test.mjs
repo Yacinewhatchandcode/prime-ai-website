@@ -20,7 +20,7 @@ function fixture() {
       expires_at: '2030-01-01T00:00:00Z', digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 12, head_sha: tooling } },
     manifest: { schema: 'static-release/v1', siteId: 'prime-ai', sourceRepository: 'owner/prime',
-      sourceSha: source, toolingSha: tooling, runId: '12', artifactSha256: digest },
+      sourceSha: source, toolingSha: tooling, runId: '12', artifactSha256: digest, indexSha256: 'e'.repeat(64) },
     now: Date.parse('2026-01-01'),
   };
 }
@@ -58,6 +58,7 @@ const rejects = [
   ['manifest from other repository', f => { f.manifest.sourceRepository = 'other/repo'; }],
   ['manifest from other site', f => { f.manifest.siteId = 'other'; }],
   ['manifest digest mismatch', f => { f.manifest.artifactSha256 = 'e'.repeat(64); }],
+  ['missing index binding', f => { delete f.manifest.indexSha256; }],
   ['invalid source', f => { f.sourceSha = 'main'; }],
   ['invalid digest', f => { f.digest = '123'; }],
   ['invalid IDs', f => { f.artifactId = '../34'; }],
@@ -105,6 +106,10 @@ test('consumption verifies original reviewed bytes and refuses rebuilt or tamper
     verifyReview(f);
     assert.equal(verifyArtifact(dir, { expectedDigest: f.digest, expectedSourceSha: f.sourceSha,
       policy: { cname: 'prime-ai.fr' } }).artifactSha256, f.digest);
+    writeManifest(dir, { ...f.manifest, indexSha256: 'e'.repeat(64) });
+    assert.throws(() => verifyArtifact(dir, { expectedDigest: f.digest,
+      expectedSourceSha: f.sourceSha, policy: { cname: 'prime-ai.fr' } }), /indexSha256/);
+    writeManifest(dir, f.manifest);
     fs.writeFileSync(path.join(dir, 'assets/original.js'), 'console.log("rebuilt")');
     assert.throws(() => verifyArtifact(dir, { expectedDigest: f.digest,
       expectedSourceSha: f.sourceSha, policy: { cname: 'prime-ai.fr' } }), /digest|sha256/i);

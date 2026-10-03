@@ -47,7 +47,7 @@ on:
       reviewed_artifact_id: { type: string, default: "", description: "Immutable artifact ID required for publish" }
       reviewed_artifact_sha256: { type: string, default: "", description: "Reviewed artifact tree digest required for publish" }
     outputs:
-      artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 }}" }
+      artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 || jobs.deploy.outputs.artifact_sha256 }}" }
       result: { value: "${{ jobs.deploy.outputs.status }}" }
 
 jobs:
@@ -263,6 +263,7 @@ jobs:
       cancel-in-progress: false
     outputs:
       status: ${{ steps.result.outputs.status }}
+      artifact_sha256: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
     env:
       TOOL: ${{ github.workspace }}/.release-tooling/scripts/release/static-release.mjs
       ARTIFACT: ${{ github.workspace }}/release-artifact
