@@ -62,8 +62,10 @@ execution verification, or a production availability check.
 Only after a separate explicit deployment approval, publish **the contents of
 `dist/`** to the repository's `gh-pages` branch with the guarded
 `prime-ai.fr release` workflow (`.github/workflows/prime-ai-release.yml`; see
-[docs/STATIC_RELEASE.md](docs/STATIC_RELEASE.md)). It builds an approved
-immutable `main` SHA, validates and hashes the artifact, waits for the
+[docs/STATIC_RELEASE.md](docs/STATIC_RELEASE.md)). First dry-run an approved
+immutable `main` SHA to build, validate and hash an immutable artifact. Publish
+requires that successful dry-run's run ID, artifact ID and reviewed tree digest;
+it downloads those exact bytes without rebuilding, waits for the
 `prime-ai-production` Environment reviewers, saves a rollback tag and
 fast-forwards `gh-pages` without force-pushing. Do not use the legacy
 force-push `GOLIVEPRIMEAI.cmd`. Do not publish the source checkout, local preview

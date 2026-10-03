@@ -42,8 +42,12 @@ on:
       max_file_mib: { type: number, default: 95 }
       artifact_retention_days: { type: number, default: 30 }
       postdeploy_timeout_sec: { type: number, default: 900 }
+      correlation_id: { type: string, default: "", description: "Optional caller id ([A-Za-z0-9._:-], max 64) echoed into the result manifest" }
+      reviewed_run_id: { type: string, default: "", description: "Successful PRIME manual dry-run run ID required for publish" }
+      reviewed_artifact_id: { type: string, default: "", description: "Immutable artifact ID required for publish" }
+      reviewed_artifact_sha256: { type: string, default: "", description: "Reviewed artifact tree digest required for publish" }
     outputs:
-      artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 }}" }
+      artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 || jobs.deploy.outputs.artifact_sha256 }}" }
       result: { value: "${{ jobs.deploy.outputs.status }}" }
 
 jobs:
@@ -65,9 +69,17 @@ jobs:
           TOOLING_SHA: ${{ inputs.tooling_sha }}
           ENVIRONMENT: ${{ inputs.environment }}
           SITE_ID: ${{ inputs.site_id }}
+          APPROVED_REF: ${{ inputs.approved_ref }}
+          CORRELATION_ID: ${{ inputs.correlation_id }}
+          REVIEW_RUN_ID: ${{ inputs.reviewed_run_id }}
+          REVIEW_ARTIFACT_ID: ${{ inputs.reviewed_artifact_id }}
+          REVIEW_DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
+          SOURCE_REPOSITORY: ${{ inputs.source_repository || github.repository }}
         run: |
           set -euo pipefail
           fail() { echo "::error::$1"; exit 1; }
+          [[ "$CORRELATION_ID" =~ ^[A-Za-z0-9._:-]{0,64}$ ]] || fail "correlation_id must match [A-Za-z0-9._:-]{0,64}"
+          [[ "$APPROVED_REF" =~ ^[A-Za-z0-9._/-]{1,200}$ && "$APPROVED_REF" != *..* && "$APPROVED_REF" != -* ]] || fail "approved_ref is not a valid branch name"
           sha() { [[ "$1" =~ ^[0-9a-f]{40}$ ]]; }
           [[ "$SITE_ID" =~ ^[a-z0-9][a-z0-9-]{0,40}$ ]] || fail "site_id must be lowercase kebab-case"
           sha "$TOOLING_SHA" || fail "tooling_sha must be a full 40-char SHA"
@@ -76,6 +88,11 @@ jobs:
             restore) sha "$RESTORE_SHA" || fail "restore_from_sha must be a full 40-char SHA" ;;
             *) fail "mode must be dry-run, publish or restore (got '$MODE')" ;;
           esac
+          if [[ "$MODE" == publish ]]; then
+            [[ "$SOURCE_REPOSITORY" == "$REPO" ]] || fail "reviewed publish supports only artifacts validated in the source repository"
+            [[ "$REVIEW_RUN_ID" =~ ^[1-9][0-9]*$ && "$REVIEW_ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]] || fail "publish requires reviewed_run_id and reviewed_artifact_id"
+            [[ "$REVIEW_DIGEST" =~ ^[0-9a-f]{64}$ ]] || fail "publish requires reviewed_artifact_sha256"
+          fi
           if [[ "$MODE" != dry-run ]]; then
             [[ "$EVENT" != pull_request* ]] || fail "production modes are never allowed from $EVENT"
             [[ -n "$ENVIRONMENT" ]] || fail "environment is required for $MODE"
@@ -85,10 +102,32 @@ jobs:
             [[ "$reviewers" -ge 1 ]] || fail "environment '$ENVIRONMENT' has no required reviewers; configure manual approval first"
           fi
           echo "preflight ok: mode=$MODE event=$EVENT"
+      - name: Checkout pinned review verification tooling
+        if: inputs.mode == 'publish'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.tooling_repository }}
+          ref: ${{ inputs.tooling_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        if: inputs.mode == 'publish'
+        with:
+          node-version: ${{ inputs.node_version }}
+      - name: Verify successful validation run and immutable artifact metadata
+        if: inputs.mode == 'publish'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_REPOSITORY: ${{ github.repository }}
+          REVIEW_SITE: ${{ inputs.site_id }}
+          REVIEW_SOURCE_SHA: ${{ inputs.source_sha }}
+          REVIEW_RUN_ID: ${{ inputs.reviewed_run_id }}
+          REVIEW_ARTIFACT_ID: ${{ inputs.reviewed_artifact_id }}
+          REVIEW_DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
+        run: node scripts/release/reviewed-artifact.mjs
 
   build:
     needs: preflight
-    if: inputs.mode != 'restore'
+    if: inputs.mode == 'dry-run'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     permissions:
@@ -168,6 +207,7 @@ jobs:
         id: names
         run: echo "artifact_name=static-release-${{ inputs.site_id }}-${{ github.run_id }}-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
       - name: Store immutable artifact
+        id: upload
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.names.outputs.artifact_name }}
@@ -193,11 +233,15 @@ jobs:
           DIGEST: ${{ steps.validate.outputs.artifact_sha256 }}
           COUNT: ${{ steps.validate.outputs.file_count }}
           BYTES: ${{ steps.validate.outputs.total_bytes }}
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          ARCHIVE_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
         run: |
           {
             echo "### Static release build (${{ inputs.site_id }}, mode ${{ inputs.mode }})"
             echo "- source: \`$SOURCE_SHA\`"
             echo "- artifact sha256: \`$DIGEST\` ($COUNT files, $BYTES bytes)"
+            echo "- immutable artifact ID: \`$ARTIFACT_ID\`"
+            echo "- archive digest (not the tree digest): \`$ARCHIVE_DIGEST\`"
             [[ -f "$RUNNER_TEMP/plan.json" ]] && { echo '- dry-run plan:'; echo '```json'; cat "$RUNNER_TEMP/plan.json"; echo '```'; }
             true
           } >> "$GITHUB_STEP_SUMMARY"
@@ -208,7 +252,7 @@ jobs:
       always() && needs.preflight.result == 'success' &&
       (inputs.mode == 'publish' || inputs.mode == 'restore') &&
       !startsWith(github.event_name, 'pull_request') &&
-      (needs.build.result == 'success' || (inputs.mode == 'restore' && needs.build.result == 'skipped'))
+      needs.build.result == 'skipped'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment:
@@ -219,6 +263,7 @@ jobs:
       cancel-in-progress: false
     outputs:
       status: ${{ steps.result.outputs.status }}
+      artifact_sha256: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
     env:
       TOOL: ${{ github.workspace }}/.release-tooling/scripts/release/static-release.mjs
       ARTIFACT: ${{ github.workspace }}/release-artifact
@@ -243,17 +288,56 @@ jobs:
           path: pages-repo
           fetch-depth: 0
           filter: blob:none
+      - name: Checkout approved source for ancestry verification (no build)
+        if: inputs.mode == 'publish'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.source_repository || github.repository }}
+          ref: ${{ inputs.source_sha }}
+          path: approved-source
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+      - name: Verify approved source ancestry and disk guard
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          APPROVED_REF: ${{ inputs.approved_ref }}
+          MODE: ${{ inputs.mode }}
+          MIN_FREE: ${{ inputs.min_free_gib }}
+        run: |
+          set -euo pipefail
+          node "$TOOL" disk-guard --dir "$GITHUB_WORKSPACE" --min-gib "$MIN_FREE"
+          if [[ "$MODE" == publish ]]; then
+            git -C approved-source fetch --no-tags origin "+refs/heads/$APPROVED_REF:refs/remotes/origin/$APPROVED_REF"
+            node "$TOOL" verify-source --repo approved-source --sha "$SOURCE_SHA" --approved-ref "refs/remotes/origin/$APPROVED_REF"
+          fi
       - name: Download approved artifact
         if: inputs.mode == 'publish'
         uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.build.outputs.artifact_name }}
+          artifact-ids: ${{ inputs.reviewed_artifact_id }}
+          run-id: ${{ inputs.reviewed_run_id }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
           path: release-artifact
+      - name: Recheck review metadata and downloaded manifest binding
+        if: inputs.mode == 'publish'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_REPOSITORY: ${{ github.repository }}
+          REVIEW_SITE: ${{ inputs.site_id }}
+          REVIEW_SOURCE_SHA: ${{ inputs.source_sha }}
+          REVIEW_RUN_ID: ${{ inputs.reviewed_run_id }}
+          REVIEW_ARTIFACT_ID: ${{ inputs.reviewed_artifact_id }}
+          REVIEW_DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
+          REVIEW_MANIFEST: ${{ env.ARTIFACT }}/release-manifest.json
+          REVIEW_OUT: ${{ runner.temp }}/review.json
+        run: node "${TOOL%/*}/reviewed-artifact.mjs"
       - name: Verify artifact digest and source binding
         id: verify
         if: inputs.mode == 'publish'
         env:
-          DIGEST: ${{ needs.build.outputs.artifact_sha256 }}
+          DIGEST: ${{ inputs.reviewed_artifact_sha256 }}
           SOURCE_SHA: ${{ inputs.source_sha }}
           MAX_FILE: ${{ inputs.max_file_mib }}
           ROUTES: ${{ inputs.required_routes }}
@@ -318,6 +402,7 @@ jobs:
           SOURCE_SHA: ${{ inputs.source_sha }}
           RESTORE_SHA: ${{ inputs.restore_from_sha }}
           TOOLING_SHA: ${{ inputs.tooling_sha }}
+          CORRELATION_ID: ${{ inputs.correlation_id }}
           DIGEST: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
           POSTDEPLOY_OUTCOME: ${{ steps.postdeploy.outcome }}
@@ -334,9 +419,11 @@ jobs:
             const result = {
               schema: "static-release-result/v1", status: process.argv[1], mode: e.MODE, site: e.SITE_ID, url: e.SITE_URL,
               repository: e.GITHUB_REPOSITORY, run: `${e.GITHUB_SERVER_URL}/${e.GITHUB_REPOSITORY}/actions/runs/${e.GITHUB_RUN_ID}`,
-              runAttempt: e.GITHUB_RUN_ATTEMPT, sourceSha: e.SOURCE_SHA || null, restoreFromSha: e.RESTORE_SHA || null,
+              runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT,
+              correlationId: e.CORRELATION_ID || null, sourceSha: e.SOURCE_SHA || null, restoreFromSha: e.RESTORE_SHA || null,
               toolingSha: e.TOOLING_SHA, artifactSha256: e.DIGEST || null, branch: e.BRANCH,
               rollbackTag: publish?.pushed ? e.ROLLBACK_TAG : null, publish, postdeploy: read(`${t}/postdeploy.json`),
+              review: read(`${t}/review.json`),
               stages: { publish: e.PUBLISH_OUTCOME || "skipped", postdeploy: e.POSTDEPLOY_OUTCOME || "skipped" },
               finishedAt: new Date().toISOString(),
             };

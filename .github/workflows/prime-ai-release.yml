@@ -2,6 +2,8 @@
 # No schedule, push or pull_request trigger: every run names an explicit approved source SHA.
 # Production modes additionally wait for the `prime-ai-production` Environment reviewers.
 name: prime-ai.fr release
+# Unique, parseable run title so external drivers can correlate their dispatch exactly.
+run-name: "prime-ai ${{ inputs.mode }} ${{ inputs.source_sha || inputs.restore_from_sha }} cid=${{ inputs.correlation_id || 'none' }}"
 
 on:
   workflow_dispatch:
@@ -28,6 +30,26 @@ on:
         type: choice
         options: [gh-pages, gh-pages-gold-backup]
         default: gh-pages
+      source_ref:
+        description: Branch source_sha must be reachable from. Must be main for publish; any branch (e.g. a PR head) for dry-run
+        type: string
+        default: main
+      correlation_id:
+        description: Optional unique caller id ([A-Za-z0-9._:-], max 64) shown in the run title and result manifest
+        type: string
+        default: ""
+      reviewed_run_id:
+        description: Successful manual dry-run run ID (required for publish)
+        type: string
+        default: ""
+      reviewed_artifact_id:
+        description: Immutable artifact ID from that dry-run (required for publish)
+        type: string
+        default: ""
+      reviewed_artifact_sha256:
+        description: Reviewed tree SHA-256 from release-manifest.json (required for publish)
+        type: string
+        default: ""
 
 concurrency:
   group: prime-ai-release
@@ -51,9 +73,11 @@ jobs:
           SOURCE_SHA: ${{ inputs.source_sha }}
           RESTORE_SHA: ${{ inputs.restore_from_sha }}
           CONFIRM: ${{ inputs.confirm_sha }}
+          SOURCE_REF: ${{ inputs.source_ref }}
         run: |
           set -euo pipefail
-          [[ "$MODE" == dry-run ]] && { echo "dry-run: no confirmation required"; exit 0; }
+          [[ "$MODE" == dry-run ]] && { echo "dry-run: no confirmation required (source_ref=$SOURCE_REF)"; exit 0; }
+          [[ "$SOURCE_REF" == main ]] || { echo "::error::production modes require source_ref=main (got $SOURCE_REF)"; exit 1; }
           [[ "$REF" == refs/heads/main ]] || { echo "::error::production modes must be dispatched from main (got $REF)"; exit 1; }
           expected=$SOURCE_SHA; [[ "$MODE" == restore ]] && expected=$RESTORE_SHA
           [[ -n "$expected" && "$CONFIRM" == "$expected" ]] || { echo "::error::confirm_sha does not match the SHA being released"; exit 1; }
@@ -67,7 +91,11 @@ jobs:
       cname: prime-ai.fr
       mode: ${{ inputs.mode }}
       source_sha: ${{ inputs.source_sha }}
-      approved_ref: main
+      approved_ref: ${{ inputs.mode == 'dry-run' && inputs.source_ref || 'main' }}
+      correlation_id: ${{ inputs.correlation_id }}
+      reviewed_run_id: ${{ inputs.reviewed_run_id }}
+      reviewed_artifact_id: ${{ inputs.reviewed_artifact_id }}
+      reviewed_artifact_sha256: ${{ inputs.reviewed_artifact_sha256 }}
       restore_from_sha: ${{ inputs.restore_from_sha }}
       restore_allowed_ref: ${{ inputs.restore_allowed_ref }}
       tooling_repository: ${{ github.repository }}
