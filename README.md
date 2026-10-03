@@ -1,5 +1,21 @@
 # PRIME AI V2 — local website QA
 
+## Isolated Pi tutorial integration
+
+The official `@earendil-works/pi-coding-agent` 1.0.1 runtime is installed locally
+under ignored `.tools/pi/`, not globally or in the production bundle. Its isolated
+agent configuration uses the existing loopback Ollama `qwen3:8b`; no paid provider
+or credentials were added. This local installation is not restored by `npm ci`.
+
+`node scripts/pi-local.mjs check` verifies model discovery without inference.
+`node scripts/pi-local.mjs review` runs a bounded, non-persisted read-only logo
+review, with a 3 GiB disk guard and 120-second timeout. Extensions, project resource
+approval and global context discovery are disabled; no bash/write/edit tools are
+exposed. The launcher restricts the selected task, but is not an OS filesystem
+sandbox. Generated answers still require verification: the first live check
+confused the navy outline with the blue stroke. Pi is not a release controller,
+does not change deployment approval policy and does not prove website publication.
+
 `/convergence` displays a two-color progress pie based on ten equally weighted,
 documented milestones. It is a dated evidence snapshot, not live agent telemetry,
 elapsed effort or an ETA. Production publication and unconnected integrations
