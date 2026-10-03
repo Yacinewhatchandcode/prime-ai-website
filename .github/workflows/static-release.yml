@@ -1,0 +1,361 @@
+# Reusable, guarded static-site release to a legacy GitHub Pages branch.
+#
+# Contract (see docs/STATIC_RELEASE.md):
+#   * Builds ONLY an explicit, immutable 40-char source SHA that is reachable from `approved_ref`.
+#   * Runs targeted tests + build, prepares CNAME/.nojekyll, validates the artifact (path allowlist,
+#     size limits, secret scan) and binds source SHA -> artifact SHA-256 in release-manifest.json.
+#   * The deploy job runs only for mode publish/restore, never for pull_request events, only behind a
+#     GitHub Environment that has required reviewers, and serialised per Pages branch.
+#   * Before updating the Pages branch it pushes a rollback tag to the previous tip; the update is a
+#     normal fast-forward push (never --force). Post-deploy checks home, assets and manifest.
+#   * Writes an explicit result manifest (success or failure) as a workflow artifact + job summary.
+#
+# Callers must grant: contents: write, pages: write, actions: read (publish/restore);
+# contents: read, actions: read (dry-run only).
+name: static-release (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      site_id: { type: string, required: true, description: "Short id, e.g. prime-ai" }
+      site_url: { type: string, required: true, description: "Production base URL, e.g. https://prime-ai.fr" }
+      cname: { type: string, required: true, description: "Exact expected CNAME; release fails if it differs" }
+      mode: { type: string, default: dry-run, description: "dry-run | publish | restore" }
+      source_repository: { type: string, default: "", description: "owner/repo of the site source (default: caller repo)" }
+      source_sha: { type: string, default: "", description: "Approved immutable 40-char source commit (dry-run/publish)" }
+      approved_ref: { type: string, default: main, description: "Branch the source SHA must be reachable from" }
+      restore_from_sha: { type: string, default: "", description: "Pages commit whose tree is republished (restore)" }
+      restore_allowed_ref: { type: string, default: gh-pages, description: "Branch whose history must contain restore_from_sha" }
+      tooling_repository: { type: string, default: Yacinewhatchandcode/prime-ai-website }
+      tooling_sha: { type: string, required: true, description: "Immutable commit of the release tooling" }
+      node_version: { type: string, default: "22" }
+      install_command: { type: string, default: "npm ci --no-audit --no-fund" }
+      test_command: { type: string, default: "" }
+      build_command: { type: string, default: "npm run build" }
+      post_build_test_command: { type: string, default: "" }
+      output_dir: { type: string, default: dist }
+      spa_404: { type: boolean, default: false }
+      required_routes: { type: string, default: "", description: "Comma list of directory routes; each needs <route>/index.html and must serve 200 after publish" }
+      pages_branch: { type: string, default: gh-pages }
+      environment: { type: string, default: "", description: "Protected GitHub Environment (required for publish/restore)" }
+      min_free_gib: { type: number, default: 3 }
+      max_file_mib: { type: number, default: 95 }
+      artifact_retention_days: { type: number, default: 30 }
+      postdeploy_timeout_sec: { type: number, default: 900 }
+    outputs:
+      artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 }}" }
+      result: { value: "${{ jobs.deploy.outputs.status }}" }
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Validate inputs and release gates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          MODE: ${{ inputs.mode }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          RESTORE_SHA: ${{ inputs.restore_from_sha }}
+          TOOLING_SHA: ${{ inputs.tooling_sha }}
+          ENVIRONMENT: ${{ inputs.environment }}
+          SITE_ID: ${{ inputs.site_id }}
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$1"; exit 1; }
+          sha() { [[ "$1" =~ ^[0-9a-f]{40}$ ]]; }
+          [[ "$SITE_ID" =~ ^[a-z0-9][a-z0-9-]{0,40}$ ]] || fail "site_id must be lowercase kebab-case"
+          sha "$TOOLING_SHA" || fail "tooling_sha must be a full 40-char SHA"
+          case "$MODE" in
+            dry-run|publish) sha "$SOURCE_SHA" || fail "source_sha must be a full 40-char SHA for $MODE" ;;
+            restore) sha "$RESTORE_SHA" || fail "restore_from_sha must be a full 40-char SHA" ;;
+            *) fail "mode must be dry-run, publish or restore (got '$MODE')" ;;
+          esac
+          if [[ "$MODE" != dry-run ]]; then
+            [[ "$EVENT" != pull_request* ]] || fail "production modes are never allowed from $EVENT"
+            [[ -n "$ENVIRONMENT" ]] || fail "environment is required for $MODE"
+            reviewers=$(gh api "repos/$REPO/environments/$ENVIRONMENT" \
+              --jq '[.protection_rules[]? | select(.type == "required_reviewers")] | length') \
+              || fail "environment '$ENVIRONMENT' not found or unreadable; refusing to deploy without manual approval"
+            [[ "$reviewers" -ge 1 ]] || fail "environment '$ENVIRONMENT' has no required reviewers; configure manual approval first"
+          fi
+          echo "preflight ok: mode=$MODE event=$EVENT"
+
+  build:
+    needs: preflight
+    if: inputs.mode != 'restore'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+    outputs:
+      artifact_sha256: ${{ steps.validate.outputs.artifact_sha256 }}
+      index_sha256: ${{ steps.validate.outputs.index_sha256 }}
+      artifact_name: ${{ steps.names.outputs.artifact_name }}
+    env:
+      TOOL: ${{ github.workspace }}/.release-tooling/scripts/release/static-release.mjs
+    steps:
+      - name: Checkout release tooling (pinned)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.tooling_repository }}
+          ref: ${{ inputs.tooling_sha }}
+          path: .release-tooling
+          persist-credentials: false
+      - name: Checkout approved source (pinned)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.source_repository || github.repository }}
+          ref: ${{ inputs.source_sha }}
+          path: source
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+      - name: Verify source SHA and disk guard
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          APPROVED_REF: ${{ inputs.approved_ref }}
+          MIN_FREE: ${{ inputs.min_free_gib }}
+        run: |
+          set -euo pipefail
+          git -C source fetch --no-tags origin "+refs/heads/$APPROVED_REF:refs/remotes/origin/$APPROVED_REF"
+          node "$TOOL" verify-source --repo source --sha "$SOURCE_SHA" --approved-ref "refs/remotes/origin/$APPROVED_REF"
+          node "$TOOL" disk-guard --dir "$GITHUB_WORKSPACE" --min-gib "$MIN_FREE"
+      - name: Install
+        working-directory: source
+        env: { CMD: "${{ inputs.install_command }}" }
+        run: bash -euo pipefail -c "$CMD"
+      - name: Targeted tests
+        if: inputs.test_command != ''
+        working-directory: source
+        env: { CMD: "${{ inputs.test_command }}" }
+        run: bash -euo pipefail -c "$CMD"
+      - name: Build
+        working-directory: source
+        env: { CMD: "${{ inputs.build_command }}" }
+        run: bash -euo pipefail -c "$CMD"
+      - name: Post-build tests
+        if: inputs.post_build_test_command != ''
+        working-directory: source
+        env: { CMD: "${{ inputs.post_build_test_command }}" }
+        run: bash -euo pipefail -c "$CMD"
+      - name: Prepare and validate artifact (bind source SHA -> artifact SHA-256)
+        id: validate
+        env:
+          OUT: source/${{ inputs.output_dir }}
+          CNAME: ${{ inputs.cname }}
+          SPA_404: ${{ inputs.spa_404 }}
+          SITE_ID: ${{ inputs.site_id }}
+          SOURCE_REPO: ${{ inputs.source_repository || github.repository }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          TOOLING_SHA: ${{ inputs.tooling_sha }}
+          MAX_FILE: ${{ inputs.max_file_mib }}
+          ROUTES: ${{ inputs.required_routes }}
+        run: |
+          set -euo pipefail
+          node "$TOOL" prepare --dir "$OUT" --cname "$CNAME" --spa-404 "$SPA_404"
+          node "$TOOL" validate --dir "$OUT" --cname "$CNAME" --max-file-mib "$MAX_FILE" --required-routes "$ROUTES" --site-id "$SITE_ID" \
+            --source-repository "$SOURCE_REPO" --source-sha "$SOURCE_SHA" --tooling-sha "$TOOLING_SHA" \
+            --run-id "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" --github-output
+      - name: Artifact name
+        id: names
+        run: echo "artifact_name=static-release-${{ inputs.site_id }}-${{ github.run_id }}-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
+      - name: Store immutable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.names.outputs.artifact_name }}
+          path: source/${{ inputs.output_dir }}
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: ${{ inputs.artifact_retention_days }}
+      - name: Dry-run publish plan (no push)
+        if: inputs.mode == 'dry-run'
+        env:
+          OUT: source/${{ inputs.output_dir }}
+          BRANCH: ${{ inputs.pages_branch }}
+          CNAME: ${{ inputs.cname }}
+          PAGES_URL: ${{ github.server_url }}/${{ github.repository }}.git
+        run: |
+          set -euo pipefail
+          git init -q pages-plan && git -C pages-plan remote add origin "$PAGES_URL"
+          node "$TOOL" publish --repo pages-plan --dir "$OUT" --branch "$BRANCH" --cname "$CNAME" --dry-run \
+            --message "dry-run" --rollback-tag "pages-rollback/dry-run" | tee "$RUNNER_TEMP/plan.json"
+      - name: Summary
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          DIGEST: ${{ steps.validate.outputs.artifact_sha256 }}
+          COUNT: ${{ steps.validate.outputs.file_count }}
+          BYTES: ${{ steps.validate.outputs.total_bytes }}
+        run: |
+          {
+            echo "### Static release build (${{ inputs.site_id }}, mode ${{ inputs.mode }})"
+            echo "- source: \`$SOURCE_SHA\`"
+            echo "- artifact sha256: \`$DIGEST\` ($COUNT files, $BYTES bytes)"
+            [[ -f "$RUNNER_TEMP/plan.json" ]] && { echo '- dry-run plan:'; echo '```json'; cat "$RUNNER_TEMP/plan.json"; echo '```'; }
+            true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: [preflight, build]
+    if: >-
+      always() && needs.preflight.result == 'success' &&
+      (inputs.mode == 'publish' || inputs.mode == 'restore') &&
+      !startsWith(github.event_name, 'pull_request') &&
+      (needs.build.result == 'success' || (inputs.mode == 'restore' && needs.build.result == 'skipped'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ inputs.site_url }}
+    concurrency:
+      group: static-release-pages-${{ github.repository }}-${{ inputs.pages_branch }}
+      cancel-in-progress: false
+    outputs:
+      status: ${{ steps.result.outputs.status }}
+    env:
+      TOOL: ${{ github.workspace }}/.release-tooling/scripts/release/static-release.mjs
+      ARTIFACT: ${{ github.workspace }}/release-artifact
+      BRANCH: ${{ inputs.pages_branch }}
+      CNAME: ${{ inputs.cname }}
+      ROLLBACK_TAG: pages-rollback/${{ inputs.site_id }}/${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Checkout release tooling (pinned)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.tooling_repository }}
+          ref: ${{ inputs.tooling_sha }}
+          path: .release-tooling
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+      - name: Checkout Pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.pages_branch }}
+          path: pages-repo
+          fetch-depth: 0
+          filter: blob:none
+      - name: Download approved artifact
+        if: inputs.mode == 'publish'
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact_name }}
+          path: release-artifact
+      - name: Verify artifact digest and source binding
+        id: verify
+        if: inputs.mode == 'publish'
+        env:
+          DIGEST: ${{ needs.build.outputs.artifact_sha256 }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          MAX_FILE: ${{ inputs.max_file_mib }}
+          ROUTES: ${{ inputs.required_routes }}
+        run: |
+          node "$TOOL" verify-artifact --dir "$ARTIFACT" --expected-digest "$DIGEST" --source-sha "$SOURCE_SHA" \
+            --cname "$CNAME" --max-file-mib "$MAX_FILE" --required-routes "$ROUTES" --github-output
+      - name: Extract and validate restore tree
+        id: restore
+        if: inputs.mode == 'restore'
+        env:
+          RESTORE_SHA: ${{ inputs.restore_from_sha }}
+          ALLOWED: ${{ inputs.restore_allowed_ref }}
+          MAX_FILE: ${{ inputs.max_file_mib }}
+        run: |
+          set -euo pipefail
+          git -C pages-repo fetch --no-tags origin "+refs/heads/$ALLOWED:refs/remotes/origin/$ALLOWED"
+          node "$TOOL" extract-tree --repo pages-repo --sha "$RESTORE_SHA" --allowed-ref "refs/remotes/origin/$ALLOWED" \
+            --out-dir "$ARTIFACT" --cname "$CNAME" --max-file-mib "$MAX_FILE" --github-output
+      - name: Save rollback tag, then fast-forward Pages branch (no force)
+        id: publish
+        env:
+          MODE: ${{ inputs.mode }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          RESTORE_SHA: ${{ inputs.restore_from_sha }}
+          DIGEST: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [[ "$MODE" == restore ]]; then subject="Restore Pages tree from $RESTORE_SHA"; else subject="Release source $SOURCE_SHA"; fi
+          message=$(printf '%s\n\nartifact-sha256: %s\nrun: %s\n' "$subject" "$DIGEST" "$RUN_URL")
+          node "$TOOL" publish --repo pages-repo --dir "$ARTIFACT" --branch "$BRANCH" --cname "$CNAME" \
+            --message "$message" --rollback-tag "$ROLLBACK_TAG" --github-output --out "$RUNNER_TEMP/publish.json"
+      - name: Request Pages build (best effort; legacy source also builds on push)
+        if: steps.publish.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
+      - name: Post-deployment checks (home, assets, manifest)
+        id: postdeploy
+        env:
+          URL: ${{ inputs.site_url }}
+          INDEX_SHA: ${{ steps.verify.outputs.index_sha256 || steps.restore.outputs.index_sha256 }}
+          MODE: ${{ inputs.mode }}
+          TIMEOUT: ${{ inputs.postdeploy_timeout_sec }}
+          ROUTES: ${{ inputs.required_routes }}
+        run: |
+          set -euo pipefail
+          extra=()
+          # Restored legacy trees predate required routes, so routes are only enforced for publish.
+          [[ "$MODE" == publish ]] && extra=(--manifest "$ARTIFACT/release-manifest.json" --paths "$ROUTES")
+          node "$TOOL" postdeploy --url "$URL" --index-sha256 "$INDEX_SHA" "${extra[@]}" \
+            --timeout-sec "$TIMEOUT" --interval-sec 20 --out "$RUNNER_TEMP/postdeploy.json"
+      - name: Result manifest
+        id: result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+          MODE: ${{ inputs.mode }}
+          SITE_ID: ${{ inputs.site_id }}
+          SITE_URL: ${{ inputs.site_url }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          RESTORE_SHA: ${{ inputs.restore_from_sha }}
+          TOOLING_SHA: ${{ inputs.tooling_sha }}
+          DIGEST: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          POSTDEPLOY_OUTCOME: ${{ steps.postdeploy.outcome }}
+        run: |
+          set -euo pipefail
+          status=failed
+          [[ "$JOB_STATUS" == success ]] && status=succeeded
+          # shellcheck disable=SC2016 # JavaScript template literals, not shell expansion
+          node -e '
+            const fs = require("fs");
+            const read = f => { try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch { return null; } };
+            const t = process.env.RUNNER_TEMP, e = process.env;
+            const publish = read(`${t}/publish.json`);
+            const result = {
+              schema: "static-release-result/v1", status: process.argv[1], mode: e.MODE, site: e.SITE_ID, url: e.SITE_URL,
+              repository: e.GITHUB_REPOSITORY, run: `${e.GITHUB_SERVER_URL}/${e.GITHUB_REPOSITORY}/actions/runs/${e.GITHUB_RUN_ID}`,
+              runAttempt: e.GITHUB_RUN_ATTEMPT, sourceSha: e.SOURCE_SHA || null, restoreFromSha: e.RESTORE_SHA || null,
+              toolingSha: e.TOOLING_SHA, artifactSha256: e.DIGEST || null, branch: e.BRANCH,
+              rollbackTag: publish?.pushed ? e.ROLLBACK_TAG : null, publish, postdeploy: read(`${t}/postdeploy.json`),
+              stages: { publish: e.PUBLISH_OUTCOME || "skipped", postdeploy: e.POSTDEPLOY_OUTCOME || "skipped" },
+              finishedAt: new Date().toISOString(),
+            };
+            fs.writeFileSync(`${t}/release-result.json`, JSON.stringify(result, null, 2) + "\n");
+          ' "$status"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Static release result: **$status** ($MODE, $SITE_ID)"
+            echo '```json'; cat "$RUNNER_TEMP/release-result.json"; echo '```'
+            if [[ -f "$RUNNER_TEMP/publish.json" ]] && grep -q '"pushed": true' "$RUNNER_TEMP/publish.json"; then
+              prev=$(node -p 'require(process.env.RUNNER_TEMP + "/publish.json").previous_sha')
+              echo "Rollback: re-run this workflow with \`mode: restore\`, \`restore_from_sha: $prev\`, \`restore_allowed_ref: $BRANCH\` (tag \`$ROLLBACK_TAG\`)."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload result manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-release-result-${{ inputs.site_id }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/release-result.json
+          if-no-files-found: warn
+          retention-days: 90

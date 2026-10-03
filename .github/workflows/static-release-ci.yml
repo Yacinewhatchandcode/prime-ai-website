@@ -1,0 +1,52 @@
+# PR validation on GitHub runners (no local disk needed). Read-only token; can never publish:
+# the reusable workflow's deploy job is excluded for pull_request events and dry-run mode.
+# Dry-runs the PR head (tests, build, artifact validation, gh-pages publish plan) using the
+# release tooling from the PR merge commit.
+name: static-release CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: static-release-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  tooling-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test scripts/release/static-release.test.mjs
+      - name: actionlint
+        run: |
+          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
+          ./actionlint -color
+
+  prime-dry-run:
+    needs: tooling-tests
+    uses: ./.github/workflows/static-release.yml
+    with:
+      site_id: prime-ai
+      site_url: https://prime-ai.fr
+      cname: prime-ai.fr
+      mode: dry-run
+      source_repository: ${{ github.event.pull_request.head.repo.full_name }}
+      source_sha: ${{ github.event.pull_request.head.sha }}
+      approved_ref: ${{ github.event.pull_request.head.ref }}
+      tooling_repository: ${{ github.repository }}
+      tooling_sha: ${{ github.sha }}
+      test_command: npm run qa:routes && npm run test:data && npm run test:proxy
+      build_command: npm run build
+      output_dir: dist
+      artifact_retention_days: 1
