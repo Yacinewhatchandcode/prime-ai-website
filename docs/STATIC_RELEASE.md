@@ -16,7 +16,8 @@ manual, approval-gated, non-force GitHub Actions release to the legacy Pages bra
 1. **Approved immutable source**: `source_sha` must be a full 40-character SHA. It must equal the
    checked-out HEAD, be reachable from `approved_ref` (default `main`), and have no tracked
    modifications.
-2. **Targeted tests and build** run on GitHub runners after a disk guard (`min_free_gib`, default 3).
+2. **Targeted tests and build** run only in dry-run mode on GitHub runners after a disk guard
+   (`min_free_gib`, default 3). Publish never installs dependencies or rebuilds.
 3. **Artifact validation** enforces:
    - an extension and path allowlist: no dotfiles except a root `.nojekyll`, no symlinks, no source maps
    - per-file and total size limits
@@ -27,7 +28,12 @@ manual, approval-gated, non-force GitHub Actions release to the legacy Pages bra
 4. **Source to artifact binding**: `release-manifest.json` is served publicly and contains no
    secrets. It records `sourceSha`, `toolingSha`, the run id, `indexSha256` and `artifactSha256`
    (SHA-256 over the sorted `sha256  path` lines). The artifact is stored with
-   `actions/upload-artifact`. The deploy job re-hashes the downloaded files and refuses any mismatch.
+   `actions/upload-artifact`. Publish requires explicit `reviewed_run_id`, `reviewed_artifact_id`
+   and `reviewed_artifact_sha256`. Preflight verifies the successful manual PRIME dry-run on
+   `main`, repository, workflow identity, source in its run title, artifact ID, expiry, run
+   attempt and immutable archive digest. The deploy job downloads that exact artifact ID,
+   repeats the metadata checks after approval, verifies the manifest's source/repository/site/
+   validation tooling/run binding, and re-hashes the downloaded files. Any mismatch fails closed.
 5. **Manual approval**: publish and restore require the GitHub Environment `prime-ai-production`
    with **required reviewers**. Preflight fails closed if the environment is missing or has no
    reviewers. Production modes are refused for `pull_request*` events. They must be dispatched from
@@ -65,7 +71,9 @@ gh workflow run prime-ai-release.yml --ref main -f mode=dry-run -f source_sha=<4
 
 # Publish (waits for prime-ai-production reviewers):
 gh workflow run prime-ai-release.yml --ref main -f mode=publish \
-  -f source_sha=<SHA> -f confirm_sha=<SHA>
+  -f source_sha=<SHA> -f confirm_sha=<SHA> \
+  -f reviewed_run_id=<successful-dry-run-id> -f reviewed_artifact_id=<immutable-artifact-id> \
+  -f reviewed_artifact_sha256=<reviewed-tree-digest>
 
 # Rollback / restore a known-good Pages tree as a new forward commit:
 gh workflow run prime-ai-release.yml --ref main -f mode=restore \
@@ -140,6 +148,41 @@ Restore checks only the home hash (legacy trees carry no manifest). To roll back
 The PRIME caller requires the replica route pages
 `replica,responsive-preview,semantic-library,replica-image,convergence,legacy`. A source SHA
 without them, such as the current `main` `712e825`, is rejected at validation.
+
+### Reviewing and consuming an immutable artifact
+
+The dry-run summary includes the immutable artifact ID and tree digest. Inspect/download the
+artifact before authorizing publish. You can also list its metadata with:
+
+```sh
+gh api repos/Yacinewhatchandcode/prime-ai-website/actions/runs/<dry-run-id>/artifacts
+```
+
+The Actions archive `digest` is different from the tree digest in `release-manifest.json`;
+`reviewed_artifact_sha256` must be the latter. The selected run must be a completed successful
+manual `prime-ai-release.yml` dry-run dispatched from `main`. PR CI artifacts and artifacts
+built using unmerged tooling are not eligible. The source must be reachable from `main` at
+publish time. An artifact built from a PR head can be consumed only if that exact source SHA
+is subsequently reachable from `main`; if a squash/rebase changes the SHA, validate the new SHA.
+The artifact name must match `static-release-<site>-<run>-<attempt>`, preventing a previous
+attempt's artifact from being selected after a rerun. Deleted/expired artifacts require a new
+dry-run and a fresh review; publish has no rebuild fallback.
+
+The result manifest adds `review` (or `null` for restore/failed verification), containing
+`validationRunId`, `validationRunAttempt`, `artifactId`, `artifactSha256`,
+`validationToolingSha` and `artifactArchiveDigest`. Preserve this raw evidence separately from
+the ORB normalized all-sites receipt. Reviewer approval, rollback and deployment locks remain
+mandatory. No single-owner approval policy is implemented or activated by this change.
+
+The live `release-manifest.json` retains the original dry-run identity: `toolingSha` must match
+`review.validationToolingSha`, and its `runId` is exactly
+`<review.validationRunId>-<review.validationRunAttempt>`. The result's top-level `toolingSha`,
+`runId` and `runAttempt` identify the later production dispatch, not the original validation.
+Do not compare the live marker's run/tooling identity to the production dispatch fields.
+
+This reviewed-publish contract currently trusts the PRIME manual validation workflow in the
+same repository. Other repositories must supply an equivalent approved validation workflow;
+do not treat a same-named artifact from arbitrary CI as approved evidence.
 
 ## Reusing for another site
 

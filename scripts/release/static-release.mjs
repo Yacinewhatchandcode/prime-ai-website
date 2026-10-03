@@ -150,6 +150,9 @@ export function verifyArtifact(dir, { expectedDigest, expectedSourceSha, policy 
   if (!expectedDigest || result.artifactSha256 !== expectedDigest) throw new ReleaseError('verify', `artifact digest ${result.artifactSha256} != approved ${expectedDigest}`);
   if (manifest.artifactSha256 !== result.artifactSha256) throw new ReleaseError('verify', 'manifest digest does not match artifact contents');
   if (expectedSourceSha && manifest.sourceSha !== expectedSourceSha) throw new ReleaseError('verify', `manifest sourceSha ${manifest.sourceSha} != ${expectedSourceSha}`);
+  if (manifest.indexSha256 && manifest.indexSha256 !== sha256(fs.readFileSync(path.join(dir, 'index.html')))) {
+    throw new ReleaseError('verify', 'manifest indexSha256 does not match index.html');
+  }
   return { manifest, ...result };
 }
 

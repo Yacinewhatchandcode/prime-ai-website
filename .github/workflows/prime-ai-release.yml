@@ -38,6 +38,18 @@ on:
         description: Optional unique caller id ([A-Za-z0-9._:-], max 64) shown in the run title and result manifest
         type: string
         default: ""
+      reviewed_run_id:
+        description: Successful manual dry-run run ID (required for publish)
+        type: string
+        default: ""
+      reviewed_artifact_id:
+        description: Immutable artifact ID from that dry-run (required for publish)
+        type: string
+        default: ""
+      reviewed_artifact_sha256:
+        description: Reviewed tree SHA-256 from release-manifest.json (required for publish)
+        type: string
+        default: ""
 
 concurrency:
   group: prime-ai-release
@@ -81,6 +93,9 @@ jobs:
       source_sha: ${{ inputs.source_sha }}
       approved_ref: ${{ inputs.mode == 'dry-run' && inputs.source_ref || 'main' }}
       correlation_id: ${{ inputs.correlation_id }}
+      reviewed_run_id: ${{ inputs.reviewed_run_id }}
+      reviewed_artifact_id: ${{ inputs.reviewed_artifact_id }}
+      reviewed_artifact_sha256: ${{ inputs.reviewed_artifact_sha256 }}
       restore_from_sha: ${{ inputs.restore_from_sha }}
       restore_allowed_ref: ${{ inputs.restore_allowed_ref }}
       tooling_repository: ${{ github.repository }}
