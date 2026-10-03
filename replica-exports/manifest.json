@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-10-03T14:51:11.238Z",
+  "renderer": "Chromium / Playwright",
+  "source": "/replica",
+  "scaleFactor": 2,
+  "images": [
+    {
+      "filename": "prime-ai-full-1440.png",
+      "label": "Full desktop replica",
+      "viewport": {
+        "width": 1440,
+        "height": 2572
+      },
+      "pixelWidth": 2880,
+      "pixelHeight": 5144,
+      "sha256": "ed3a7c211199227819daf0331bfe1a12a434bb4927b1710cd7d747026bb19624",
+      "bytes": 5750878
+    },
+    {
+      "filename": "prime-ai-full-390.png",
+      "label": "Full mobile replica",
+      "viewport": {
+        "width": 390,
+        "height": 3939
+      },
+      "pixelWidth": 780,
+      "pixelHeight": 7878,
+      "sha256": "c20c1c9d616e0375f2cb1b2d75b6e25ea64942fc5bac29d8c19d7489eb01183d",
+      "bytes": 2784781
+    }
+  ],
+  "limitation": "Exact captures of the rendered local implementation, not a claim of pixel-identical matching to the original artwork. Reference illustration resolution is unchanged.",
+  "composition": {
+    "filename": "prime-ai-complete-paired.png",
+    "pixelWidth": 2965,
+    "pixelHeight": 6273,
+    "method": "Both complete captured pages, proportionally scaled and placed side by side. No sections are cropped."
+  }
+}

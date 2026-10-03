@@ -1,0 +1,13 @@
+{
+  "schema": "static-release/v1",
+  "siteId": "prime-ai",
+  "sourceRepository": "Yacinewhatchandcode/prime-ai-website",
+  "sourceSha": "185b48dd1e1abb177ccbc79245d5fb794ab15b47",
+  "toolingSha": "185b48dd1e1abb177ccbc79245d5fb794ab15b47",
+  "runId": "37136660690-1",
+  "builtAt": "2026-10-03T16:25:09.914Z",
+  "indexSha256": "989002ecd205a47b742e8d41766ccf7d5870002f82e80dc779817fb3562eab72",
+  "artifactSha256": "509897156d921dc2ccb22aab7a08ed4718893ce2c5c38fcf296ba724d6e4190f",
+  "fileCount": 106,
+  "totalBytes": 99649922
+}
