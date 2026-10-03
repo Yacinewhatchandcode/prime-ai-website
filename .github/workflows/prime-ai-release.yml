@@ -50,6 +50,15 @@ on:
         description: Reviewed tree SHA-256 from release-manifest.json (required for publish)
         type: string
         default: ""
+      approval_policy:
+        description: Explicit approval policy; default remains required reviewers
+        type: choice
+        options: [required-reviewers/v1, single-owner/v1]
+        default: required-reviewers/v1
+      policy_approval:
+        description: Exact single-owner/v1 repository/source/digest/run/artifact approval token
+        type: string
+        default: ""
 
 concurrency:
   group: prime-ai-release
@@ -96,6 +105,8 @@ jobs:
       reviewed_run_id: ${{ inputs.reviewed_run_id }}
       reviewed_artifact_id: ${{ inputs.reviewed_artifact_id }}
       reviewed_artifact_sha256: ${{ inputs.reviewed_artifact_sha256 }}
+      approval_policy: ${{ inputs.approval_policy }}
+      policy_approval: ${{ inputs.policy_approval }}
       restore_from_sha: ${{ inputs.restore_from_sha }}
       restore_allowed_ref: ${{ inputs.restore_allowed_ref }}
       tooling_repository: ${{ github.repository }}

@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: node --test scripts/release/static-release.test.mjs scripts/release/reviewed-artifact.test.mjs
+      - run: node --test scripts/release/static-release.test.mjs scripts/release/reviewed-artifact.test.mjs scripts/release/approval-policy.test.mjs
       - name: actionlint
         run: |
           bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash) 1.7.12
