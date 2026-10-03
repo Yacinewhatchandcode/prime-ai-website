@@ -2,6 +2,22 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
+import process from 'node:process'
+import { copyFile, mkdir } from 'node:fs/promises'
+import path from 'node:path'
+import { createIntentProxy } from './scripts/intent-proxy.mjs'
+
+function localIntentBridge() {
+  return {
+    name: 'prime-local-intent-bridge',
+    configureServer(server) {
+      server.middlewares.use(createIntentProxy({
+        backend: process.env.LOCAL_INTENT_URL,
+        tokenFile: process.env.LOCAL_INTENT_TOKEN_FILE,
+      }));
+    },
+  }
+}
 
 function offlineShell() {
   return {
@@ -51,9 +67,24 @@ self.addEventListener('fetch', event => {
   }
 }
 
+function staticRoutePages() {
+  return {
+    name: 'prime-static-route-pages',
+    apply: 'build',
+    async writeBundle(options) {
+      const output = options.dir || 'dist'
+      for (const route of ['replica', 'responsive-preview', 'semantic-library', 'replica-image', 'convergence', 'legacy']) {
+        const directory = path.join(output, route)
+        await mkdir(directory, { recursive: true })
+        await copyFile(path.join(output, 'index.html'), path.join(directory, 'index.html'))
+      }
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), offlineShell()],
+  plugins: [react(), offlineShell(), localIntentBridge(), staticRoutePages()],
   resolve: {
     alias: {
       'react': fileURLToPath(new URL('./node_modules/react', import.meta.url)),

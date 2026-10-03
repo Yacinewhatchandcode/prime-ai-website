@@ -46,7 +46,8 @@ jobs:
       approved_ref: ${{ github.event.pull_request.head.ref }}
       tooling_repository: ${{ github.repository }}
       tooling_sha: ${{ github.sha }}
-      test_command: npm run qa:routes && npm run test:data && npm run test:proxy
+      test_command: npm run qa:routes && npm run test:data && npm run test:proxy && node --test scripts/convergence-status.test.mjs scripts/intent-client.test.mjs scripts/intent-proxy.test.mjs scripts/replica-retrieval.test.mjs
       build_command: npm run build
       output_dir: dist
+      required_routes: replica,responsive-preview,semantic-library,replica-image,convergence,legacy
       artifact_retention_days: 1

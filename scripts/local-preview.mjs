@@ -3,6 +3,7 @@ import { readFile, realpath, stat } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createIntentProxy } from './intent-proxy.mjs';
 
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.mp4': 'video/mp4', '.webm': 'video/webm', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
 const loopback = url => url.protocol === 'http:' && ['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname) && !url.username && !url.password;
@@ -12,13 +13,14 @@ const json = (res, status, body) => {
 };
 const fail = (res, status, code, message) => json(res, status, { error: { code, message } });
 
-export async function createPreview({ directory = new URL('../dist/', import.meta.url), backend = 'http://127.0.0.1:8767', tokenFile, timeout = 8000 } = {}) {
+export async function createPreview({ directory = new URL('../dist/', import.meta.url), backend = 'http://127.0.0.1:8767', tokenFile, timeout = 8000, intentBackend, intentTokenFile } = {}) {
   const upstream = new URL(backend);
   if (!loopback(upstream) || upstream.pathname !== '/' || upstream.search || upstream.hash) throw new Error('Backend must be a plain HTTP loopback origin');
   if (!tokenFile) throw new Error('LOCAL_FLEET_TOKEN_FILE is required');
   const root = await realpath(directory instanceof URL ? fileURLToPath(directory) : directory);
   const token = (await readFile(tokenFile, 'utf8')).trim();
   if (!token || /[\r\n]/.test(token)) throw new Error('Invalid local fleet token file');
+  const intentProxy = createIntentProxy({ backend: intentBackend, tokenFile: intentTokenFile });
 
   const server = http.createServer(async (req, res) => {
     try {
@@ -27,6 +29,7 @@ export async function createPreview({ directory = new URL('../dist/', import.met
       if (!loopback(origin) || Number(origin.port) !== server.address().port) return fail(res, 403, 'HOST_DENIED', 'Loopback Host required');
       if (req.headers.origin && req.headers.origin !== origin.origin) return fail(res, 403, 'ORIGIN_DENIED', 'Same-origin requests required');
       const url = new URL(req.url, origin);
+      if (url.pathname.startsWith('/api/intent/')) return await intentProxy(req, res);
       if (url.pathname.startsWith('/api/')) {
         const endpoint = url.pathname.replace(/^\/api\/local-fleet/, '');
         const readAllowed = /^\/(health|status|missions|memory)$/.test(endpoint) || /^\/missions\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(endpoint);
@@ -127,6 +130,6 @@ export async function createPreview({ directory = new URL('../dist/', import.met
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.PORT || 4174);
   if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('Invalid PORT');
-  const server = await createPreview({ backend: process.env.LOCAL_FLEET_URL, tokenFile: process.env.LOCAL_FLEET_TOKEN_FILE });
+  const server = await createPreview({ backend: process.env.LOCAL_FLEET_URL, tokenFile: process.env.LOCAL_FLEET_TOKEN_FILE, intentBackend: process.env.LOCAL_INTENT_URL, intentTokenFile: process.env.LOCAL_INTENT_TOKEN_FILE });
   server.listen(port, '127.0.0.1', () => console.log(`Local website and fleet proxy: http://127.0.0.1:${port}`));
 }

@@ -1,0 +1,742 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-03T14:51:09.834Z",
+  "origin": "https://prime-ai.fr",
+  "scope": "All eight production metadata keywords, all seven rendered reference-replica content sections, three foundation details and six platform details. No private data or external APIs.",
+  "method": "Deterministic keyword and curated concept-alias retrieval, not vector embeddings or live fleet memory.",
+  "groups": [
+    {
+      "id": "sovereign-ai",
+      "label": "Sovereign AI",
+      "aliases": [
+        "sovereign intelligence",
+        "souverain",
+        "souveraine",
+        "human control",
+        "data ownership",
+        "your rules",
+        "own your intelligence"
+      ]
+    },
+    {
+      "id": "multi-agent",
+      "label": "Multi-agent systems",
+      "aliases": [
+        "multi agent",
+        "agents",
+        "fleet",
+        "flotte",
+        "constellation",
+        "research",
+        "creation",
+        "analysis",
+        "automation"
+      ]
+    },
+    {
+      "id": "cognition",
+      "label": "Cognitive infrastructure",
+      "aliases": [
+        "cognitive",
+        "cognition",
+        "augmented human",
+        "brain",
+        "cerveau",
+        "thinking",
+        "intelligence designed to think"
+      ]
+    },
+    {
+      "id": "orchestration",
+      "label": "AI orchestration",
+      "aliases": [
+        "orchestrate",
+        "orchestration",
+        "collaboration",
+        "collaborative",
+        "workflow",
+        "pipeline",
+        "coordination"
+      ]
+    },
+    {
+      "id": "memory",
+      "label": "Semantic memory",
+      "aliases": [
+        "memory",
+        "memoire",
+        "semantic backup",
+        "knowledge",
+        "context",
+        "sauvegarde",
+        "persistent cognition"
+      ]
+    },
+    {
+      "id": "trust",
+      "label": "Trust and privacy",
+      "aliases": [
+        "trust",
+        "confiance",
+        "privacy",
+        "confidentialite",
+        "secure",
+        "security",
+        "encrypted",
+        "data protection"
+      ]
+    },
+    {
+      "id": "edge-ai",
+      "label": "Edge AI systems",
+      "aliases": [
+        "edge",
+        "local first",
+        "local",
+        "m4",
+        "mac",
+        "macos",
+        "windows",
+        "desktop",
+        "mobile",
+        "ios",
+        "android"
+      ]
+    },
+    {
+      "id": "models",
+      "label": "Local AI models",
+      "aliases": [
+        "models",
+        "model",
+        "llm",
+        "inference",
+        "dspy",
+        "prompt",
+        "teleprompter",
+        "alignment",
+        "optimization"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "label": "Autonomous enterprise systems",
+      "aliases": [
+        "autonomous",
+        "enterprise",
+        "entreprise",
+        "impact",
+        "scale",
+        "execution",
+        "decision",
+        "business"
+      ]
+    },
+    {
+      "id": "cloud",
+      "label": "Private AI infrastructure",
+      "aliases": [
+        "private cloud",
+        "private server",
+        "cloud prive",
+        "infrastructure",
+        "decentralized",
+        "server",
+        "servers",
+        "hosting"
+      ]
+    },
+    {
+      "id": "ecosystem",
+      "label": "Platform ecosystem",
+      "aliases": [
+        "ecosystem",
+        "ecosysteme",
+        "platform",
+        "plateforme",
+        "telegram",
+        "gram",
+        "gateway",
+        "every platform",
+        "everywhere"
+      ]
+    },
+    {
+      "id": "briefing",
+      "label": "System briefing",
+      "aliases": [
+        "briefing",
+        "newsletter",
+        "subscribe",
+        "updates",
+        "architecture briefs",
+        "abonner",
+        "signup"
+      ]
+    }
+  ],
+  "metadataKeywords": [
+    "sovereign ai",
+    "multi-agent systems",
+    "cognitive infrastructure",
+    "ai orchestration",
+    "edge ai systems",
+    "local ai models",
+    "autonomous enterprise systems",
+    "private ai infrastructure"
+  ],
+  "records": [
+    {
+      "id": "replica-section-0",
+      "selector": ".replica-hero",
+      "anchor": "platform",
+      "title": "Intelligence. designed to think with you.",
+      "text": "SOVEREIGN COGNITIVE INFRASTRUCTURE Intelligence. designed to think with you. PRIME-AI orchestrates sovereign multi-agent systems to amplify your cognition and scale your impact. Deploy Sovereign Intelligence Watch Overview Sovereign AI agents Your data. Your rules. Everywhere you work COGNITIVE_HUD_v2.0 SCAN Ingesting digital memory nodes... OK Sync status: 100% synchronized Cognitive bridge established... OK CONCEPT VISUALIZATION CONNECT ORCHESTRATE AUGMENT SOVEREIGN EVERYWHERE",
+      "images": [
+        {
+          "src": "/replica-art/constellation.webp",
+          "alt": "A connected blue globe surrounded by colorful orbiting agent cities"
+        }
+      ],
+      "url": "/replica#platform",
+      "source": "Local reference replica",
+      "groups": [
+        "sovereign-ai",
+        "multi-agent",
+        "cognition",
+        "orchestration",
+        "memory",
+        "enterprise",
+        "cloud",
+        "ecosystem"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-hero",
+        "capturedAt": "2026-10-03T14:51:09.221Z"
+      }
+    },
+    {
+      "id": "replica-section-1",
+      "selector": ".replica-foundations",
+      "anchor": "platform",
+      "title": "Memory · Orchestration · Trust",
+      "text": "MEMORY Persistent cognition. Autonomous semantic backup. 01 ORCHESTRATION Systems thinking together. Synchronic collaborative multi-agents. 02 TRUST Your infrastructure. Your intelligence. Uncompromising privacy by design. 03",
+      "images": [
+        {
+          "src": "/replica-art/memory-orb.webp",
+          "alt": ""
+        },
+        {
+          "src": "/replica-art/orchestration-orb.webp",
+          "alt": ""
+        },
+        {
+          "src": "/replica-art/trust-orb.webp",
+          "alt": ""
+        }
+      ],
+      "url": "/replica#platform",
+      "source": "Local reference replica",
+      "groups": [
+        "multi-agent",
+        "cognition",
+        "orchestration",
+        "memory",
+        "trust",
+        "enterprise",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-foundations",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-section-2",
+      "selector": ".replica-augmented",
+      "anchor": "replica-brain-title",
+      "title": "Your cognition. Augmented.",
+      "text": "AUGMENTED HUMAN Your cognition. Augmented. Free your mind from execution constraints. PRIME-AI manages the technical complexity, model alignment, and background data pipelines, so you can focus on what truly matters: higher-order thinking. Amplify creativity Accelerate decisions Multiply capabilities Scale your impact THINK FURTHER CREATE MORE MOVE FASTER STAY SOVEREIGN",
+      "images": [
+        {
+          "src": "/replica-art/augmented-brain.webp",
+          "alt": "A luminous multicolored brain connected to orbiting intelligence nodes"
+        }
+      ],
+      "url": "/replica#replica-brain-title",
+      "source": "Local reference replica",
+      "groups": [
+        "cognition",
+        "models",
+        "enterprise"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-augmented",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-section-3",
+      "selector": ".replica-ecosystem",
+      "anchor": "ecosystem",
+      "title": "An intelligence present wherever you move forward.",
+      "text": "PRIME-AI ECOSYSTEM An intelligence present wherever you move forward. One ecosystem. Every platform. Your sovereign AI companion, everywhere you work, create and build. MAC macOS WINDOWS Windows OS MOBILE iOS / Android TELEGRAM (GRAM) Telegram Gateway TELEPROMPTER DSPy Optimizer PRIVATE CLOUD Private Server",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "sovereign-ai",
+        "edge-ai",
+        "models",
+        "cloud",
+        "ecosystem"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-ecosystem",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-section-4",
+      "selector": ".replica-fleet",
+      "anchor": "fleet",
+      "title": "Your Personal AI Fleet",
+      "text": "YOUR SOVEREIGN FLEET Your Personal AI Fleet A constellation of specialized AI agents, working in harmony to amplify your cognition across every domain. Book a Discovery Call RESEARCH CREATION ORCHESTRATION ANALYSIS AUTOMATION",
+      "images": [
+        {
+          "src": "/replica-art/fleet.webp",
+          "alt": "Five colorful agent cities linked into one sovereign constellation"
+        }
+      ],
+      "url": "/replica#fleet",
+      "source": "Local reference replica",
+      "groups": [
+        "multi-agent",
+        "cognition",
+        "orchestration"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-fleet",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-section-5",
+      "selector": ".replica-briefing",
+      "anchor": "briefing",
+      "title": "Stay ahead of the curve.",
+      "text": "SYSTEM BRIEFING Stay ahead of the curve. Get notified about new sovereign updates, autonomous features, and exclusive architecture briefs. Your email address Subscribe Local preview only. No email is stored or sent.",
+      "images": [],
+      "url": "/replica#briefing",
+      "source": "Local reference replica",
+      "groups": [
+        "edge-ai",
+        "enterprise",
+        "briefing"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-briefing",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-section-6",
+      "selector": ".replica-final",
+      "anchor": "replica-final-title",
+      "title": "Deploy Your Sovereign Fleet Today.",
+      "text": "PRIME-AI is not a tool. It is your cognitive advantage. Deploy Your Sovereign Fleet Today. AI is not a SaaS vendor lock-in. It is a secure, decentralized infrastructure. Own your intelligence. Deploy Sovereign Intelligence",
+      "images": [
+        {
+          "src": "/replica-art/final-globe.webp",
+          "alt": ""
+        },
+        {
+          "src": "/replica-art/final-city.webp",
+          "alt": ""
+        }
+      ],
+      "url": "/replica#replica-final-title",
+      "source": "Local reference replica",
+      "groups": [
+        "sovereign-ai",
+        "multi-agent",
+        "cognition",
+        "trust",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Rendered component text",
+        "selector": ".replica-final",
+        "capturedAt": "2026-10-03T14:51:09.222Z"
+      }
+    },
+    {
+      "id": "replica-detail-7",
+      "title": "Memory",
+      "text": "Your knowledge, connected. A local-first memory layer keeps context available across your agents without handing ownership to a cloud vendor.",
+      "images": [],
+      "url": "/replica#platform",
+      "source": "Local reference replica",
+      "groups": [
+        "multi-agent",
+        "memory",
+        "edge-ai"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-foundation:nth-of-type(1)",
+        "capturedAt": "2026-10-03T14:51:09.323Z"
+      }
+    },
+    {
+      "id": "replica-detail-8",
+      "title": "Orchestration",
+      "text": "Specialized agents collaborate around your intent. Reasoning, creation and execution become one coordinated workflow, under your control.",
+      "images": [],
+      "url": "/replica#platform",
+      "source": "Local reference replica",
+      "groups": [
+        "multi-agent",
+        "orchestration",
+        "enterprise"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-foundation:nth-of-type(2)",
+        "capturedAt": "2026-10-03T14:51:09.388Z"
+      }
+    },
+    {
+      "id": "replica-detail-9",
+      "title": "Trust",
+      "text": "Keep your models and data on infrastructure you choose. Local-first operation, clear boundaries and human oversight are core design principles.",
+      "images": [],
+      "url": "/replica#platform",
+      "source": "Local reference replica",
+      "groups": [
+        "trust",
+        "edge-ai",
+        "models",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-foundation:nth-of-type(3)",
+        "capturedAt": "2026-10-03T14:51:09.443Z"
+      }
+    },
+    {
+      "id": "replica-detail-10",
+      "title": "Mac",
+      "text": "Local-first desktop intelligence. Connect your working context on your own M4 and macOS infrastructure.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "memory",
+        "edge-ai",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(1)",
+        "capturedAt": "2026-10-03T14:51:09.525Z"
+      }
+    },
+    {
+      "id": "replica-detail-11",
+      "title": "Windows",
+      "text": "A sovereign workspace for your Windows environment, with local models and secure file-system context.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "memory",
+        "trust",
+        "edge-ai",
+        "models"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(2)",
+        "capturedAt": "2026-10-03T14:51:09.576Z"
+      }
+    },
+    {
+      "id": "replica-detail-12",
+      "title": "Mobile",
+      "text": "Take your thinking with you. A mobile companion for your notes, voice and asynchronous workflows.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "cognition",
+        "edge-ai"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(3)",
+        "capturedAt": "2026-10-03T14:51:09.642Z"
+      }
+    },
+    {
+      "id": "replica-detail-13",
+      "title": "Telegram (gram)",
+      "text": "An optional messaging gateway to your own agent infrastructure. This preview does not connect a Telegram account.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "cloud",
+        "ecosystem"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(4)",
+        "capturedAt": "2026-10-03T14:51:09.709Z"
+      }
+    },
+    {
+      "id": "replica-detail-14",
+      "title": "Teleprompter",
+      "text": "Compile and refine agent instructions through local validation and prompt optimization.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "edge-ai",
+        "models"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(5)",
+        "capturedAt": "2026-10-03T14:51:09.760Z"
+      }
+    },
+    {
+      "id": "replica-detail-15",
+      "title": "Private Cloud",
+      "text": "Run inference and data pipelines on infrastructure you control. No cloud service is provisioned by this preview.",
+      "images": [],
+      "url": "/replica#ecosystem",
+      "source": "Local reference replica",
+      "groups": [
+        "models",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Accessible component detail dialog",
+        "selector": ".replica-platform:nth-of-type(6)",
+        "capturedAt": "2026-10-03T14:51:09.826Z"
+      }
+    },
+    {
+      "id": "production-keyword-16",
+      "title": "sovereign ai",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "sovereign-ai"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-17",
+      "title": "multi-agent systems",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "multi-agent"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-18",
+      "title": "cognitive infrastructure",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "cognition",
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-19",
+      "title": "ai orchestration",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "orchestration"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-20",
+      "title": "edge ai systems",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "edge-ai"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-21",
+      "title": "local ai models",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "edge-ai",
+        "models"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-22",
+      "title": "autonomous enterprise systems",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "enterprise"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    },
+    {
+      "id": "production-keyword-23",
+      "title": "private ai infrastructure",
+      "text": "PRIME AI builds the reference layer for sovereign multi-agent AI infrastructure in Europe. We design autonomous cognitive systems, edge AI orchestration, and enterprise operational infrastructure.",
+      "images": [],
+      "url": "/semantic-library",
+      "source": "Public production metadata",
+      "groups": [
+        "cloud"
+      ],
+      "evidence": {
+        "kind": "Public HTML meta keywords",
+        "origin": "https://prime-ai.fr",
+        "capturedAt": "2026-10-03T14:23:42.465Z",
+        "sha256": "1d0a2176b52e877c199c54db283bc5ff238490d935a2e3efc8d1facd5ad0b42d"
+      }
+    }
+  ],
+  "sourceSnapshot": {
+    "capturedAt": "2026-10-03T14:23:43.129Z",
+    "publicResourceCount": 5,
+    "bundleSha256": "4dbd1f3799ea1b0221f849994447a8a9ab6ef99da71966a472599f6db0008103"
+  },
+  "artwork": {
+    "source": "User-supplied PRIME-AI visual reference",
+    "sourceDimensions": [
+      888,
+      1600
+    ],
+    "method": "Illustration-only crops. All headings, cards, navigation, forms and responsive layout are real HTML components.",
+    "regions": {
+      "constellation": [
+        320,
+        40,
+        790,
+        457
+      ],
+      "augmented-brain": [
+        389,
+        577,
+        788,
+        823
+      ],
+      "fleet": [
+        325,
+        1055,
+        874,
+        1187
+      ],
+      "memory-orb": [
+        30,
+        470,
+        101,
+        549
+      ],
+      "orchestration-orb": [
+        315,
+        470,
+        386,
+        549
+      ],
+      "trust-orb": [
+        599,
+        470,
+        670,
+        549
+      ],
+      "final-globe": [
+        34,
+        1356,
+        245,
+        1527
+      ],
+      "final-city": [
+        636,
+        1356,
+        856,
+        1527
+      ]
+    },
+    "limitation": "Original standalone high-resolution renders were not present in the repo or public landing-page bundle. These crops retain the supplied reference resolution."
+  }
+}
