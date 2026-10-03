@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { verifyReview } from './reviewed-artifact.mjs';
-import { sha256, validateArtifact, verifyArtifact, writeManifest } from './static-release.mjs';
+import { main, verifyArtifact, writeManifest } from './static-release.mjs';
 
 function fixture() {
   const source = 'a'.repeat(40), tooling = 'b'.repeat(40), digest = 'c'.repeat(64);
@@ -20,7 +20,7 @@ function fixture() {
       expires_at: '2030-01-01T00:00:00Z', digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 12, head_sha: tooling } },
     manifest: { schema: 'static-release/v1', siteId: 'prime-ai', sourceRepository: 'owner/prime',
-      sourceSha: source, toolingSha: tooling, runId: '12', artifactSha256: digest, indexSha256: 'e'.repeat(64) },
+      sourceSha: source, toolingSha: tooling, runId: '12-2', artifactSha256: digest, indexSha256: 'e'.repeat(64) },
     now: Date.parse('2026-01-01'),
   };
 }
@@ -55,6 +55,8 @@ const rejects = [
   ['manifest from other source', f => { f.manifest.sourceSha = 'e'.repeat(40); }],
   ['manifest from other tooling', f => { f.manifest.toolingSha = 'e'.repeat(40); }],
   ['manifest from other run', f => { f.manifest.runId = '13'; }],
+  ['manifest missing run attempt', f => { f.manifest.runId = '12'; }],
+  ['manifest from earlier attempt', f => { f.manifest.runId = '12-1'; }],
   ['manifest from other repository', f => { f.manifest.sourceRepository = 'other/repo'; }],
   ['manifest from other site', f => { f.manifest.siteId = 'other'; }],
   ['manifest digest mismatch', f => { f.manifest.artifactSha256 = 'e'.repeat(64); }],
@@ -89,7 +91,7 @@ test('workflow publishes only downloaded reviewed bytes, with existing approval 
     assert.ok(deploy.indexOf('verify-artifact') < deploy.indexOf('Save rollback tag'));
 });
 
-test('consumption verifies original reviewed bytes and refuses rebuilt or tampered bytes', () => {
+test('consumption verifies actual validation CLI manifest and refuses rebuilt or tampered bytes', async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-consumption-'));
   try {
     const html = '<html><script src="/assets/original.js"></script></html>';
@@ -99,10 +101,11 @@ test('consumption verifies original reviewed bytes and refuses rebuilt or tamper
     fs.writeFileSync(path.join(dir, 'CNAME'), 'prime-ai.fr\n');
     fs.writeFileSync(path.join(dir, '.nojekyll'), '');
     const f = fixture();
-    f.digest = validateArtifact(dir, { cname: 'prime-ai.fr' }).artifactSha256;
-    f.manifest.artifactSha256 = f.digest;
-    f.manifest.indexSha256 = sha256(html);
-    writeManifest(dir, f.manifest);
+    await main(['validate', '--dir', dir, '--cname', 'prime-ai.fr', '--site-id', f.site,
+      '--source-repository', f.repository, '--source-sha', f.sourceSha,
+      '--tooling-sha', f.run.head_sha, '--run-id', `${f.runId}-${f.run.run_attempt}`]);
+    f.manifest = JSON.parse(fs.readFileSync(path.join(dir, 'release-manifest.json'), 'utf8'));
+    f.digest = f.manifest.artifactSha256;
     verifyReview(f);
     assert.equal(verifyArtifact(dir, { expectedDigest: f.digest, expectedSourceSha: f.sourceSha,
       policy: { cname: 'prime-ai.fr' } }).artifactSha256, f.digest);

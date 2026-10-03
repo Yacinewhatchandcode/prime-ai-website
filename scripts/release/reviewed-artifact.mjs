@@ -24,7 +24,7 @@ export function verifyReview({ repository, site, sourceSha, runId, artifactId, d
   if (!/^sha256:[0-9a-f]{64}$/.test(artifact.digest ?? '')) fail('immutable artifact archive digest missing');
   if (manifest && (manifest.schema !== 'static-release/v1' || manifest.siteId !== site ||
       manifest.sourceRepository !== repository || manifest.sourceSha !== sourceSha ||
-      manifest.toolingSha !== run.head_sha || String(manifest.runId) !== String(runId) ||
+      manifest.toolingSha !== run.head_sha || manifest.runId !== `${runId}-${run.run_attempt}` ||
       manifest.artifactSha256 !== digest || !/^[0-9a-f]{64}$/.test(manifest.indexSha256 ?? ''))) fail('manifest source, tooling, run or tree digest mismatch');
   return { validationRunId: String(runId), validationRunAttempt: String(run.run_attempt),
     artifactId: String(artifactId), artifactSha256: digest, validationToolingSha: run.head_sha,

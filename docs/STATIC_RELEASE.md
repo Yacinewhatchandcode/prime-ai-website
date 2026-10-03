@@ -174,6 +174,12 @@ The result manifest adds `review` (or `null` for restore/failed verification), c
 the ORB normalized all-sites receipt. Reviewer approval, rollback and deployment locks remain
 mandatory. No single-owner approval policy is implemented or activated by this change.
 
+The live `release-manifest.json` retains the original dry-run identity: `toolingSha` must match
+`review.validationToolingSha`, and its `runId` is exactly
+`<review.validationRunId>-<review.validationRunAttempt>`. The result's top-level `toolingSha`,
+`runId` and `runAttempt` identify the later production dispatch, not the original validation.
+Do not compare the live marker's run/tooling identity to the production dispatch fields.
+
 This reviewed-publish contract currently trusts the PRIME manual validation workflow in the
 same repository. Other repositories must supply an equivalent approved validation workflow;
 do not treat a same-named artifact from arbitrary CI as approved evidence.
