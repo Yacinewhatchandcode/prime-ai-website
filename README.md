@@ -1,5 +1,158 @@
 # PRIME AI V2 — local website QA
 
+`/convergence` displays a two-color progress pie based on ten equally weighted,
+documented milestones. It is a dated evidence snapshot, not live agent telemetry,
+elapsed effort or an ETA. Production publication and unconnected integrations
+remain incomplete; update milestone evidence only after actual validation.
+Intent HTTP 429 responses display `RATE_LIMITED` and the server's `Retry-After`
+delay when supplied. The client never automatically retries approvals or streams.
+The build emits directory index pages for the six local routes so GitHub Pages
+can serve direct navigation without an API/rewrite server. Trailing slashes are
+normalized by the route entry component.
+
+## White PRIME-AI reference replica
+
+The local white replica uses `public/prime-trinity.svg`: a sharp custom mark of
+three interlocking equilateral triangles rotated by 40 degrees, forming nine
+outer points, in blue, white and red. This is user-directed brand symbolism
+inspired by the Bahá'í nine-point motif, not an official Bahá'í emblem or an
+assertion of religious affiliation. The footer connects the user-provided
+PRIME-AI, YACE19AI and AMLAZR domains; external links are not deployment evidence.
+The logo does not change the resolution of the separate globe illustration.
+Existing full-page image exports predate this small brand update.
+
+The logo now opens color-linked personal avatar layers: red PRIME-AI, blue
+YACE19AI, white AMLAZR. Local URLs `/replica?brand=prime`,
+`/replica?brand=yace19ai` and `/replica?brand=amlazr` select the corresponding
+profile. Selection also resolves the matching hostname if this implementation
+is later installed there; this does not deploy to or change any public domain.
+A raised CSS-3D ribbon sits mid-page, between augmented cognition and the ecosystem.
+A single tap selects a color; a second tap within 450ms unfolds its meaning and
+conversation inline below the ribbon, without a modal or scroll lock.
+Enter/Space and the explicit Unfold layer button provide accessible
+alternatives. The personal logo declaration comes directly from the user;
+additional layer meanings are labelled design copy.
+
+Voice is explicit, optional device-local browser text-to-speech: it starts only
+if an English voice reports `localService`, and stops on dialog close or unmount.
+No microphone is accessed, no speech autoplay occurs, and no introduction text
+is submitted to inference. Julia retrieval is explicitly **not connected**:
+the other Julia runtime owner confirmed its current embed is a scripted demo,
+not a verified conversational/retrieval backend. No production issuer is called
+and no Julia assets are copied from another checkout. The existing approved
+local intent service remains available within each layer, but its source scope
+is not represented as YACE19AI/AMLAZR knowledge.
+
+Brand-layer changes are live on dev port 4186. Port 4174's previously built
+version, source index and full-page image exports are not regenerated while disk
+reserve is below 3 GiB.
+
+The isolated reference implementation is the default **`/`** homepage and also
+lives at **`/replica`**. Existing workspace navigation remains at **`/legacy/#/`**
+and direct existing **`/#/...`** links. Open
+**`/responsive-preview`** to see the same real page in simultaneous 1440px desktop
+and 390px mobile iframe viewports. Controls support 1280/1024px desktop, 375px
+mobile, and resetting both panes. Each pane scrolls independently. Existing
+HashRouter routes and the gold experience are unchanged.
+
+```sh
+npm ci
+npm run dev -- --host 127.0.0.1 --port 4186 --strictPort
+# http://127.0.0.1:4186/responsive-preview
+npm run build
+npx eslint src/pages/ReplicaLanding.jsx src/pages/ResponsivePreview.jsx src/main.jsx scripts/capture-prime-reference.mjs scripts/qa-replica.mjs
+QA_OUTPUT=/absolute/path/to/artifacts node scripts/qa-replica.mjs
+```
+
+Use a supervisor/tool-managed detached process to keep the local server running.
+Do not stop other servers; choose a free port and set `QA_BASE_URL` accordingly.
+This JavaScript project has no TypeScript configuration or typecheck script;
+the production build and targeted ESLint checks validate the implementation.
+
+**`/semantic-library`** provides local source-backed retrieval of all eight public
+metadata keywords, all seven landing sections, and all nine foundation/platform
+details: 24 records in 12 concept groups. Curated aliases (including French terms)
+connect related concepts. It is deterministic keyword retrieval, not embeddings,
+AI inference, or live private fleet memory. Each result includes source type and
+timestamp; production evidence includes origin and snapshot SHA-256.
+
+**`/replica-image`** presents downloadable complete 2× desktop/mobile PNG captures
+and a tailored full-page paired composition. Both pages are complete, with their
+natural proportions preserved. These are exact captures of the implementation,
+not a promise of pixel-identical source artwork. The live page never uses the
+full-page exports as its layout.
+
+```sh
+# Run while the isolated dev server is available:
+node scripts/index-replica-content.mjs /path/to/production-reference
+npm run test:replica
+npm run export:replica
+QA_BASE_URL=http://127.0.0.1:4174 QA_OUTPUT=/path/to/artifacts npm run qa:replica
+```
+
+Image composition uses Pillow (`ImageFont.load_default(size=...)` requires a recent
+Pillow). Generated local data and images live under `public/replica-data/` and
+`public/replica-exports/`. Regenerate them after changing the landing content.
+The legacy app is lazy-loaded, avoiding loading its entire workspace bundle for
+the white homepage.
+
+The paired preview also includes a compact **written intent avatar**. Its spectrum
+is explicitly decorative and reacts to the draft text locally, not to sensors,
+agent activity or model inference. Typing retrieval is opt-in, debounced/cancellable,
+and searches the local source index without sending draft text. There is no
+automatic personal profiling, speech generation or recursive model training.
+
+The optional local intent service uses server-side authentication through
+`/api/intent/*` on both the Vite dev server and `preview:local`. Set
+`LOCAL_INTENT_URL=http://127.0.0.1:4191` and `LOCAL_INTENT_TOKEN_FILE` to the
+service-owned token path; never put its contents in client code or Vite-prefixed
+environment variables. Missing service/configuration is displayed explicitly.
+Only explicit Send creates a compiled, awaiting-approval mission. Read-only
+execution/local inference require a second explicit approval. Actual SSE mission
+events and retrieved facts are separate from generated inference; the backend
+delivers completed answers, **not token deltas**. Stop requests backend cancellation.
+ByteBot viewing, desktop mutations and VPS access stay disabled without an
+authorized adapter. No desktop stream or pointer is simulated.
+
+```sh
+node --test scripts/intent-client.test.mjs scripts/intent-proxy.test.mjs
+QA_OUTPUT=/path/to/artifacts node scripts/qa-intent-chat.mjs
+# Optional deliberate read-only backend mission, only after service is ready:
+QA_APPROVE_READ_ONLY=1 QA_OUTPUT=/path/to/artifacts node scripts/qa-intent-chat.mjs
+```
+
+Port 4174 was handed off by its previous owning QA session. The upgraded server
+uses the existing `preview:local` server so authorized loopback fleet calls remain
+proxied without exposing the token in the browser. Keep the coordinator-owned token
+file unchanged and pass its authorized path, not the token itself:
+
+```sh
+npm run build
+LOCAL_FLEET_URL=http://127.0.0.1:8767 \
+  LOCAL_FLEET_TOKEN_FILE=/authorized/path/to/api-token \
+  PORT=4174 npm run preview:local
+```
+
+The white page has accessible mobile navigation, EN/FR copy, native modal details,
+local overview/platform videos, and a deliberately **local-only** newsletter demo.
+No signup email is sent or persisted, no booking is made, and no fleet is deployed.
+The cognitive HUD and agent constellation are clearly illustrative, not live data.
+
+Artwork in `public/replica-art/` consists of illustration-only crops from the
+supplied design reference, not a whole-page screenshot. Every text element,
+card, form and navigation control is HTML. `provenance.json` records crop bounds
+and the resolution limitation: the original standalone high-resolution renders
+were not found in the repo or public production bundle. Existing local videos
+are reused. To reproduce the crops, use Pillow and
+`python3 scripts/extract-prime-art.py /path/to/reference.png public/replica-art`.
+
+`node scripts/capture-prime-reference.mjs /absolute/path/to/artifacts` records
+the production HTML, its directly linked public JS/CSS, and up to two referenced
+images, with origin, UTC timestamps and SHA-256 hashes. This bounded same-site
+capture does not execute the bundle, call APIs, submit forms, authenticate,
+crawl unrelated pages, or deploy. Keep the captured bundle in a private local
+artifact directory rather than serving it from `public/`.
+
 The website uses React, Vite and **HashRouter**. The staging source declares 31 routes,
 including ten country nodes. Navigation links alone are not the route inventory.
 `npm run qa:routes` deterministically extracts every explicit route from `src/App.jsx`,

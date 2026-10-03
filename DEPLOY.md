@@ -1,8 +1,16 @@
-# Production preparation — GitHub Pages
+# Production preparation — hosting verification required
 
-Production is GitHub Pages, publishing the `gh-pages` branch for the custom domain
-`prime-ai.fr`. The registrar/DNS owner is GoDaddy. The live site is the old
-version; this work prepares a new build **without deploying it**.
+The user identifies `prime-ai.fr` production hosting as Hostinger. The older
+GitHub Pages procedure below is historical, not a verified current deployment
+target or registrar record. Confirm each domain's hosting, document root and
+release/rollback procedure before publication. The live site is the old version;
+the latest local replica has not been deployed.
+
+The current source preview is on port 4186. Port 4174 serves an earlier build.
+Rebuilding is paused while free disk space remains below the 3 GiB reserve.
+The three-domain Julia retrieval runtime is not connected, and localhost intent
+proxies are not public production adapters. Mobile Chromium checks do not
+establish real-device iPhone/Safari acceptance or complete security assurance.
 
 ## Build and verify locally
 
@@ -58,7 +66,7 @@ server, tokens, mission storage, or QA exports. No Vercel/Netlify configuration
 is needed. Preserve `CNAME` and `.nojekyll` on that branch.
 
 The owner must independently verify repository Pages settings, HTTPS, and
-GoDaddy DNS against GitHub Pages' current documented domain records; this task
+the actual DNS provider against the selected host's documented domain records; this task
 did not query or change production/DNS. A fresh browser visit installs the
 versioned offline app shell; cache activation removes older shell caches.
 Existing open tabs use their already-loaded version until reload. APIs, videos
