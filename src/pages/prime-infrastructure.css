@@ -1,0 +1,132 @@
+.prime-infrastructure {
+  --space: #080712;
+  --surface: #11101d;
+  --text: #f5f2ff;
+  --muted: #b8b4c7;
+  --violet: #a38aff;
+  --blue: #5c8cff;
+  --red: #ff6472;
+  background: var(--space);
+  color: var(--text);
+  min-height: 75vh;
+}
+
+.prime-infrastructure .prime-hero {
+  min-height: min(720px, calc(100svh - 80px));
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: clamp(64px, 9vw, 126px) clamp(22px, 7vw, 100px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 90px);
+  overflow: hidden;
+}
+
+.prime-hero-copy { position: relative; z-index: 1; }
+.prime-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c1b1ff;
+  font: 700 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.prime-eyebrow > span { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 16px var(--violet); }
+.prime-hero h1 {
+  max-width: 770px;
+  margin: 25px 0 22px;
+  color: var(--text);
+  font-size: clamp(42px, 6.1vw, 76px);
+  font-weight: 650;
+  line-height: 1.04;
+  letter-spacing: -.055em;
+}
+.prime-lede { max-width: 620px; color: var(--muted); font-size: clamp(17px, 1.8vw, 20px); line-height: 1.65; }
+.prime-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.prime-action {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 18px;
+  border: 1px solid #ffffff2b;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.prime-action.primary { border-color: #a38aff; background: linear-gradient(110deg,#7654e4,#4931a4); box-shadow: 0 10px 30px #5035b43b; }
+.prime-action:hover { border-color: #d1c4ff; transform: translateY(-1px); }
+.prime-hero-orbit { min-height: 390px; position: relative; display: grid; place-items: center; }
+.orbit { position: absolute; border: 1px solid #a38aff42; border-radius: 50%; }
+.orbit-outer { width: min(380px,80vw); aspect-ratio: 1; transform: rotate(-24deg) scaleY(.58); }
+.orbit-inner { width: min(285px,61vw); aspect-ratio: 1; transform: rotate(28deg) scaleY(.6); border-color: #5c8cff5a; }
+.orbit-core {
+  width: 135px;
+  height: 135px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b4a1ff9c;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%,#573aa6,#17112b 70%);
+  box-shadow: 0 0 90px #8b69ff46,inset 0 0 35px #a38aff25;
+  text-align: center;
+  color: #f5f2ff;
+  font: 700 16px/1.2 ui-monospace,monospace;
+  letter-spacing: .12em;
+}
+.orbit-node { position: absolute; width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 22px currentColor; }
+.node-blue { color: var(--blue); background: var(--blue); top: 18%; left: 27%; }
+.node-red { color: var(--red); background: var(--red); bottom: 22%; left: 18%; }
+.node-violet { color: var(--violet); background: var(--violet); top: 35%; right: 10%; }
+
+.prime-architecture,.prime-sovereignty,.prime-constellation { padding: clamp(66px,9vw,112px) clamp(22px,7vw,100px); }
+.prime-architecture { background: linear-gradient(180deg,#0b0a15,#100e1b); border-top: 1px solid #ffffff0d; border-bottom: 1px solid #ffffff0d; }
+.section-heading { max-width: 1320px; margin: 0 auto 42px; }
+.section-heading h2,.sovereignty-intro h2,.prime-constellation h2 { max-width: 760px; margin: 12px 0 0; color: var(--text); font-size: clamp(28px,4vw,42px); font-weight: 600; line-height: 1.15; letter-spacing: -.035em; }
+.architecture-flow { max-width: 1320px; margin: 0 auto; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); }
+.architecture-stage { min-height: 188px; position: relative; padding: 19px 26px 15px 0; border-top: 1px solid #a38aff85; }
+.stage-number { color: #a99aff; font: 600 12px ui-monospace,monospace; }
+.architecture-stage h3 { margin: 20px 20px 8px 0; color: var(--text); font-size: 19px; }
+.architecture-stage p { max-width: 250px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.stage-arrow { position: absolute; top: 10px; right: 22px; color: var(--violet); font-size: 22px; }
+.prime-sovereignty { display: grid; grid-template-columns: minmax(220px,.8fr) minmax(0,1.2fr); gap: clamp(36px,9vw,120px); max-width: 1440px; margin: 0 auto; }
+.sovereignty-intro h2 { font-size: clamp(27px,3.5vw,40px); }
+.sovereignty-definitions { margin: 0; border-top: 1px solid #ffffff25; }
+.sovereignty-definitions > div { display: grid; grid-template-columns: minmax(150px,.65fr) minmax(0,1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid #ffffff25; }
+.sovereignty-definitions dt { color: #d9d0ff; font-weight: 650; }
+.sovereignty-definitions dd { margin: 0; color: var(--muted); line-height: 1.65; }
+.prime-constellation { display: flex; align-items: end; justify-content: space-between; gap: 35px; background: radial-gradient(ellipse at 10% 100%,#5c8cff20,transparent 45%),#100e1b; border-top: 1px solid #ffffff0d; }
+.prime-constellation h2 { max-width: 670px; font-size: clamp(24px,3.4vw,36px); }
+.constellation-links { display: flex; flex-direction: column; gap: 12px; min-width: 190px; }
+.constellation-links a { display: flex; justify-content: space-between; gap: 20px; color: #ded5ff; font-size: 14px; text-decoration: none; }
+.constellation-links a:hover { color: white; }
+
+@media (max-width: 760px) {
+  .prime-infrastructure .prime-hero { min-height: auto; grid-template-columns: 1fr; gap: 15px; padding-top: 70px; }
+  .prime-hero-orbit { min-height: 270px; }
+  .orbit-outer { width: min(300px,75vw); }
+  .orbit-inner { width: min(225px,58vw); }
+  .orbit-core { width: 110px; height: 110px; }
+  .architecture-flow { grid-template-columns: 1fr 1fr; gap: 0 20px; }
+  .architecture-stage { min-height: 190px; }
+  .stage-arrow { right: 4px; }
+  .prime-sovereignty { grid-template-columns: 1fr; }
+  .prime-constellation { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .prime-hero-actions { align-items: stretch; flex-direction: column; }
+  .prime-hero-actions a { width: 100%; }
+  .architecture-flow { grid-template-columns: 1fr; }
+  .architecture-stage { min-height: auto; padding: 20px 22px 24px 0; }
+  .architecture-stage h3 { margin-top: 12px; }
+  .stage-arrow { transform: rotate(90deg); top: auto; right: 2px; bottom: 20px; }
+  .sovereignty-definitions > div { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prime-action { transition: none; }
+}

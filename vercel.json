@@ -2,7 +2,13 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/julia-embed.js": {
+      "includeFiles": "public/julia/embed.js"
+    }
+  },
   "rewrites": [
+    { "source": "/julia/embed.js", "destination": "/api/julia-embed" },
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],

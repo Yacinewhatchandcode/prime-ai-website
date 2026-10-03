@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import en from '../locales/en';
 import fr from '../locales/fr';
 
@@ -6,15 +6,22 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    // Check local storage or default to 'en'
+    const urlLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (urlLanguage === 'fr' || urlLanguage === 'en') return urlLanguage;
     return localStorage.getItem('appLanguage') || 'en';
   });
 
   useEffect(() => {
     localStorage.setItem('appLanguage', language);
-    // Optionally update document lang attribute
     document.documentElement.lang = language;
   }, [language]);
+
+  const chooseLanguage = (nextLanguage) => {
+    setLanguage(nextLanguage);
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', nextLanguage);
+    window.history.replaceState(window.history.state, '', url);
+  };
 
   const t = (key) => {
     const keys = key.split('.');
@@ -39,12 +46,14 @@ export const LanguageProvider = ({ children }) => {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: chooseLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
+// The provider and its hook intentionally share the context module.
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (context === undefined) {

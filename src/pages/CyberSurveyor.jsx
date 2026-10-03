@@ -1,70 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Shield, Zap, Globe, Activity, Terminal, AlertTriangle, CheckCircle, Eye, Wifi, BarChart2 } from 'lucide-react';
+import { Shield, Zap, Globe, Terminal, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const PRODUCTION_URLS = [
-  { path: '/', name: 'Macro Vision V3' },
-  { path: '/sovereign-ai', name: 'Sovereign AI Infrastructure' },
-  { path: '/multi-agent-systems', name: 'Multi-Agent Mesh' },
-  { path: '/enterprise-ai-orchestration', name: 'Enterprise Workflows' },
-  { path: '/vision', name: 'Vision Document' },
-  { path: '/technologie', name: 'Technologie Spec' },
-  { path: '/ecosysteme', name: 'Ecosysteme Hub' },
-  { path: '/credentials', name: 'Credentials Verification' },
+const ROUTES = [
+  { path: '/', name: 'Sovereign Infrastructure' },
+  { path: '/technologie', name: 'Architecture' },
+  { path: '/ecosysteme', name: 'Constellation' },
+  { path: '/sovereign-ai', name: 'Deployment Sovereignty' },
+  { path: '/multi-agent-systems', name: 'Governed Agents' },
+  { path: '/enterprise-ai-orchestration', name: 'Enterprise Integrations' },
+  { path: '/orchestration', name: 'Operator Console' },
+  { path: '/amlazr', name: 'Execution Preview' },
 ];
 
 function CyberSurveyor() {
-  const [telemetry, setTelemetry] = useState({});
-  const [qaStatus, setQaStatus] = useState({});
-  const [securityStatus, setSecurityStatus] = useState({});
-
-  useEffect(() => {
-    // Initial mock data
-    const initialTelemetry = {};
-    const initialQa = {};
-    const initialSecurity = {};
-
-    PRODUCTION_URLS.forEach(url => {
-      initialTelemetry[url.path] = {
-        ttfb: Math.floor(Math.random() * 40) + 15,
-        latency: Math.floor(Math.random() * 80) + 40,
-        requests: Math.floor(Math.random() * 20) + 5
-      };
-      initialQa[url.path] = { status: 'PASSING', coverage: '100%', dom: 'HEALTHY' };
-      initialSecurity[url.path] = { ssl: 'VALID', waf: 'ACTIVE', pings: 0 };
-    });
-
-    setTelemetry(initialTelemetry);
-    setQaStatus(initialQa);
-    setSecurityStatus(initialSecurity);
-
-    // Simulate real-time fluctuations
-    const interval = setInterval(() => {
-      setTelemetry(prev => {
-        const next = { ...prev };
-        const randomUrl = PRODUCTION_URLS[Math.floor(Math.random() * PRODUCTION_URLS.length)].path;
-        next[randomUrl] = {
-          ttfb: Math.floor(Math.random() * 40) + 15,
-          latency: Math.floor(Math.random() * 80) + 40,
-          requests: Math.floor(Math.random() * 50) + 10
-        };
-        return next;
-      });
-
-      setSecurityStatus(prev => {
-        const next = { ...prev };
-        const randomUrl = PRODUCTION_URLS[Math.floor(Math.random() * PRODUCTION_URLS.length)].path;
-        next[randomUrl] = {
-          ...next[randomUrl],
-          pings: Math.random() > 0.7 ? next[randomUrl].pings + 1 : next[randomUrl].pings
-        };
-        return next;
-      });
-    }, 1200);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%', background: '#050505', color: '#fff', overflowX: 'hidden', paddingBottom: '40px' }}>
       
@@ -85,15 +33,15 @@ function CyberSurveyor() {
               Domain Map 3 — Cyber Surveyor
             </h1>
             <p style={{ margin: '8px 0 0 0', color: '#94a3b8', fontSize: '1rem' }}>
-              Live production telemetry across all primary URL children. Real-time Security, QA, and Performance.
+              Operator preview only. No live production scans, security checks, QA runs or performance measurements are performed here.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '16px' }}>
-            <Link to="/fleet-command" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 255, 255, 0.1)', color: '#fff', padding: '8px 16px', borderRadius: '4px', textDecoration: 'none' }}>
-              <Terminal size={16} /> Fleet Command
+            <Link to="/orchestration" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 255, 255, 0.1)', color: '#fff', padding: '8px 16px', borderRadius: '4px', textDecoration: 'none' }}>
+              <Terminal size={16} /> Orchestration Console
             </Link>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
-              <Wifi size={16} /> LIVE CONNECTION
+            <div role="note" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(148, 163, 184, 0.1)', color: '#cbd5e1', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
+              PREVIEW · NO LIVE DATA
             </div>
           </div>
         </div>
@@ -118,13 +66,13 @@ function CyberSurveyor() {
                   </tr>
                 </thead>
                 <tbody>
-                  {PRODUCTION_URLS.map(url => (
+                  {ROUTES.map(url => (
                     <tr key={url.path} style={{ borderBottom: '1px solid rgba(255,255,255,0.02)' }}>
                       <td style={{ padding: '12px 4px', color: '#cbd5e1' }}>{url.path}</td>
-                      <td style={{ padding: '12px 4px', color: '#22c55e' }}>{securityStatus[url.path]?.waf}</td>
-                      <td style={{ padding: '12px 4px', color: '#22c55e' }}>{securityStatus[url.path]?.ssl}</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: securityStatus[url.path]?.pings > 5 ? '#ef4444' : '#94a3b8' }}>
-                        {securityStatus[url.path]?.pings} blocked
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>Not verified</td>
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>Not checked</td>
+                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#94a3b8' }}>
+                        Not measured
                       </td>
                     </tr>
                   ))}
@@ -149,11 +97,11 @@ function CyberSurveyor() {
                   </tr>
                 </thead>
                 <tbody>
-                  {PRODUCTION_URLS.map(url => (
+                  {ROUTES.map(url => (
                     <tr key={url.path} style={{ borderBottom: '1px solid rgba(255,255,255,0.02)' }}>
                       <td style={{ padding: '12px 4px', color: '#cbd5e1' }}>{url.path}</td>
-                      <td style={{ padding: '12px 4px', color: '#22c55e' }}>{qaStatus[url.path]?.status}</td>
-                      <td style={{ padding: '12px 4px', color: '#22c55e' }}>{qaStatus[url.path]?.dom}</td>
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>Not run</td>
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>Not checked</td>
                     </tr>
                   ))}
                 </tbody>
@@ -178,15 +126,15 @@ function CyberSurveyor() {
                   </tr>
                 </thead>
                 <tbody>
-                  {PRODUCTION_URLS.map(url => (
+                  {ROUTES.map(url => (
                     <tr key={url.path} style={{ borderBottom: '1px solid rgba(255,255,255,0.02)' }}>
                       <td style={{ padding: '12px 4px', color: '#cbd5e1' }}>{url.path}</td>
-                      <td style={{ padding: '12px 4px', color: '#38bdf8' }}>{telemetry[url.path]?.ttfb} ms</td>
-                      <td style={{ padding: '12px 4px', color: telemetry[url.path]?.latency > 100 ? '#facc15' : '#38bdf8' }}>
-                        {telemetry[url.path]?.latency} ms
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>Not measured</td>
+                      <td style={{ padding: '12px 4px', color: '#94a3b8' }}>
+                        Not measured
                       </td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#e2e8f0' }}>
-                        {telemetry[url.path]?.requests}
+                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#94a3b8' }}>
+                        Not measured
                       </td>
                     </tr>
                   ))}

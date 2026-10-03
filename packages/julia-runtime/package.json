@@ -1,0 +1,21 @@
+{
+  "name": "@prime-ai/julia-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Embeddable Julia avatar, agent controls, and constellation navigation.",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "build": "node ./scripts/build-embed.mjs",
+    "compress:model": "gltf-transform optimize ../../public/julia/source.glb ../../public/julia/julia.glb --compress meshopt"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.2.1",
+    "vite": "^8.0.12"
+  }
+}
