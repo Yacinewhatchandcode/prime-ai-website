@@ -1,0 +1,23 @@
+# PRIME-AI
+
+PRIME-AI is the sovereign cognitive infrastructure layer in a three-site constellation. It connects models, memory and reasoning, governed agents, and execution on infrastructure selected and controlled by the deploying organization.
+
+“Sovereign” describes deployment choices: where data resides, who controls access, whether external model or cloud providers are used, and which components run locally. Capabilities depend on the configured environment; the site does not promise that every deployment is fully local or provider-independent.
+
+## Constellation
+
+- [PRIME-AI](https://prime-ai.fr/): sovereign cognitive infrastructure.
+- [YACE19AI](https://yace19ai.com): research, models and world models.
+- [AMLAZR](https://amlazr.com): execution intelligence and operational applications.
+- [LinkedIn](https://www.linkedin.com/in/yacine-benhamou-b26386124/): Yacine Benhamou's professional profile.
+
+## PRIME-AI pages
+
+- [Infrastructure overview](https://prime-ai.fr/)
+- [Technology and architecture](https://prime-ai.fr/technologie)
+- [Ecosystem](https://prime-ai.fr/ecosysteme)
+- [Sovereignty](https://prime-ai.fr/sovereign-ai)
+- [Governed multi-agent systems](https://prime-ai.fr/multi-agent-systems)
+- [Enterprise infrastructure integration](https://prime-ai.fr/enterprise-ai-orchestration)
+
+This site does not publish independently verifiable customer, benchmark, certification, availability, or performance metrics. Do not infer such claims from UI demonstrations or preview consoles.

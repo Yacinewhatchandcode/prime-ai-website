@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -187,7 +187,7 @@ export default function SovereignLightLayout() {
         <div style={{
           position: 'fixed',
           top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(250, 248, 244, 0.98)',
+          background: 'rgba(8, 7, 18, 0.98)',
           backdropFilter: 'blur(30px)',
           zIndex: 1500,
           display: 'flex',
@@ -197,7 +197,7 @@ export default function SovereignLightLayout() {
           overflowY: 'auto'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ color: '#8A8580', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>PRIME CORE</div>
+            <div style={{ color: '#aaa4bd', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>PRIME CORE</div>
             <Link to="/vision" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.vision')}</Link>
             <Link to="/technologie" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.technologie')}</Link>
             <Link to="/ecosysteme" className="nav-link" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>{t('nav.ecosysteme')}</Link>
@@ -212,27 +212,6 @@ export default function SovereignLightLayout() {
         <Outlet />
       </main>
 
-      {/* ── GLOBAL FOOTER ────────────────────────────────── */}
-      <footer style={{
-        padding: '30px 60px',
-        background: '#1F1A13',
-        color: '#FAF8F4',
-        borderTop: '1px solid rgba(250, 248, 244, 0.05)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '20px',
-        fontSize: '11px',
-        opacity: 0.8
-      }}>
-        <span>{t('footer.rights')}</span>
-        <div style={{ display: 'flex', gap: '24px' }}>
-          <Link to="/vision" style={{ color: '#C6A15A', textDecoration: 'none', fontWeight: 'bold' }}>{t('nav.vision')} Node</Link>
-          <Link to="/technologie" style={{ color: 'inherit', textDecoration: 'none' }}>{t('nav.technologie')}</Link>
-          <Link to="/ecosysteme" style={{ color: 'inherit', textDecoration: 'none' }}>{t('nav.ecosysteme')}</Link>
-        </div>
-      </footer>
     </div>
   );
 }

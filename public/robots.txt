@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://prime-ai.fr/sitemap.xml

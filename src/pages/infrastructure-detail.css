@@ -1,0 +1,30 @@
+.infrastructure-detail {
+  min-height: 70vh;
+  padding: clamp(58px,8vw,100px) clamp(22px,7vw,100px) clamp(70px,10vw,120px);
+  color: #f5f2ff;
+  background: radial-gradient(ellipse at 90% 0%,#38276547,transparent 38%),#080712;
+}
+.detail-hero,.detail-path,.detail-boundary,.detail-next { width: min(1080px,100%); margin-inline: auto; }
+.detail-hero { padding-bottom: clamp(50px,7vw,84px); }
+.detail-eyebrow { display:flex;align-items:center;gap:10px;color:#c1b1ff;font:700 11px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase; }
+.detail-eyebrow span { width:7px;height:7px;border-radius:50%;background:#a38aff;box-shadow:0 0 16px #a38aff; }
+.detail-hero h1 { max-width:850px;margin:24px 0 18px;font-size:clamp(38px,6vw,66px);line-height:1.05;letter-spacing:-.05em;font-weight:620; }
+.detail-intro { max-width:740px;color:#b8b4c7;font-size:18px;line-height:1.7; }
+.detail-path { border-top:1px solid #ffffff1e; }
+.detail-path h2 { margin:28px 0 0;color:#dcd3ff;font-size:clamp(15px,2vw,20px);font-weight:600; }
+.detail-path ol { list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:38px; }
+.detail-path li { display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;padding:22px 0;border-bottom:1px solid #ffffff18; }
+.detail-number { color:#a895ff;font:600 12px ui-monospace,monospace;padding-top:4px; }
+.detail-path h3 { margin:0 0 8px;font-size:18px;font-weight:600;color:#f5f2ff; }
+.detail-path li p { margin:0;color:#b8b4c7;font-size:14px;line-height:1.65; }
+.detail-boundary { margin-top:30px;padding:18px 20px;display:flex;align-items:flex-start;gap:12px;border:1px solid #5c8cff52;border-radius:12px;background:#10162982; }
+.detail-boundary span { display:grid;place-items:center;flex:0 0 21px;height:21px;border-radius:50%;background:#5c8cff2e;color:#9fc0ff;font-weight:700; }
+.detail-boundary p { margin:0;color:#ccd3e3;font-size:13px;line-height:1.65; }
+.detail-next { margin-top:30px;display:flex;justify-content:flex-end; }
+.detail-next a { padding:12px 16px;border:1px solid #a38aff85;border-radius:10px;background:#7b5ad22e;color:#e6deff;text-decoration:none;font-weight:650; }
+.detail-next a:hover { border-color:#d0c2ff;background:#7b5ad255; }
+@media(max-width:680px) {
+  .detail-path ol { grid-template-columns:1fr; }
+  .detail-path li { padding:20px 0; }
+  .detail-next a { width:100%;text-align:center; }
+}

@@ -37,6 +37,34 @@ input, textarea, select, [contenteditable="true"] {
   user-select: text;
 }
 
+.constellation-footer {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  padding: 18px clamp(20px, 6vw, 80px);
+  border-top: 1px solid #ffffff18;
+  background: #080712;
+  color: #b8b4c7;
+  font-size: 12px;
+}
+.constellation-footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+.constellation-footer a { color: #ddd5ff; text-decoration: none; }
+.constellation-footer a:hover { color: #fff; text-decoration: underline; }
+.console-disclaimer {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(163, 138, 255, 0.18);
+  background: rgba(17, 16, 29, 0.9);
+  color: #c8c2d7;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+.external-redirect { min-height: 60vh; display: grid; place-content: center; gap: 16px; color: #f5f2ff; background: #080712; text-align: center; }
+.external-redirect a { color: #d7caff; }
+
 ::-webkit-scrollbar {
   width: 2px;
 }

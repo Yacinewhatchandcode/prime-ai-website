@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import SovereignCommandBar from './SovereignCommandBar';
 import SovereignWorkflowLog from './SovereignWorkflowLog';
 import { useLanguage } from '../context/LanguageContext';
@@ -7,11 +7,10 @@ import { useLanguage } from '../context/LanguageContext';
 function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const path = location.pathname;
 
-  const isSubsystemActive = ['/orb', '/orchestration', '/media', '/whatsapp', '/memory', '/factory', '/fleet-command'].includes(path);
+  const isSubsystemActive = ['/orb', '/orchestration', '/media', '/whatsapp', '/memory', '/factory'].includes(path);
   const isLabActive = ['/amlazr', '/azirem', '/yace19'].includes(path);
 
   return (
@@ -49,12 +48,10 @@ function Layout() {
         
         {/* Desktop Links */}
         <div className="agent-nav-links desktop-only">
-          <Link to="/vision" className={`agent-nav-item ${path === '/vision' || path === '/' ? 'active' : ''}`}>👁️ VISION</Link>
+          <Link to="/" className={`agent-nav-item ${path === '/vision' || path === '/' ? 'active' : ''}`}>👁️ VISION</Link>
           <Link to="/technologie" className={`agent-nav-item ${path === '/technologie' ? 'active' : ''}`}>🔬 TECHNOLOGIE</Link>
           <Link to="/ecosysteme" className={`agent-nav-item ${path === '/ecosysteme' ? 'active' : ''}`}>🌐 ÉCOSYSTÈME</Link>
           <Link to="/yace-aura" className={`agent-nav-item aura ${path === '/yace-aura' ? 'active' : ''}`}>👑 YACE•AURA</Link>
-          <Link to="/credentials" className={`agent-nav-item backoffice ${path === '/credentials' ? 'active' : ''}`}>🔒 BACKOFFICE</Link>
-          <Link to="/revenue" className={`agent-nav-item revenue ${path === '/revenue' ? 'active' : ''}`}>💰 REVENUE</Link>
           
           {/* Subsystems Dropdown */}
           <div className="agent-nav-dropdown">
@@ -66,7 +63,6 @@ function Layout() {
               <Link to="/whatsapp" className="dropdown-link">04_WA</Link>
               <Link to="/memory" className="dropdown-link">05_MEM</Link>
               <Link to="/factory" className="dropdown-link">06_FAC</Link>
-              <Link to="/fleet-command" className="dropdown-link">09_FLEET_CMD</Link>
             </div>
           </div>
           
@@ -84,7 +80,8 @@ function Layout() {
         {/* Right side items: Language switcher & grid menu to align with Light Layout */}
         <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           {/* Language Switcher */}
-          <div 
+          <button
+            type="button"
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
             style={{
               display: 'flex',
@@ -95,6 +92,7 @@ function Layout() {
               color: '#FAF8F4',
               letterSpacing: '1px',
               cursor: 'pointer',
+              fontFamily: 'inherit',
               padding: '6px 12px',
               background: 'rgba(198, 161, 90, 0.06)',
               borderRadius: '100px',
@@ -103,10 +101,10 @@ function Layout() {
           >
             <span>{language.toUpperCase()}</span>
             <span style={{ color: '#C6A15A', fontSize: '9px' }}>▼</span>
-          </div>
+          </button>
 
           {/* Menu Grid Icon */}
-          <div style={{
+          <Link to="/" aria-label="Return to PRIME-AI homepage" style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '3px',
@@ -115,7 +113,7 @@ function Layout() {
             borderRadius: '8px',
             background: 'rgba(198, 161, 90, 0.06)',
             border: '1px solid rgba(198, 161, 90, 0.12)'
-          }} onClick={() => navigate("/")}>
+          }}>
             <div style={{ display: 'flex', gap: '3px' }}>
               <div style={{ width: '4px', height: '4px', background: '#FAF8F4', borderRadius: '50%' }} />
               <div style={{ width: '4px', height: '4px', background: '#FAF8F4', borderRadius: '50%' }} />
@@ -131,13 +129,16 @@ function Layout() {
               <div style={{ width: '4px', height: '4px', background: '#FAF8F4', borderRadius: '50%' }} />
               <div style={{ width: '4px', height: '4px', background: '#FAF8F4', borderRadius: '50%' }} />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Mobile Toggle Hamburger */}
         <button 
           className="mobile-hamburger-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="agent-mobile-menu"
           style={{
             background: 'transparent',
             border: 'none',
@@ -159,7 +160,7 @@ function Layout() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div style={{
+        <div id="agent-mobile-menu" style={{
           position: 'fixed',
           top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(5, 5, 8, 0.98)',
@@ -173,12 +174,10 @@ function Layout() {
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ color: '#6b6b7b', fontSize: '0.65rem', letterSpacing: '2px', fontFamily: 'monospace' }}>MAIN CORE</div>
-            <Link to="/vision" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>👁️ VISION</Link>
+            <Link to="/" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0' }} onClick={() => setMobileMenuOpen(false)}>👁️ VISION</Link>
             <Link to="/technologie" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#c084fc' }} onClick={() => setMobileMenuOpen(false)}>🔬 TECHNOLOGIE</Link>
             <Link to="/ecosysteme" className="agent-nav-item" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#60a5fa' }} onClick={() => setMobileMenuOpen(false)}>🌐 ÉCOSYSTÈME</Link>
             <Link to="/yace-aura" className="agent-nav-item aura" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#d4af37' }} onClick={() => setMobileMenuOpen(false)}>👑 YACE•AURA</Link>
-            <Link to="/credentials" className="agent-nav-item backoffice" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#f59e0b' }} onClick={() => setMobileMenuOpen(false)}>🔒 BACKOFFICE</Link>
-            <Link to="/revenue" className="agent-nav-item revenue" style={{ fontSize: '1.2rem', padding: '8px 0', color: '#10b981' }} onClick={() => setMobileMenuOpen(false)}>💰 REVENUE</Link>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}>
@@ -190,7 +189,6 @@ function Layout() {
               <Link to="/whatsapp" className="dropdown-link" style={{ fontSize: '0.8rem', padding: '10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px' }} onClick={() => setMobileMenuOpen(false)}>04_WA</Link>
               <Link to="/memory" className="dropdown-link" style={{ fontSize: '0.8rem', padding: '10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px' }} onClick={() => setMobileMenuOpen(false)}>05_MEM</Link>
               <Link to="/factory" className="dropdown-link" style={{ fontSize: '0.8rem', padding: '10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px' }} onClick={() => setMobileMenuOpen(false)}>06_FAC</Link>
-              <Link to="/fleet-command" className="dropdown-link" style={{ fontSize: '0.8rem', padding: '10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px' }} onClick={() => setMobileMenuOpen(false)}>09_CMD</Link>
             </div>
           </div>
 
@@ -210,6 +208,11 @@ function Layout() {
       <SovereignCommandBar />
 
       <div className="agent-layout-content">
+        <aside className="console-disclaimer" role="note">
+          {language === 'fr'
+            ? 'Aperçu opérateur. Le statut, les intégrations et les données dépendent de l’environnement configuré ; certaines valeurs peuvent être illustratives.'
+            : 'Operator preview. Live status, integrations and data depend on the configured environment; sample values may be illustrative.'}
+        </aside>
         <Outlet />
       </div>
     </div>
