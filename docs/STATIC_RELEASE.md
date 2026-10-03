@@ -81,6 +81,62 @@ To follow a run, use `gh run watch <id>`. To get the result, use
 `gh run download <id> -n static-release-result-prime-ai-<id>-<attempt>`. The run fails, and is not
 successful, unless publishing and every post-deployment check pass.
 
+### Validating an unmerged source (dry-run only)
+
+`source_ref` names the branch that `source_sha` must be reachable from. Dry-run accepts any
+branch, for example a PR head; publish and restore require `source_ref=main`. A dry-run runs the
+full PRIME gate (tests, build, Playwright, artifact policy, required routes, publish plan) and
+never publishes:
+
+```sh
+gh workflow run prime-ai-release.yml --ref main -f mode=dry-run \
+  -f source_ref=<PR head branch> -f source_sha=<PR head SHA> -f correlation_id=<id>
+```
+
+Pull requests to `main` also run `static-release CI` automatically (dry-run of the PR head,
+read-only token, required routes not enforced).
+
+### Exact run correlation for external drivers
+
+Pass a unique `correlation_id` (`[A-Za-z0-9._:-]`, at most 64 characters). The run title is then
+exactly `prime-ai <mode> <source_sha|restore_from_sha> cid=<correlation_id>`. Find the run with
+`gh run list -w prime-ai-release.yml -e workflow_dispatch --json databaseId,displayTitle,headSha,createdAt`
+and require exactly one run whose `displayTitle` matches and whose `headSha` is the tooling commit on
+`main` that you dispatched against. Never select the latest run blindly. The id is also written to
+the result manifest as `correlationId`.
+
+### Result manifest `static-release-result/v1`
+
+Only publish and restore runs produce `result.json` (artifact
+`static-release-result-<site>-<runId>-<runAttempt>`, file `release-result.json`, 90-day retention).
+It is written even when an earlier deploy step fails; if the run fails before the deploy job
+(preflight, build, gate, or rejected approval), there is no result artifact and the driver must
+treat the run conclusion as `failed`. Dry-runs only produce the build artifact
+`static-release-<site>-<runId>-<runAttempt>`, which contains `release-manifest.json`, and a
+`planned` publish status in the job log.
+
+| Field | Meaning |
+|---|---|
+| `schema` | `"static-release-result/v1"` |
+| `status` | `succeeded` (publish/restore plus all post-deploy checks passed, or tree `unchanged`) or `failed` |
+| `mode`, `site`, `url`, `repository` | Inputs and context |
+| `run`, `runId`, `runAttempt` | Run URL, id and attempt (strings) |
+| `correlationId` | Caller id or `null` |
+| `sourceSha` / `restoreFromSha` | Released source commit (publish) or republished Pages commit (restore); the other is `null` |
+| `toolingSha` | Pinned release tooling commit |
+| `artifactSha256` | Digest of the deployed tree, excluding `release-manifest.json` |
+| `branch` | Pages branch (`gh-pages`) |
+| `rollbackTag` | `pages-rollback/<site>/<runId>-<runAttempt>` when a push happened, else `null` |
+| `publish` | `null` or `{status: published, unchanged or planned; previous_sha; new_sha; rollback_tag; pushed; tree}` |
+| `postdeploy` | `null` or `{ok, attempts, home, routes:[{path,status}], assets:[{path,status}]}` |
+| `stages` | `{publish, postdeploy}`, each `success`, `failure` or `skipped` |
+| `finishedAt` | ISO timestamp |
+
+Post-deploy SHA marker: after publish, the live `/release-manifest.json` must report the released
+`sourceSha` and `artifactSha256`, and the live home HTML must hash to the released `indexSha256`.
+Restore checks only the home hash (legacy trees carry no manifest). To roll back, dispatch
+`mode=restore` with `restore_from_sha=publish.previous_sha`.
+
 The PRIME caller requires the replica route pages
 `replica,responsive-preview,semantic-library,replica-image,convergence,legacy`. A source SHA
 without them, such as the current `main` `712e825`, is rejected at validation.

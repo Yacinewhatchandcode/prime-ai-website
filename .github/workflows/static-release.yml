@@ -42,6 +42,7 @@ on:
       max_file_mib: { type: number, default: 95 }
       artifact_retention_days: { type: number, default: 30 }
       postdeploy_timeout_sec: { type: number, default: 900 }
+      correlation_id: { type: string, default: "", description: "Optional caller id ([A-Za-z0-9._:-], max 64) echoed into the result manifest" }
     outputs:
       artifact_sha256: { value: "${{ jobs.build.outputs.artifact_sha256 }}" }
       result: { value: "${{ jobs.deploy.outputs.status }}" }
@@ -65,9 +66,13 @@ jobs:
           TOOLING_SHA: ${{ inputs.tooling_sha }}
           ENVIRONMENT: ${{ inputs.environment }}
           SITE_ID: ${{ inputs.site_id }}
+          APPROVED_REF: ${{ inputs.approved_ref }}
+          CORRELATION_ID: ${{ inputs.correlation_id }}
         run: |
           set -euo pipefail
           fail() { echo "::error::$1"; exit 1; }
+          [[ "$CORRELATION_ID" =~ ^[A-Za-z0-9._:-]{0,64}$ ]] || fail "correlation_id must match [A-Za-z0-9._:-]{0,64}"
+          [[ "$APPROVED_REF" =~ ^[A-Za-z0-9._/-]{1,200}$ && "$APPROVED_REF" != *..* && "$APPROVED_REF" != -* ]] || fail "approved_ref is not a valid branch name"
           sha() { [[ "$1" =~ ^[0-9a-f]{40}$ ]]; }
           [[ "$SITE_ID" =~ ^[a-z0-9][a-z0-9-]{0,40}$ ]] || fail "site_id must be lowercase kebab-case"
           sha "$TOOLING_SHA" || fail "tooling_sha must be a full 40-char SHA"
@@ -318,6 +323,7 @@ jobs:
           SOURCE_SHA: ${{ inputs.source_sha }}
           RESTORE_SHA: ${{ inputs.restore_from_sha }}
           TOOLING_SHA: ${{ inputs.tooling_sha }}
+          CORRELATION_ID: ${{ inputs.correlation_id }}
           DIGEST: ${{ steps.verify.outputs.artifact_sha256 || steps.restore.outputs.artifact_sha256 }}
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
           POSTDEPLOY_OUTCOME: ${{ steps.postdeploy.outcome }}
@@ -334,7 +340,8 @@ jobs:
             const result = {
               schema: "static-release-result/v1", status: process.argv[1], mode: e.MODE, site: e.SITE_ID, url: e.SITE_URL,
               repository: e.GITHUB_REPOSITORY, run: `${e.GITHUB_SERVER_URL}/${e.GITHUB_REPOSITORY}/actions/runs/${e.GITHUB_RUN_ID}`,
-              runAttempt: e.GITHUB_RUN_ATTEMPT, sourceSha: e.SOURCE_SHA || null, restoreFromSha: e.RESTORE_SHA || null,
+              runId: e.GITHUB_RUN_ID, runAttempt: e.GITHUB_RUN_ATTEMPT,
+              correlationId: e.CORRELATION_ID || null, sourceSha: e.SOURCE_SHA || null, restoreFromSha: e.RESTORE_SHA || null,
               toolingSha: e.TOOLING_SHA, artifactSha256: e.DIGEST || null, branch: e.BRANCH,
               rollbackTag: publish?.pushed ? e.ROLLBACK_TAG : null, publish, postdeploy: read(`${t}/postdeploy.json`),
               stages: { publish: e.PUBLISH_OUTCOME || "skipped", postdeploy: e.POSTDEPLOY_OUTCOME || "skipped" },
